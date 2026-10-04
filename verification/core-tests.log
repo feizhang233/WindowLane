@@ -1,0 +1,55 @@
+warning: /Users/zhangfei/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: /Users/zhangfei/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+Building for debugging...
+[3 / 20] WindowLaneCore
+[6 / 9] WindowLane-product
+[9 / 12] WindowLane-product
+[10 / 12] WindowLane-product
+[14 / 16] WindowLane-product
+[16 / 18] WindowLane-product
+Build complete! (2.44 sec)
+Test Suite 'All tests' started at 2026-10-04 10:46:59.608.
+Test Suite 'WindowLaneCoreTests.xctest' started at 2026-10-04 10:46:59.610.
+Test Suite 'SavedWindowFrameTests' started at 2026-10-04 10:46:59.610.
+Test Case '-[WindowLaneCoreTests.SavedWindowFrameTests testRecoveryDataPreservesNegativeDisplayCoordinatesAndMinimizedState]' started.
+Test Case '-[WindowLaneCoreTests.SavedWindowFrameTests testRecoveryDataPreservesNegativeDisplayCoordinatesAndMinimizedState]' passed (0.002 seconds).
+Test Suite 'SavedWindowFrameTests' passed at 2026-10-04 10:46:59.613.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
+Test Suite 'WorkspaceLayoutTests' started at 2026-10-04 10:46:59.613.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testAccessibilityConversionUsesPrimaryDisplayIncludingNegativeCoordinates]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testAccessibilityConversionUsesPrimaryDisplayIncludingNegativeCoordinates]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testExpandedModeUsesPreviewSpaceButPreservesRail]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testExpandedModeUsesPreviewSpaceButPreservesRail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testFramesFitVisibleAreaAndDoNotOverlapAcrossDisplays]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testFramesFitVisibleAreaAndDoNotOverlapAcrossDisplays]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testRatiosClampToSupportedRangeAndNonFiniteUsesDefault]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testRatiosClampToSupportedRangeAndNonFiniteUsesDefault]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testTinyVisibleAreasNeverProduceNegativeSizes]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testTinyVisibleAreasNeverProduceNegativeSizes]' passed (0.000 seconds).
+Test Suite 'WorkspaceLayoutTests' passed at 2026-10-04 10:46:59.613.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'WorkspaceOrderTests' started at 2026-10-04 10:46:59.613.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testCapacityAndDuplicateAttemptsPreserveExistingWorkspace]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testCapacityAndDuplicateAttemptsPreserveExistingWorkspace]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testDecodingNormalizesPersistedInvalidIdentities]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testDecodingNormalizesPersistedInvalidIdentities]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testInvalidRequestsDoNotAlterSelectionOrOrder]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testInvalidRequestsDoNotAlterSelectionOrOrder]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testNavigationStopsAtBothEndsEvenForExtremeOffsets]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testNavigationStopsAtBothEndsEvenForExtremeOffsets]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingActiveWindowSelectsNeighborAndLastRemovalClearsSelection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingActiveWindowSelectsNeighborAndLastRemovalClearsSelection]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingOtherWindowPreservesSelection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingOtherWindowPreservesSelection]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testReorderKeepsSelectedWindowIdentity]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testReorderKeepsSelectedWindowIdentity]' passed (0.000 seconds).
+Test Suite 'WorkspaceOrderTests' passed at 2026-10-04 10:46:59.614.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'WindowLaneCoreTests.xctest' passed at 2026-10-04 10:46:59.614.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'All tests' passed at 2026-10-04 10:46:59.614.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.003 (0.006) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

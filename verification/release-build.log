@@ -1,0 +1,12 @@
+Building for production...
+[Planning deferred tasks]
+[6 / 13] WindowLaneCore
+[8 / 14] WindowLaneCore
+[14 / 16] WindowLane-product
+[16 / 18] WindowLane-product
+[18 / 18] WindowLane-product
+[19 / 20] WindowLane-product
+Build complete! (9.08 sec)
+/Users/zhangfei/.codex/.chatgpt-projects/g-p-6ac00a5fb83c81919f184e2204fcb1c5/WindowLane/dist/WindowLane.app/Contents/Info.plist: OK
+/Users/zhangfei/.codex/.chatgpt-projects/g-p-6ac00a5fb83c81919f184e2204fcb1c5/WindowLane/dist/WindowLane.app: replacing existing signature
+Built and signed: /Users/zhangfei/.codex/.chatgpt-projects/g-p-6ac00a5fb83c81919f184e2204fcb1c5/WindowLane/dist/WindowLane.app

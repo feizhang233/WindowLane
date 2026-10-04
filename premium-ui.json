@@ -1,0 +1,9 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["Sources"],
+  "locale": "zh-Hant",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": ["Select/Listbox", "Form", "Scrollbar", "Toast", "CRUD"],
+  "ownership": {"Select/Listbox":"native"},
+  "evidence": {"crudFullFlow":"Sources/WindowLane/SmokeCheck.swift","failurePaths":"Sources/WindowLane/WorkspaceStore.swift"}
+}

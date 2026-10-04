@@ -1,0 +1,139 @@
+{
+  "appPath": "dist/WindowLane.app",
+  "appVersion": "0.2.0",
+  "architecture": "arm64",
+  "backgroundReport": {
+    "completedAt": "2026-10-04T13:46:19Z",
+    "count": 23,
+    "passed": true,
+    "path": "verification/background-smoke.json",
+    "scope": "local-background-preferences",
+    "sha256": "df4792985275e8c4a71589e2dc196052d3ed8690c5b25c8f566a7281918e5aab"
+  },
+  "bundleIdentifier": "com.feizhang.windowlane",
+  "createdAtUTC": "2026-10-04T13:53:07Z",
+  "executablePath": "dist/WindowLane.app/Contents/MacOS/WindowLane",
+  "executableSHA256": "f2bf84dcb9403bb869fdf1974715c1c669d26ba7fd302acc935e20e572eb6df5",
+  "externalReport": {
+    "completedAt": "2026-10-04T13:48:48Z",
+    "count": 44,
+    "passed": true,
+    "path": "verification/external-smoke.json",
+    "scope": "external-AX-integration",
+    "sha256": "f41242d1ddcd4b3ab141b2d53f42021ebe07dbf35bee9356f0ff213c391c11c3"
+  },
+  "nativeReport": {
+    "completedAt": "2026-10-04T13:45:57Z",
+    "count": 30,
+    "passed": true,
+    "path": "verification/native-smoke.json",
+    "scope": "native-demo-integration",
+    "sha256": "307ed3148142dc5a0acb617bd41c8ac9d38c8b2d8bb64dbbd5efe4aff04b9556"
+  },
+  "schemaVersion": 1,
+  "sourcesHash": {
+    "aggregateFormat": "UTF-8 relative path + NUL + lowercase SHA-256 + LF, sorted by path",
+    "algorithm": "SHA-256",
+    "files": [
+      {
+        "path": "Package.swift",
+        "sha256": "d12fc901eda2785ef8c75ba28a96426eb5070faa23adbb8a1900c29438f8af65"
+      },
+      {
+        "path": "Resources/Info.plist",
+        "sha256": "40ee5bdc057c59a231a24cb740ebf517f6262c1ff45604c88f4f9a92eb6edf9a"
+      },
+      {
+        "path": "Sources/WindowLane/App.swift",
+        "sha256": "66a6d298c6a496e6e086d27284abca8ee65a5fd717cabe94c1341769b0cd045c"
+      },
+      {
+        "path": "Sources/WindowLane/BackgroundCheck.swift",
+        "sha256": "38b63564577078a2d49752fc152acb2107a8757b00e6fa908aa3cbf3c717adbf"
+      },
+      {
+        "path": "Sources/WindowLane/BackgroundSettings.swift",
+        "sha256": "70f5b3fade70eef106661100012ca03cc728472481e8ef462c1d911355ebafeb"
+      },
+      {
+        "path": "Sources/WindowLane/BackgroundSettingsView.swift",
+        "sha256": "4edb06178a0b51fcbcca9ea2c6e91350e0a1e532321f28a656517073598a59e0"
+      },
+      {
+        "path": "Sources/WindowLane/ExternalCheck.swift",
+        "sha256": "bfe18092941fb81274a1e4a9d7ca45d6dd544fb65b499a4d975b5e8bcead6dfb"
+      },
+      {
+        "path": "Sources/WindowLane/FixtureWindows.swift",
+        "sha256": "d668e0d59ca2fcab7b480cedc2bd5b577a640b3b8cb34e3ebb1d1c796b97c6e6"
+      },
+      {
+        "path": "Sources/WindowLane/GlassUI.swift",
+        "sha256": "e98c5d4363210be92baafee54f10c4c3710475eed86e288cbe517da456c04cb9"
+      },
+      {
+        "path": "Sources/WindowLane/GlobalShortcuts.swift",
+        "sha256": "42ca53615c49fc6fd61e3c2745ff17ee775ff4c84f306db855111b3ae7619eee"
+      },
+      {
+        "path": "Sources/WindowLane/HorizontalScrollRouter.swift",
+        "sha256": "7003d0547d496f3640da11263ce5786d4768f618f5a8e7370660ba2bc0d5cd21"
+      },
+      {
+        "path": "Sources/WindowLane/InteractionSettings.swift",
+        "sha256": "d03c862d310f91b2ab90dfcf7f50bb12c150e076d999ed17a64faad962fd88d9"
+      },
+      {
+        "path": "Sources/WindowLane/SmokeCheck.swift",
+        "sha256": "2af4b672692224172431872e9f92903e8d4c49cf78da78c3943bf56bda7eac54"
+      },
+      {
+        "path": "Sources/WindowLane/Views.swift",
+        "sha256": "4be7e8f996551be0168544033ca8daee04dfe6628c80e1e7ee9eefa05b5f3139"
+      },
+      {
+        "path": "Sources/WindowLane/WindowBackend.swift",
+        "sha256": "9d8528b5434111f92842960d2e1d43d7f8ee5c6f55535dc168993d086489ac57"
+      },
+      {
+        "path": "Sources/WindowLane/WorkspaceStore.swift",
+        "sha256": "175aeca7cf2c0832fa693be9014b4c3bb30ed3238a24d2d52adb0f0208d48152"
+      },
+      {
+        "path": "Sources/WindowLaneCore/HorizontalScrollGate.swift",
+        "sha256": "eb0a6016c569b097623d815b8a999e79eeb4dc1f1bfd613ab3c44b50519f22df"
+      },
+      {
+        "path": "Sources/WindowLaneCore/WindowRestorationGeometry.swift",
+        "sha256": "8b57e56b881270f9d9b5e7bb5a8ed862a0ddf3813ad92e670f7a00c823972989"
+      },
+      {
+        "path": "Sources/WindowLaneCore/WorkspaceCore.swift",
+        "sha256": "a009cb5f27562f1c2a0161ba3008cb1c70839767930ce83c856c4680face5e1e"
+      },
+      {
+        "path": "Tests/WindowLaneCoreTests/HorizontalScrollGateTests.swift",
+        "sha256": "eac1ce282417b5ae1e52f02fd144e141081867303c56b06da8188d3f1767e2b8"
+      },
+      {
+        "path": "Tests/WindowLaneCoreTests/WindowRestorationGeometryTests.swift",
+        "sha256": "32bb42b5ecd8a9d2173a6ffa50a16a8e6d263affb29abd2a977fb1ab87913d88"
+      },
+      {
+        "path": "Tests/WindowLaneCoreTests/WorkspaceCoreTests.swift",
+        "sha256": "48a99a5b660bebb035d0e9976f87c6f710fddccff9e649c6d54533c9cff86854"
+      },
+      {
+        "path": "scripts/build-app.sh",
+        "sha256": "c2b40399911e8cc1dc259229f8e63377df4db043b31818b67869f59c89226a45"
+      },
+      {
+        "path": "scripts/package-app.sh",
+        "sha256": "1829e4ee8dac19c47ed7941fcba914825afeb175be85b28717930db61f6eb365"
+      }
+    ],
+    "sha256": "c1a9626bb868426437ec4bc372c52828e09116ddc3f8214cce98cc4a5df65334"
+  },
+  "zipPath": "dist/WindowLane-0.2.0-arm64.zip",
+  "zipSHA256": "ed663d3b98f367487977d8753e67570650e29662017bd5aebba31caa815eb1bf"
+}

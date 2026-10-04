@@ -1,0 +1,35 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "accessibility_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "Already granted; all three pre-layout snapshots must contain nonempty pixels.",
+      "name" : "optional_screen_capture_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T10:27:03Z",
+  "fixtureBundleID" : "com.feizhang.windowlane.fixture",
+  "limitation" : "Only the three documents of the separate fixture application are managed. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested.",
+  "originalStates" : [
+
+  ],
+  "passed" : false,
+  "reason" : "Exactly one separate com.feizhang.windowlane.fixture application must be running with --fixture-host. No windows were changed.",
+  "restoredStates" : [
+
+  ],
+  "schemaVersion" : 1,
+  "scope" : "external-AX-integration",
+  "screenCaptureAuthorizedAtStart" : true,
+  "screenCaptureTest" : "unverified",
+  "status" : "blocked"
+}

@@ -1,0 +1,7 @@
+.build/
+dist/
+.DS_Store
+
+# Local verification binaries and rendered evidence
+verification/*.app/
+verification/*.png

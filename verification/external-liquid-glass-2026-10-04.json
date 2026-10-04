@@ -1,0 +1,290 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "accessibility_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "Already granted; all three pre-layout snapshots must contain nonempty pixels.",
+      "name" : "optional_screen_capture_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    },
+    {
+      "detail" : "Three AX objects in process 51605; own application and all other bundles excluded.",
+      "name" : "fixture_only_scope",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stable_AX_identity_across_discovery",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "three_external_windows_added",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條或 ⌃⌥← \/ → 切換。",
+      "name" : "start_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條或 ⌃⌥← \/ → 切換。",
+      "name" : "workspace_running",
+      "passed" : true
+    },
+    {
+      "detail" : "720 × 588 pixels from the pre-layout ScreenCaptureKit snapshot.",
+      "name" : "screen_capture_0_nonempty_pixels",
+      "passed" : true
+    },
+    {
+      "detail" : "720 × 588 pixels from the pre-layout ScreenCaptureKit snapshot.",
+      "name" : "screen_capture_1_nonempty_pixels",
+      "passed" : true
+    },
+    {
+      "detail" : "720 × 588 pixels from the pre-layout ScreenCaptureKit snapshot.",
+      "name" : "screen_capture_2_nonempty_pixels",
+      "passed" : true
+    },
+    {
+      "detail" : "2110 × 1306 pixels; workspace 2110 × 1306 points at 1.0x screen scale.",
+      "name" : "main_window_capture_native_resolution",
+      "passed" : true
+    },
+    {
+      "detail" : "NSImage point size must match the live window so the edge crop never stretches a thumbnail.",
+      "name" : "main_window_capture_logical_size",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條或 ⌃⌥← \/ → 切換。",
+      "name" : "switch_0_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document A · 閱讀測試.",
+      "name" : "switch_0_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_0_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_0_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "Active document is unminimized; the other two specific windows are minimized.",
+      "name" : "switch_0_neighbor_minimized_states",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document B · 草稿測試",
+      "name" : "switch_1_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document B · 草稿測試.",
+      "name" : "switch_1_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_1_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_1_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "Active document is unminimized; the other two specific windows are minimized.",
+      "name" : "switch_1_neighbor_minimized_states",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document C · 日語測試",
+      "name" : "switch_2_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document C · 日語測試.",
+      "name" : "switch_2_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_2_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_2_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "Active document is unminimized; the other two specific windows are minimized.",
+      "name" : "switch_2_neighbor_minimized_states",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "switch_3_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document A · 閱讀測試.",
+      "name" : "switch_3_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_3_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_3_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "Active document is unminimized; the other two specific windows are minimized.",
+      "name" : "switch_3_neighbor_minimized_states",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "expanded_actual_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "expanded_restores_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_clears_running_state",
+      "passed" : true
+    },
+    {
+      "detail" : "Each original AX frame restored within 2 points and original minimized flag restored exactly.",
+      "name" : "stop_restores_original_geometry_and_minimized_state",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_fixture_documents_alive",
+      "passed" : true
+    },
+    {
+      "detail" : "已退出工作區，視窗已恢復原位置與尺寸。",
+      "name" : "recovery_journal_completed",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T09:44:24Z",
+  "fixtureBundleID" : "com.feizhang.windowlane.fixture",
+  "limitation" : "Only the three documents of the separate fixture application are managed. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested.",
+  "originalStates" : [
+    {
+      "cgWindowID" : 16523,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 50,
+        "y" : 37
+      },
+      "id" : "1AFDB277-3CB8-42AB-B4DD-3CB3092F3237",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document A · 閱讀測試"
+    },
+    {
+      "cgWindowID" : 16524,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 94,
+        "y" : 72
+      },
+      "id" : "C5643208-5D4B-4E31-9514-71537A29057B",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document B · 草稿測試"
+    },
+    {
+      "cgWindowID" : 16525,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 138,
+        "y" : 107
+      },
+      "id" : "FCDAB584-F3DF-47D2-9808-6F0123EA7C26",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document C · 日語測試"
+    }
+  ],
+  "passed" : true,
+  "restoredStates" : [
+    {
+      "cgWindowID" : 16523,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 50,
+        "y" : 37
+      },
+      "id" : "1AFDB277-3CB8-42AB-B4DD-3CB3092F3237",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document A · 閱讀測試"
+    },
+    {
+      "cgWindowID" : 16524,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 94,
+        "y" : 72
+      },
+      "id" : "C5643208-5D4B-4E31-9514-71537A29057B",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document B · 草稿測試"
+    },
+    {
+      "cgWindowID" : 16525,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 138,
+        "y" : 107
+      },
+      "id" : "FCDAB584-F3DF-47D2-9808-6F0123EA7C26",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document C · 日語測試"
+    }
+  ],
+  "schemaVersion" : 1,
+  "scope" : "external-AX-integration",
+  "screenCaptureAuthorizedAtStart" : true,
+  "screenCaptureTest" : "pixel-output-verified",
+  "status" : "passed"
+}

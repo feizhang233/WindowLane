@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "scope": "native-ui-liquid-glass-review",
+  "completedAt": "2026-10-04T09:47:46+00:00",
+  "checks": [
+    {
+      "name": "light_manager_final",
+      "result": "reviewed",
+      "detail": "Native CUA screenshot: glass cards, transparent titlebar, selected slot and clipped list. Previous three workspace windows re-added."
+    },
+    {
+      "name": "dark_material",
+      "result": "reviewed",
+      "detail": "App-specific --ui-preview-dark; white labels and selected card remained readable. Inspected before final list clipping change."
+    },
+    {
+      "name": "opaque_fallback",
+      "result": "reviewed",
+      "detail": "Final --ui-preview-reduce-transparency rendered opaque surfaces and visible borders; no macOS setting changed."
+    },
+    {
+      "name": "search_filter_empty_clear",
+      "result": "reviewed",
+      "detail": "Native UI showed filtered windows, no-result state, and returned list after Clear."
+    },
+    {
+      "name": "minimum_window_size",
+      "result": "unverified",
+      "detail": "CUA drag did not resize the window; no claim of passing minimum-size visual check."
+    }
+  ],
+  "limitations": [
+    "Actual OS accessibility preference switching and macOS 14-25 fallback were not run.",
+    "Offscreen manager.png does not establish native glass compositor appearance."
+  ]
+}

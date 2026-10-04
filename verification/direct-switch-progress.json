@@ -1,0 +1,9 @@
+{
+  "version": "0.2.1",
+  "build": "3",
+  "binarySHA256": "ef5a25868b7e960a2a563ba7a32b9b32b131b203f7c6f06092fe96ee92e424a8",
+  "coreChecksPassed": 32,
+  "backgroundChecksPassed": 23,
+  "liveVerification": "awaiting macOS unlock",
+  "packaging": "not yet performed; old reports are historical"
+}

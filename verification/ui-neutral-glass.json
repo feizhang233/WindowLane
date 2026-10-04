@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "scope": "neutral-glass-native-ui-review",
+  "completedAt": "2026-10-04T10:50:10+00:00",
+  "sources": [
+    "https://developer.apple.com/design/human-interface-guidelines/color",
+    "https://developer.apple.com/design/human-interface-guidelines/buttons",
+    "https://developer.apple.com/design/human-interface-guidelines/materials",
+    "https://developer.apple.com/videos/play/wwdc2025/219/"
+  ],
+  "checks": [
+    {
+      "name": "light_manager_and_selected_cards",
+      "result": "reviewed",
+      "detail": "Native screenshot: untinted Background, Demo, Refresh, neutral enabled Start, selected outline and monochrome symbols. Fixed blue tint removed."
+    },
+    {
+      "name": "light_background_sheet",
+      "result": "reviewed",
+      "detail": "Native screenshot: neutral Done, image chooser and reset; default frosted mode and 35% transparency unchanged."
+    },
+    {
+      "name": "dark_manager_and_sheet",
+      "result": "reviewed",
+      "detail": "App-only dark preview: manager and background settings inspected; controls remained neutral and primary labels readable. No OS appearance preference was changed."
+    },
+    {
+      "name": "opaque_fallback",
+      "result": "reviewed",
+      "detail": "App-only reduce-transparency preview: light manager and sheet had opaque neutral surfaces, visible selected outline, black primary buttons with white labels."
+    },
+    {
+      "name": "demo_start_and_stop",
+      "result": "reviewed",
+      "detail": "Started native demo and exited with Control+Option+Escape; manager reported original positions and sizes restored."
+    },
+    {
+      "name": "external_workspace_start_and_stop",
+      "result": "reviewed",
+      "detail": "Added the three separate fixture documents, observed neutral enabled Start and secondary actions, started the workspace, then exited with Control+Option+Escape. The manager reported original positions and sizes restored. The UI tool selected the backdrop window during workspace capture, so this does not establish rail/edge compositor appearance."
+    }
+  ],
+  "limitations": [
+    "Diagnostic flags exercise local branches and do not establish real OS preference switching or older macOS fallback.",
+    "Snapshots are visual review only; no numerical contrast audit or exhaustive arbitrary-wallpaper assessment.",
+    "The workspace screenshot tool selected the backdrop; full rail and edge compositor appearance was not visually verified in this revision.",
+    "System focus rings, native control accents, screen-capture privacy indicator and original application icons retain OS/user colors."
+  ]
+}

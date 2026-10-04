@@ -1,0 +1,175 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "three_native_editable_windows",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "native_editors",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "reorder_preserves_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "1010 × 760 PNG, rendered from own content view without screen capture.",
+      "name" : "manager_native_render",
+      "passed" : true
+    },
+    {
+      "detail" : "示範工作區已啟動。",
+      "name" : "start_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "workspace_running",
+      "passed" : true
+    },
+    {
+      "detail" : "AppKit frame tolerance: 1 point.",
+      "name" : "active_window_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "inactive_windows_parked",
+      "passed" : true
+    },
+    {
+      "detail" : "示範視窗 · Document B · 草稿測試",
+      "name" : "select_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "select_uses_reordered_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "selected_window_key_and_editable",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "previous_window_parked_after_switch",
+      "passed" : true
+    },
+    {
+      "detail" : "示範視窗 · Document C · 日語測試",
+      "name" : "step_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "next_window_selected",
+      "passed" : true
+    },
+    {
+      "detail" : "示範視窗 · Document A · 閱讀測試",
+      "name" : "return_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "input_focus_returns",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "drafts_and_selections_survive_switches",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "expanded_fills_content_area",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "expanded_restores_normal_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_clears_running_state",
+      "passed" : true
+    },
+    {
+      "detail" : "Exact equality with the three original AppKit frames.",
+      "name" : "stop_restores_all_original_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_documents_open",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_drafts_and_selections",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "removing_does_not_close_document",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T09:13:31Z",
+  "limitation" : "App-owned NSWindow\/NSTextView integration only. External application control, AX permission grants, ScreenCaptureKit capture, and global key delivery are not verified by this run.",
+  "originalFrames" : [
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 50,
+      "y" : 815
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 94,
+      "y" : 780
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 138,
+      "y" : 745
+    }
+  ],
+  "passed" : true,
+  "restoredFrames" : [
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 50,
+      "y" : 815
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 94,
+      "y" : 780
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 138,
+      "y" : 745
+    }
+  ],
+  "schemaVersion" : 1,
+  "scope" : "native-demo-integration",
+  "screenshotPath" : "\/Users\/zhangfei\/.codex\/.chatgpt-projects\/g-p-6ac00a5fb83c81919f184e2204fcb1c5\/WindowLane\/verification\/manager.png"
+}

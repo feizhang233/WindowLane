@@ -1,0 +1,56 @@
+{
+  "completedAt": "2026-10-04T13:53:07+00:00",
+  "appVersion": "0.2.0",
+  "scope": "native UI and original Safari recovery; dedicated external fixtures",
+  "checks": [
+    {
+      "name": "separate_native_settings_window",
+      "passed": true,
+      "detail": "WindowLane 設定 is a separate standard window with Appearance, Switching, Permissions tabs."
+    },
+    {
+      "name": "independent_transparency_controls",
+      "passed": true,
+      "detail": "Native increment changed application35 to43, settings stayed35; decrement changed settings35 to27, application stayed43."
+    },
+    {
+      "name": "independent_transparency_relaunch",
+      "passed": true,
+      "detail": "After app exit/relaunch, native settings displayed application43/settings27."
+    },
+    {
+      "name": "default_restored",
+      "passed": true,
+      "detail": "Native Restore defaults returned both sliders35 and frosted background."
+    },
+    {
+      "name": "horizontal_scroll_settings",
+      "passed": true,
+      "detail": "Native Switching tab displayed enabled, workspace scope and threshold80."
+    },
+    {
+      "name": "granted_permission_cards_hidden",
+      "passed": true,
+      "detail": "With both grants valid, manager displayed no permission cards; Permissions tab displayed both granted statuses."
+    },
+    {
+      "name": "safari_original_frame_recovery",
+      "passed": true,
+      "detail": "Exact stored windowCG17923/PID7491 uniquely matched rawAX and CG frames. Old resize failed at height1373 vs stored1390. Final staging path passed exact backend AX+CG verification of original(-9,67,2558,1390); native UI displayed復原完成 and original recovery.json became empty."
+    },
+    {
+      "name": "horizontal_scroll_physical_mouse",
+      "passed": true,
+      "detail": "User confirmed: 可以切換，小幅滑動不誤觸. Limited to this mouse and three fixture windows at default threshold80/workspace scope. CUA-generated scroll calls alone did not trigger switching; user physical test is the supporting evidence."
+    },
+    {
+      "name": "manual_workspace_exit_restore",
+      "passed": true,
+      "detail": "Native Exit and restore menu returned manager with已退出工作區，視窗已恢復原位置與尺寸 and no pending recovery. Three test entries removed and search cleared."
+    }
+  ],
+  "limitations": [
+    "Physical mouse/trackpad hardware variations not exhaustively tested.",
+    "Different screens, long sleep/resume and arbitrary applications not exhaustively tested."
+  ]
+}

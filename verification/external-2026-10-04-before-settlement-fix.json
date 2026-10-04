@@ -1,0 +1,160 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "accessibility_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "Not granted; ScreenCaptureKit remains unverified. Core AX tests continue without requesting permission.",
+      "name" : "optional_screen_capture_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    },
+    {
+      "detail" : "Three AX objects in process 51605; own application and all other bundles excluded.",
+      "name" : "fixture_only_scope",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stable_AX_identity_across_discovery",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "three_external_windows_added",
+      "passed" : true
+    },
+    {
+      "detail" : "無法完成視窗排列：「Document A · 閱讀測試」未接受指定尺寸或位置，可能受應用最小尺寸或目前螢幕限制。",
+      "name" : "start_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "無法完成視窗排列：「Document A · 閱讀測試」未接受指定尺寸或位置，可能受應用最小尺寸或目前螢幕限制。",
+      "name" : "workspace_running",
+      "passed" : false
+    },
+    {
+      "detail" : "",
+      "name" : "stop_clears_running_state",
+      "passed" : true
+    },
+    {
+      "detail" : "Each original AX frame restored within 2 points and original minimized flag restored exactly.",
+      "name" : "stop_restores_original_geometry_and_minimized_state",
+      "passed" : false
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_fixture_documents_alive",
+      "passed" : true
+    },
+    {
+      "detail" : "無法完成視窗排列：「Document A · 閱讀測試」未接受指定尺寸或位置，可能受應用最小尺寸或目前螢幕限制。",
+      "name" : "recovery_journal_completed",
+      "passed" : false
+    },
+    {
+      "detail" : "視窗復原完成。",
+      "name" : "cleanup_recovery_attempt",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T08:43:04Z",
+  "fixtureBundleID" : "com.feizhang.windowlane.fixture",
+  "limitation" : "Only the three documents of the separate fixture application are managed. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested.",
+  "originalStates" : [
+    {
+      "cgWindowID" : 16523,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 50,
+        "y" : 37
+      },
+      "id" : "EE4A01F0-27FF-4B52-9505-501F6E037E76",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document A · 閱讀測試"
+    },
+    {
+      "cgWindowID" : 16524,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 94,
+        "y" : 72
+      },
+      "id" : "52293630-226E-4AC2-B2FE-6081CA6DC854",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document B · 草稿測試"
+    },
+    {
+      "cgWindowID" : 16525,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 138,
+        "y" : 107
+      },
+      "id" : "1E1B79AD-E0CA-4AA6-9933-A9B94847F46F",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document C · 日語測試"
+    }
+  ],
+  "passed" : false,
+  "restoredStates" : [
+    {
+      "cgWindowID" : 16523,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 50,
+        "y" : 37
+      },
+      "id" : "EE4A01F0-27FF-4B52-9505-501F6E037E76",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document A · 閱讀測試"
+    },
+    {
+      "cgWindowID" : 16524,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 94,
+        "y" : 72
+      },
+      "id" : "52293630-226E-4AC2-B2FE-6081CA6DC854",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document B · 草稿測試"
+    },
+    {
+      "cgWindowID" : 16525,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 138,
+        "y" : 107
+      },
+      "id" : "1E1B79AD-E0CA-4AA6-9933-A9B94847F46F",
+      "minimized" : false,
+      "pid" : 51605,
+      "title" : "Document C · 日語測試"
+    }
+  ],
+  "schemaVersion" : 1,
+  "scope" : "external-AX-integration",
+  "screenCaptureAuthorizedAtStart" : false,
+  "screenCaptureTest" : "unverified",
+  "status" : "failed"
+}

@@ -1,0 +1,46 @@
+Building for debugging...
+[2 / 6] WindowLaneCore
+[7 / 11] WindowLaneCore
+[10 / 14] WindowLaneCoreTests-product
+[12 / 16] WindowLaneCoreTests-product
+[18 / 20] WindowLaneCoreTests-product
+Build complete! (0.85 sec)
+Test Suite 'Selected tests' started at 2026-10-04 15:12:42.073.
+Test Suite 'WindowLaneCoreTests.xctest' started at 2026-10-04 15:12:42.074.
+Test Suite 'HorizontalScrollGateTests' started at 2026-10-04 15:12:42.074.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testCooldownDiscardsWheelDistanceInsteadOfQueuingIt]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testCooldownDiscardsWheelDistanceInsteadOfQueuingIt]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testDisabledAndBusyInputNeitherAccumulatesNorQueuesGestureTail]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testDisabledAndBusyInputNeitherAccumulatesNorQueuesGestureTail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testExtremeFiniteDeltaSafelySaturatesAtThreshold]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testExtremeFiniteDeltaSafelySaturatesAtThreshold]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testGestureThatStartsDuringCooldownCannotTriggerFromItsTail]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testGestureThatStartsDuringCooldownCannotTriggerFromItsTail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testIdleGapDropsPartialWheelMovement]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testIdleGapDropsPartialWheelMovement]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testInvalidInputAndBackwardsTimeDropAccumulatedMovement]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testInvalidInputAndBackwardsTimeDropAccumulatedMovement]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testMomentumAndCancelledMovementNeverTrigger]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testMomentumAndCancelledMovementNeverTrigger]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testOnePhaseGestureCannotSwitchTwiceEvenAfterCooldownOrIdle]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testOnePhaseGestureCannotSwitchTwiceEvenAfterCooldownOrIdle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testResetClearsCooldownAndGestureLatch]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testResetClearsCooldownAndGestureLatch]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testReversalUsesOnlyNewDirectionDistance]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testReversalUsesOnlyNewDirectionDistance]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdBoundsAndChangesStartFresh]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdBoundsAndChangesStartFresh]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdIsInclusiveAndSmallTouchesDoNotSwitch]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdIsInclusiveAndSmallTouchesDoNotSwitch]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testVerticalAndDiagonalInputClearsPreviousHorizontalIntent]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testVerticalAndDiagonalInputClearsPreviousHorizontalIntent]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelCanFollowTrackpadWhenItsTerminalPhaseWasLost]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelCanFollowTrackpadWhenItsTerminalPhaseWasLost]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelTicksNormalizeAndBothDirectionsWork]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelTicksNormalizeAndBothDirectionsWork]' passed (0.000 seconds).
+Test Suite 'HorizontalScrollGateTests' passed at 2026-10-04 15:12:42.076.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'WindowLaneCoreTests.xctest' passed at 2026-10-04 15:12:42.076.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'Selected tests' passed at 2026-10-04 15:12:42.076.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.003) seconds

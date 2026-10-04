@@ -1,0 +1,115 @@
+{
+  "appPath": "dist/WindowLane.app",
+  "appVersion": "0.1.0",
+  "architecture": "arm64",
+  "backgroundReport": {
+    "completedAt": "2026-10-04T10:50:10Z",
+    "count": 13,
+    "passed": true,
+    "path": "verification/background-smoke.json",
+    "scope": "local-background-preferences",
+    "sha256": "6ed8eb45a40d6546abe7cd54079512479a16fd3fcad74fec72f10b9e6fdc284f"
+  },
+  "bundleIdentifier": "com.feizhang.windowlane",
+  "createdAtUTC": "2026-10-04T10:50:47Z",
+  "executablePath": "dist/WindowLane.app/Contents/MacOS/WindowLane",
+  "executableSHA256": "b67d9b0cc074c79d6f5ed2fc868ec75ebecb1ae9e1addcc9ffce70cd35fec33c",
+  "externalReport": {
+    "completedAt": "2026-10-04T10:46:05Z",
+    "count": 39,
+    "passed": true,
+    "path": "verification/external-smoke.json",
+    "scope": "external-AX-integration",
+    "sha256": "87eae7da7f226d5b116f99f471f111885f31f5f39620bf05c38904ca3c6d785b"
+  },
+  "nativeReport": {
+    "completedAt": "2026-10-04T10:49:57Z",
+    "count": 25,
+    "passed": true,
+    "path": "verification/native-smoke.json",
+    "scope": "native-demo-integration",
+    "sha256": "e38d48652cdc4908c41582b87d8b1dafdb9563318a50e4977b00d176226d4469"
+  },
+  "schemaVersion": 1,
+  "sourcesHash": {
+    "aggregateFormat": "UTF-8 relative path + NUL + lowercase SHA-256 + LF, sorted by path",
+    "algorithm": "SHA-256",
+    "files": [
+      {
+        "path": "Package.swift",
+        "sha256": "d12fc901eda2785ef8c75ba28a96426eb5070faa23adbb8a1900c29438f8af65"
+      },
+      {
+        "path": "Resources/Info.plist",
+        "sha256": "1bb9ad008e7f40d8e772401cf129da381369191a3ce7efea2eff92fedc77b760"
+      },
+      {
+        "path": "Sources/WindowLane/App.swift",
+        "sha256": "c5f1e0b8c8726a9b8f18ca5f4869f78161f743492da9e76e530b9430f298d723"
+      },
+      {
+        "path": "Sources/WindowLane/BackgroundCheck.swift",
+        "sha256": "937c2b9d627457cf09b9783a56ccbd848db4af15061ada72a88a599d74389069"
+      },
+      {
+        "path": "Sources/WindowLane/BackgroundSettings.swift",
+        "sha256": "b578b07961dcca19b6f08b7d9063a318dbdc5f30c95f4dea2af3dbdb29ff3388"
+      },
+      {
+        "path": "Sources/WindowLane/BackgroundSettingsView.swift",
+        "sha256": "677de8bc637c710e11295eb0070a9d332718b95b9602c53a545b44c834679d86"
+      },
+      {
+        "path": "Sources/WindowLane/ExternalCheck.swift",
+        "sha256": "c255d41d15e9aec39996960e8a46972bf2b0020900640402d39ea0e71cae931a"
+      },
+      {
+        "path": "Sources/WindowLane/FixtureWindows.swift",
+        "sha256": "d668e0d59ca2fcab7b480cedc2bd5b577a640b3b8cb34e3ebb1d1c796b97c6e6"
+      },
+      {
+        "path": "Sources/WindowLane/GlassUI.swift",
+        "sha256": "91e9be1b88de56532edc9d1994a767d05e3ca92be64c9b9c51939cbce1406b00"
+      },
+      {
+        "path": "Sources/WindowLane/GlobalShortcuts.swift",
+        "sha256": "42ca53615c49fc6fd61e3c2745ff17ee775ff4c84f306db855111b3ae7619eee"
+      },
+      {
+        "path": "Sources/WindowLane/SmokeCheck.swift",
+        "sha256": "fb0644907b30d34fd7e466984fad8474851d909b45cf6a44a0b186fe1ef479cd"
+      },
+      {
+        "path": "Sources/WindowLane/Views.swift",
+        "sha256": "1c7f58fe64b17cd11fd3114b7fccce1871558b8f450f6ed309f125f6605eb536"
+      },
+      {
+        "path": "Sources/WindowLane/WindowBackend.swift",
+        "sha256": "4d94d9ee6a0b14516cf570b117791f16231812e6a41f289ae63892e2001406ec"
+      },
+      {
+        "path": "Sources/WindowLane/WorkspaceStore.swift",
+        "sha256": "2b61fd5cd83229e9bb56d2b726db6769d22532c09da510686f34c952b6e5fb40"
+      },
+      {
+        "path": "Sources/WindowLaneCore/WorkspaceCore.swift",
+        "sha256": "a009cb5f27562f1c2a0161ba3008cb1c70839767930ce83c856c4680face5e1e"
+      },
+      {
+        "path": "Tests/WindowLaneCoreTests/WorkspaceCoreTests.swift",
+        "sha256": "48a99a5b660bebb035d0e9976f87c6f710fddccff9e649c6d54533c9cff86854"
+      },
+      {
+        "path": "scripts/build-app.sh",
+        "sha256": "c2b40399911e8cc1dc259229f8e63377df4db043b31818b67869f59c89226a45"
+      },
+      {
+        "path": "scripts/package-app.sh",
+        "sha256": "1829e4ee8dac19c47ed7941fcba914825afeb175be85b28717930db61f6eb365"
+      }
+    ],
+    "sha256": "5a8abbcc1856a0023ea303d4a32076ef8e049d43bf272e87eefccbaa63234ac7"
+  },
+  "zipPath": "dist/WindowLane-0.1.0-arm64.zip",
+  "zipSHA256": "adab4470ccc718890b2022a678b7f5465044f37c8ec768d10c161976b611412e"
+}

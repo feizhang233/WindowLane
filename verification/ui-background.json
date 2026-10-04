@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "scope": "native-background-ui-review",
+  "completedAt": "2026-10-04T10:35:20+00:00",
+  "checks": [
+    {
+      "name": "default_frosted_settings",
+      "result": "reviewed",
+      "detail": "Native sheet showed frosted mode, 35% transparency and 24 pt wallpaper blur."
+    },
+    {
+      "name": "native_image_chooser",
+      "result": "reviewed",
+      "detail": "Native NSOpenPanel accepted the app-generated wallpaper-fixture.png; original remains in verification."
+    },
+    {
+      "name": "wallpaper_in_manager_and_sheet",
+      "result": "reviewed",
+      "detail": "CUA screenshots showed custom wallpaper in the main manager, settings sheet and preview."
+    },
+    {
+      "name": "slider_changes",
+      "result": "reviewed",
+      "detail": "Native Increment/Decrement actions updated transparency to 43% and blur to 18 pt."
+    },
+    {
+      "name": "actual_restart_persistence",
+      "result": "reviewed",
+      "detail": "Quit and reopened main app; filename, wallpaper mode, 43% transparency and 18 pt blur remained."
+    },
+    {
+      "name": "mode_toggle_and_chooser_cancel",
+      "result": "reviewed",
+      "detail": "Switched frosted -> wallpaper; opening and cancelling replacement kept accepted filename/mode/values."
+    },
+    {
+      "name": "restore_defaults_and_remove_copy",
+      "result": "reviewed",
+      "detail": "Reset selected frosted, 35%, 24 pt while retaining image; removal cleared the test copy and image preference. Source PNG retained."
+    }
+  ],
+  "limitations": [
+    "Full-screen workspace backdrop is wired to the same observed renderer; CUA captures only the rail during workspace mode, so whole-screen compositor appearance is not established by these screenshots.",
+    "Actual OS accessibility preferences, macOS 14-25 fallback and arbitrary personal image contrast were not exhaustively tested."
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "source": "/Users/zhangfei/.codex/.chatgpt-projects/g-p-6ac00a5fb83c81919f184e2204fcb1c5/WindowLane",
+  "projectRoot": "/Users/zhangfei/Documents/Codex/WindowLane",
+  "copiedFileCount": 89,
+  "excluded": [
+    ".build",
+    ".DS_Store",
+    ".git"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "98804de6e29b7725bc34939e01238c284295712d325fef53c41e0b7bb4ab1bb8"
+    },
+    {
+      "path": "DESIGN.md",
+      "sha256": "66bce42a0ae640988ae2fdd80694474d0af87182f16d620120db1d888aff78d7"
+    },
+    {
+      "path": "Package.swift",
+      "sha256": "d12fc901eda2785ef8c75ba28a96426eb5070faa23adbb8a1900c29438f8af65"
+    },
+    {
+      "path": "README.md",
+      "sha256": "359bc639ddd36cd30927e7f8353c8808ce5746b573071ae9cc8f06e5ac4ea052"
+    },
+    {
+      "path": "Resources/Info.plist",
+      "sha256": "678e3fad4edb5b95b41b96deeeca7ae925489357f5c7f512862681eeb7bf5736"
+    },
+    {
+      "path": "Sources/WindowLane/App.swift",
+      "sha256": "c7dc5e3c4e5568265e05a201fa7ad4c642d4f56c247bf068aaba52f2ea46456e"
+    },
+    {
+      "path": "Sources/WindowLane/BackgroundCheck.swift",
+      "sha256": "38b63564577078a2d49752fc152acb2107a8757b00e6fa908aa3cbf3c717adbf"
+    },
+    {
+      "path": "Sources/WindowLane/BackgroundSettings.swift",
+      "sha256": "70f5b3fade70eef106661100012ca03cc728472481e8ef462c1d911355ebafeb"
+    },
+    {
+      "path": "Sources/WindowLane/BackgroundSettingsView.swift",
+      "sha256": "4edb06178a0b51fcbcca9ea2c6e91350e0a1e532321f28a656517073598a59e0"
+    },
+    {
+      "path": "Sources/WindowLane/ExternalCheck.swift",
+      "sha256": "ba8c8d31c099e60324d1039bedf411ac0fc3e6d39ef933105e2b200ff09433ee"
+    },
+    {
+      "path": "Sources/WindowLane/FixtureWindows.swift",
+      "sha256": "d668e0d59ca2fcab7b480cedc2bd5b577a640b3b8cb34e3ebb1d1c796b97c6e6"
+    },
+    {
+      "path": "Sources/WindowLane/GlassUI.swift",
+      "sha256": "e98c5d4363210be92baafee54f10c4c3710475eed86e288cbe517da456c04cb9"
+    },
+    {
+      "path": "Sources/WindowLane/GlobalShortcuts.swift",
+      "sha256": "42ca53615c49fc6fd61e3c2745ff17ee775ff4c84f306db855111b3ae7619eee"
+    },
+    {
+      "path": "Sources/WindowLane/HorizontalScrollRouter.swift",
+      "sha256": "7003d0547d496f3640da11263ce5786d4768f618f5a8e7370660ba2bc0d5cd21"
+    },
+    {
+      "path": "Sources/WindowLane/InteractionSettings.swift",
+      "sha256": "d03c862d310f91b2ab90dfcf7f50bb12c150e076d999ed17a64faad962fd88d9"
+    },
+    {
+      "path": "Sources/WindowLane/SmokeCheck.swift",
+      "sha256": "86233525386c9c84179ac98af77258ee8d3e351fd074475e486e700ba0de36cc"
+    },
+    {
+      "path": "Sources/WindowLane/Views.swift",
+      "sha256": "4be7e8f996551be0168544033ca8daee04dfe6628c80e1e7ee9eefa05b5f3139"
+    },
+    {
+      "path": "Sources/WindowLane/WindowBackend.swift",
+      "sha256": "d52e528069fcc294c697854dfe6e68972999c594a9032532a88d12d4038ac603"
+    },
+    {
+      "path": "Sources/WindowLane/WorkspaceStore.swift",
+      "sha256": "0c6e1144bfc0f4cea0f3b7720139695ca90eaf4fa6f5e9d1096192c60c748754"
+    },
+    {
+      "path": "Sources/WindowLaneCore/HorizontalScrollGate.swift",
+      "sha256": "eb0a6016c569b097623d815b8a999e79eeb4dc1f1bfd613ab3c44b50519f22df"
+    },
+    {
+      "path": "Sources/WindowLaneCore/WindowRestorationGeometry.swift",
+      "sha256": "8b57e56b881270f9d9b5e7bb5a8ed862a0ddf3813ad92e670f7a00c823972989"
+    },
+    {
+      "path": "Sources/WindowLaneCore/WorkspaceCore.swift",
+      "sha256": "a009cb5f27562f1c2a0161ba3008cb1c70839767930ce83c856c4680face5e1e"
+    },
+    {
+      "path": "Tests/WindowLaneCoreTests/HorizontalScrollGateTests.swift",
+      "sha256": "eac1ce282417b5ae1e52f02fd144e141081867303c56b06da8188d3f1767e2b8"
+    },
+    {
+      "path": "Tests/WindowLaneCoreTests/WindowRestorationGeometryTests.swift",
+      "sha256": "32bb42b5ecd8a9d2173a6ffa50a16a8e6d263affb29abd2a977fb1ab87913d88"
+    },
+    {
+      "path": "Tests/WindowLaneCoreTests/WorkspaceCoreTests.swift",
+      "sha256": "48a99a5b660bebb035d0e9976f87c6f710fddccff9e649c6d54533c9cff86854"
+    },
+    {
+      "path": "UX-CONTRACT.md",
+      "sha256": "de5aaa7f2a032aa93c2790e6b01bf32dcad3c3aafd3d340f398b1977e52963ab"
+    },
+    {
+      "path": "dist/WindowLane-0.1.0-arm64.zip",
+      "sha256": "adab4470ccc718890b2022a678b7f5465044f37c8ec768d10c161976b611412e"
+    },
+    {
+      "path": "dist/WindowLane-0.2.0-arm64.zip",
+      "sha256": "ed663d3b98f367487977d8753e67570650e29662017bd5aebba31caa815eb1bf"
+    },
+    {
+      "path": "dist/WindowLane.app/Contents/Info.plist",
+      "sha256": "678e3fad4edb5b95b41b96deeeca7ae925489357f5c7f512862681eeb7bf5736"
+    },
+    {
+      "path": "dist/WindowLane.app/Contents/MacOS/WindowLane",
+      "sha256": "ef5a25868b7e960a2a563ba7a32b9b32b131b203f7c6f06092fe96ee92e424a8"
+    },
+    {
+      "path": "dist/WindowLane.app/Contents/_CodeSignature/CodeResources",
+      "sha256": "6686de10a28a2fe11b36cbb86dcbacc827cfc4ea116b4dabf1845e5aee629e9b"
+    },
+    {
+      "path": "premium-audit.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "premium-ui.json",
+      "sha256": "7260afa44e5e3843bb72e92052bbd8cc71b325028151c120b0fad1ccf126db78"
+    },
+    {
+      "path": "scripts/build-app.sh",
+      "sha256": "c2b40399911e8cc1dc259229f8e63377df4db043b31818b67869f59c89226a45"
+    },
+    {
+      "path": "scripts/package-app.sh",
+      "sha256": "1829e4ee8dac19c47ed7941fcba914825afeb175be85b28717930db61f6eb365"
+    },
+    {
+      "path": "verification/TESTING.md",
+      "sha256": "67c61f1a4e68eb6c78481d93a32496908a7c7fc66145c3ed6464fc3207897953"
+    },
+    {
+      "path": "verification/WindowLaneFixture.app/Contents/Info.plist",
+      "sha256": "8d29fc89fa95b8c3b5c45f6b152e6d100fa4121c3ce45c88fafecf10e1a7051a"
+    },
+    {
+      "path": "verification/WindowLaneFixture.app/Contents/MacOS/WindowLane",
+      "sha256": "fda7dfcf0cbe1ef94f21902d12f2efe807dae27ec2fad132697b2883eeb1a3b8"
+    },
+    {
+      "path": "verification/WindowLaneFixture.app/Contents/_CodeSignature/CodeResources",
+      "sha256": "6686de10a28a2fe11b36cbb86dcbacc827cfc4ea116b4dabf1845e5aee629e9b"
+    },
+    {
+      "path": "verification/background-2026-10-04.json",
+      "sha256": "b8fa95be2c562f5c05f9f8e3b41afdf406a66c196bcdde4665a45cd4b86a8e21"
+    },
+    {
+      "path": "verification/background-neutral-2026-10-04.json",
+      "sha256": "6ed8eb45a40d6546abe7cd54079512479a16fd3fcad74fec72f10b9e6fdc284f"
+    },
+    {
+      "path": "verification/background-smoke-stability-v020.json",
+      "sha256": "df4792985275e8c4a71589e2dc196052d3ed8690c5b25c8f566a7281918e5aab"
+    },
+    {
+      "path": "verification/background-smoke.json",
+      "sha256": "72ea365bfb8ee56022e13846517bc1184cc17ea140ce8fcc3f295db0ee104a50"
+    },
+    {
+      "path": "verification/build-manifest-stability-v020.json",
+      "sha256": "bb7464426eef8e009d35741eb834fad5ccf236008a656d0c9bbd5b0655725b27"
+    },
+    {
+      "path": "verification/build-manifest.json",
+      "sha256": "bb7464426eef8e009d35741eb834fad5ccf236008a656d0c9bbd5b0655725b27"
+    },
+    {
+      "path": "verification/core-direct-switch-tests.log",
+      "sha256": "7eb5a2ea5a853373bad970116830e244bacc356c093a8510262f8c100990dfa9"
+    },
+    {
+      "path": "verification/core-stability-tests.log",
+      "sha256": "3ab0eb3ce6ba289e3f60ae03a9d47bc41114cb9be1bc0503a0a06ace1091c4e7"
+    },
+    {
+      "path": "verification/core-tests.log",
+      "sha256": "1c4ee707eb8bfc26584e57dee10ecfbaa7f28ab7006423d2b5241ca73214baa6"
+    },
+    {
+      "path": "verification/design-lint-liquid-glass.log",
+      "sha256": "6e5405e7f99e2e5fdfd022cef974c03fb0657af609472b0277cdac4a79aa0268"
+    },
+    {
+      "path": "verification/direct-switch-progress.json",
+      "sha256": "ea188516d8c860fe243a756630d06e45276e69a1e519ba46a808e39e1c33e148"
+    },
+    {
+      "path": "verification/external-2026-10-04-before-clarity-fix.json",
+      "sha256": "e96a5a48e839d8860ebde8c7adc197789ca3a49433f52d1abb5fb445c259ed7d"
+    },
+    {
+      "path": "verification/external-2026-10-04-before-expand-fix.json",
+      "sha256": "3e4342d3d501b3662c76b2a0a3276d3bfec2154896ca29ef9ff48766bf3af81a"
+    },
+    {
+      "path": "verification/external-2026-10-04-before-liquid-glass.json",
+      "sha256": "49d4942fe0963b2663a9e2ad96ffae94da6f976006939cd1156e7f69a05d8e50"
+    },
+    {
+      "path": "verification/external-2026-10-04-before-settlement-fix.json",
+      "sha256": "23ebf9da90f5cc1c397f2ff198072654e11e17b561883ad6c569f2d5f6f3c59b"
+    },
+    {
+      "path": "verification/external-2026-10-04-preview-first-run.json",
+      "sha256": "88d37dd25012822a5eafce980b64e0b4d375d31f7512a5d6a657bd7890d4185c"
+    },
+    {
+      "path": "verification/external-2026-10-04-staged-animation-failure.json",
+      "sha256": "9243e02ee5e3d0102bb5bf680b3811b515502448afd3e7c9339fce9bd99e64ab"
+    },
+    {
+      "path": "verification/external-after-zoom.json",
+      "sha256": "3bc426c78275447380bfa295ea205b6391d2e874d4724e6105bdfc652e6d23a1"
+    },
+    {
+      "path": "verification/external-background-2026-10-04.json",
+      "sha256": "dd8194f12fcc2772cac9565b9b52fc81ddd51d1208ca7ac148d703f420d88c96"
+    },
+    {
+      "path": "verification/external-background-fixture-absent.json",
+      "sha256": "c5b9eedc9e0b54d90424f26665892a5b24e713fdf60715f3f5128d07a27b1e5f"
+    },
+    {
+      "path": "verification/external-launchservices.json",
+      "sha256": "1381d4e216dc0e911f0611a090e4c247a84aa34e5446d10218974a2615900ad2"
+    },
+    {
+      "path": "verification/external-liquid-glass-2026-10-04.json",
+      "sha256": "7ee6811aba35eead7a7a560a2aa0f5692c361e0d09960a6b3f22926b5cc7e29d"
+    },
+    {
+      "path": "verification/external-neutral-2026-10-04.json",
+      "sha256": "87eae7da7f226d5b116f99f471f111885f31f5f39620bf05c38904ca3c6d785b"
+    },
+    {
+      "path": "verification/external-smoke-stability-v020.json",
+      "sha256": "f41242d1ddcd4b3ab141b2d53f42021ebe07dbf35bee9356f0ff213c391c11c3"
+    },
+    {
+      "path": "verification/external-smoke.json",
+      "sha256": "f41242d1ddcd4b3ab141b2d53f42021ebe07dbf35bee9356f0ff213c391c11c3"
+    },
+    {
+      "path": "verification/manager.png",
+      "sha256": "34a00382acbb66f42f0ab1911c026f8a8b9ecb4fb64b89522134feaeb6d5971c"
+    },
+    {
+      "path": "verification/manifest-neutral-2026-10-04.json",
+      "sha256": "5bd12fe6a86702c5dcf77ad549350a770357c26fae19a5df2ad4b1f64f69797f"
+    },
+    {
+      "path": "verification/native-2026-10-04-before-clarity-fix.json",
+      "sha256": "7eadb055d7511d3cf9c0e0bc67757881c27c16290e211050fd118b31ae5012e7"
+    },
+    {
+      "path": "verification/native-2026-10-04-before-liquid-glass.json",
+      "sha256": "8d52fbe94124efec5f130a840b2eab5a7c2f94ea1cf3004e4f395b7b95575db9"
+    },
+    {
+      "path": "verification/native-background-2026-10-04.json",
+      "sha256": "5533697adb389c1ca31d9cbfb27f28d2b7646d8095735b6e9e45209c11d971db"
+    },
+    {
+      "path": "verification/native-liquid-glass-2026-10-04.json",
+      "sha256": "b3b16b037fc7b8baa04c015e22d3c1a97caacd5304a3ab0909293a202eda270a"
+    },
+    {
+      "path": "verification/native-neutral-2026-10-04.json",
+      "sha256": "e38d48652cdc4908c41582b87d8b1dafdb9563318a50e4977b00d176226d4469"
+    },
+    {
+      "path": "verification/native-smoke-direct-initial-failure.json",
+      "sha256": "750777f5575e660ad4878f988edfc1a8ad0483457ba99cba0666a9d665cbc524"
+    },
+    {
+      "path": "verification/native-smoke-stability-v020.json",
+      "sha256": "307ed3148142dc5a0acb617bd41c8ac9d38c8b2d8bb64dbbd5efe4aff04b9556"
+    },
+    {
+      "path": "verification/native-smoke.json",
+      "sha256": "750777f5575e660ad4878f988edfc1a8ad0483457ba99cba0666a9d665cbc524"
+    },
+    {
+      "path": "verification/premium-audit-background.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "verification/premium-audit-direct-switch.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "verification/premium-audit-liquid-glass.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "verification/premium-audit-neutral-glass.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "verification/premium-audit-stability-stability-v020.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "verification/premium-audit-stability.json",
+      "sha256": "321886c4c8493b5b27522ce7f3132b0c1b64640a6ec443933e92d960630b29c6"
+    },
+    {
+      "path": "verification/release-build.log",
+      "sha256": "72308ff1d6d094982febc2893a3fc1b64c658be7d61232a042bf3a458399929d"
+    },
+    {
+      "path": "verification/release-direct-switch-build.log",
+      "sha256": "6964b87a51381dfbe98721b8d746290334971c88303b661654ab0866a6c32699"
+    },
+    {
+      "path": "verification/scroll-gate-tests.log",
+      "sha256": "a265ad8e1ba92cb6cc5554411a455072f57b6bb28c2d4043ed7366d7eb133b2b"
+    },
+    {
+      "path": "verification/ui-background.json",
+      "sha256": "78e58585d46792aaa98ad8b966cd7b7bb85e6e0809f210ae888e4cd85d9b47f8"
+    },
+    {
+      "path": "verification/ui-liquid-glass.json",
+      "sha256": "18e3b5f62c05398f97ab58eedf17d49f2680dda2aa016660401b84b7144c181c"
+    },
+    {
+      "path": "verification/ui-neutral-glass.json",
+      "sha256": "52fdab7440b8a6221b81ae860f7880b507f1f6b10e0627bd8ed3f49a28972821"
+    },
+    {
+      "path": "verification/ui-stability-stability-v020.json",
+      "sha256": "8112d09d64e0db68f46ab753d51e6ab16ae7b6437a92197996d51cab2932ba30"
+    },
+    {
+      "path": "verification/ui-stability.json",
+      "sha256": "8112d09d64e0db68f46ab753d51e6ab16ae7b6437a92197996d51cab2932ba30"
+    },
+    {
+      "path": "verification/wallpaper-fixture.png",
+      "sha256": "8cab50a37b1830df960dbbee3092cd3c6ed09e44b6aba07ef8118bddb901eee1"
+    }
+  ],
+  "runtimeValidation": "Copied application was not relaunched from this location; final live tests remain pending.",
+  "copyIntegrityScope": "Source, tests, resources, scripts, existing docs, application binaries and historical evidence copied unchanged. Project-only metadata is listed separately.",
+  "projectMetadataChanges": [
+    ".gitignore adds exclusions for local verification apps and PNG files.",
+    "verification/project-copy.json records the standalone copy.",
+    "AGENTS.md and CURRENT_STATE.md capture durable handoff guidance and the manual project-registration step."
+  ],
+  "allApplicationSourcesAndBinariesMatch": true,
+  "copiedPayloadMatchedBeforeProjectMetadataChanges": true
+}
