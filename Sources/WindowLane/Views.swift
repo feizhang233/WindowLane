@@ -81,17 +81,7 @@ struct ManagerView: View {
                 }
             }
             HStack(spacing:16) {
-                VStack(alignment:.leading,spacing:4) {
-                    Text("主視窗寬度 \(Int(store.ratio * 100))%").font(.caption.weight(.medium))
-                    Slider(value:$store.ratio,in:0.80...0.90,step:0.01).frame(width:180).accessibilityLabel("主視窗寬度")
-                        .disabled(store.isRunning || store.isBusy)
-                }
-                Divider().frame(height:32)
-                Picker("螢幕",selection:$store.screenIndex) {
-                    ForEach(Array(NSScreen.screens.enumerated()),id:\.offset) { index,screen in
-                        Text(screen.localizedName).tag(index)
-                    }
-                }.frame(maxWidth:250).disabled(store.isRunning || store.isBusy)
+                WorkspacePresetControls(store:store, compact:true)
                 Spacer()
                 Button { store.start() } label: {
                     HStack { if store.isBusy { ProgressView().controlSize(.small) }; Text("啟動工作區"); Image(systemName:"arrow.right") }
@@ -155,7 +145,7 @@ struct ManagerView: View {
             }.font(.system(size:10)).foregroundStyle(Theme.muted)
         }
         .padding(24).foregroundStyle(Theme.ink)
-        }.background(LaneWindowBackground(settings: store.background))
+        }.background(LaneWindowBackground(settings: store.background, surface: .application))
         .frame(minWidth:880,minHeight:650)
         .onAppear { store.refreshWindows() }
         .alert("已手動恢復所有視窗？",isPresented:$confirmManualRecovery) {
@@ -232,6 +222,12 @@ struct RailView: View {
             Button { store.step(1) } label: { Image(systemName:"chevron.right") }.disabled(store.activeIndex >= store.order.ids.count-1 || store.isBusy).accessibilityLabel("下一個視窗")
             Spacer(minLength:0)
             if store.isDemo { Text("示範").font(.caption).foregroundStyle(Theme.muted) }
+            Button(store.isSplit ? "單頁" : "並排") {
+                if store.isSplit, let id = store.order.activeID { store.select(id) }
+                else { store.showHalfPage() }
+            }.disabled(store.isBusy || store.ordered.count < 2 || store.expanded)
+                .help("兩個真實視窗並排，可直接拖放文件與圖片")
+            Button("儲存版面") { store.openWorkspaceSettings() }.disabled(store.isBusy)
             Button { store.toggleExpanded() } label: { Image(systemName:store.expanded ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right") }.disabled(store.isBusy).help("暫時放大 · ⌃⌥↩").accessibilityLabel("切換暫時放大")
             Button("管理") { store.stop(); store.onShowManager?() }
             Button("設定") { store.onShowSettings?() }

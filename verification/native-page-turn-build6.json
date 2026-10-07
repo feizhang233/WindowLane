@@ -1,0 +1,290 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    },
+    {
+      "detail" : "Injected Reduce Motion policy; no macOS preference was modified.",
+      "name" : "reduce_motion_bypasses_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "empty_snapshot_bypasses_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "A 96 × 64 logical-point image must not be stretched into a 192 × 128 window.",
+      "name" : "mismatched_snapshot_bypasses_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "three_native_editable_windows",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "native_editors",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "reorder_preserves_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "示範工作區已啟動。",
+      "name" : "start_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "workspace_running",
+      "passed" : true
+    },
+    {
+      "detail" : "AppKit frame tolerance: 1 point.",
+      "name" : "active_window_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed windows stay ready behind the active window; no per-switch parking.",
+      "name" : "all_windows_open_unminimized_at_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "示範視窗 · Document B · 草稿測試",
+      "name" : "select_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "select_uses_reordered_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-1; expectedWindow={NSWindow#21200[Document B · 草稿測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21200[Document B · 草稿測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21200[Document B · 草稿測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21200]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455400), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455400), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455400)",
+      "name" : "selected_window_key_and_editable",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_keeps_all_windows_ready",
+      "passed" : true
+    },
+    {
+      "detail" : "direction=Optional(-1), expected=-1; prepared 0→1; completed 0→1.",
+      "name" : "backward_page_turn_animation_completed",
+      "passed" : true
+    },
+    {
+      "detail" : "示範視窗 · Document C · 日語測試",
+      "name" : "step_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "next_window_selected",
+      "passed" : true
+    },
+    {
+      "detail" : "direction=Optional(1), expected=1; prepared 1→2; completed 1→2.",
+      "name" : "forward_page_turn_animation_completed",
+      "passed" : true
+    },
+    {
+      "detail" : "appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-2; expectedWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21201]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00)",
+      "name" : "page_turn_retains_target_keyboard_editor",
+      "passed" : true
+    },
+    {
+      "detail" : "示範視窗 · Document A · 閱讀測試",
+      "name" : "return_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-0; expectedWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21198]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00)",
+      "name" : "input_focus_returns",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "drafts_and_selections_survive_switches",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "expanded_aligns_all_windows_to_content_area",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "expanded_restores_all_normal_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_clears_running_state",
+      "passed" : true
+    },
+    {
+      "detail" : "Exact equality with the three original AppKit frames.",
+      "name" : "stop_restores_all_original_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_documents_open",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_drafts_and_selections",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "removing_does_not_close_document",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "cancel_start_has_no_late_mutation",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "restart_after_cancel",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "cancel_immediate_focus_handoff_has_no_late_commit",
+      "passed" : true
+    },
+    {
+      "detail" : "iteration=0, settled=true, expectedID=demo-2, actualID=demo-2, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-2; expectedWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21201]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00)\niteration=1, settled=true, expectedID=demo-0, actualID=demo-0, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-0; expectedWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21198]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00)\niteration=2, settled=true, expectedID=demo-2, actualID=demo-2, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-2; expectedWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21201]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00)\niteration=3, settled=true, expectedID=demo-0, actualID=demo-0, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-0; expectedWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21198]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00)\niteration=4, settled=true, expectedID=demo-2, actualID=demo-2, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-2; expectedWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21201]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00)\niteration=5, settled=true, expectedID=demo-0, actualID=demo-0, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-0; expectedWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21198]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00)\niteration=6, settled=true, expectedID=demo-2, actualID=demo-2, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-2; expectedWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21201]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00)\niteration=7, settled=true, expectedID=demo-0, actualID=demo-0, identityMatches=true; appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-0; expectedWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21198[Document A · 閱讀測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21198]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41454a00)",
+      "name" : "repeated_switches_ignore_busy_input",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed native frames and minimized flags equal their post-start baseline after each direct focus switch.",
+      "name" : "repeated_switches_preserve_geometry_and_minimized_state",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "repeated_switches_restore_documents",
+      "passed" : true
+    },
+    {
+      "detail" : "示範工作區已啟動。",
+      "name" : "restart_for_animation_cancellation",
+      "passed" : true
+    },
+    {
+      "detail" : "Polled renderer state; an arbitrary delay is not used as evidence that animation began.",
+      "name" : "cancellation_enters_visible_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "appActive=true, frontmostBundle=com.feizhang.windowlane, activeID=demo-2; expectedWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualKeyWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; actualMainWindow={NSWindow#21201[Document C · 日語測試] key=true main=true visible=true minimized=false}; keyedWindowFlags=[NSWindow#21201]; expectedResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), expectedWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00), responderMatches=true; keyWindowActualResponder=NSTextView@ObjectIdentifier(0x0000007b41455e00)",
+      "name" : "visible_page_turn_keeps_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_immediately_removes_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "Selection, keyboard focus, overlay visibility, completion count, and original frames remain unchanged after a 400 ms observation interval.",
+      "name" : "cancel_page_turn_has_no_late_mutation",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "cancel_page_turn_preserves_documents",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T17:40:12Z",
+  "limitation" : "App-owned NSWindow\/NSTextView integration only. External application control, AX permission grants, ScreenCaptureKit capture, and global key delivery are not verified by this run.",
+  "originalFrames" : [
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 50,
+      "y" : 815
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 94,
+      "y" : 780
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 138,
+      "y" : 745
+    }
+  ],
+  "passed" : true,
+  "requestToFocusMilliseconds" : [
+    54.95849996805191,
+    50.099708314519376,
+    47.48433333588764,
+    502.2217499790713,
+    64.4849999807775,
+    52.38154163816944,
+    69.66020830441266,
+    60.71041664108634,
+    53.3605000237003,
+    59.12466661538929,
+    53.11616667313501
+  ],
+  "restoredFrames" : [
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 50,
+      "y" : 815
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 94,
+      "y" : 780
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 138,
+      "y" : 745
+    }
+  ],
+  "schemaVersion" : 2,
+  "scope" : "native-demo-integration",
+  "switchPerformance" : {
+    "maximumMilliseconds" : 801.3755416614003,
+    "measurement" : "Monotonic elapsed time from select() to completed presentation with confirmed native keyboard focus, including outgoing native snapshot preparation, focus handoff, page-turn animation when enabled, and diagnostic polling. Successful switches only; no fixed latency pass\/fail budget.",
+    "medianMilliseconds" : 373.29354166286066,
+    "samplesMilliseconds" : [
+      360.30737502733245,
+      374.15287498151883,
+      361.8926249910146,
+      801.3755416614003,
+      389.61241667857394,
+      368.3923750068061,
+      374.71508333692327,
+      369.1062916186638,
+      364.49604167137295,
+      375.1032499712892,
+      373.29354166286066
+    ]
+  }
+}

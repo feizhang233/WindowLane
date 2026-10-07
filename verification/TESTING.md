@@ -1,5 +1,73 @@
 # WindowLane 驗證紀錄
 
+## GitHub 準備（2026-10-07）
+
+- 核心 **77 / 77** 通過：[執行紀錄](core-github-preparation-2026-10-07.log)。
+- release 編譯通過：[編譯紀錄](build-github-preparation-2026-10-07.log)。
+- 建置／封裝腳本語法與 Git 空白檢查通過。
+- 新增 GitHub Actions，在 macOS 26 上執行核心測試及 release 編譯；雲端結果以實際 workflow 為準。
+
+首次受限環境執行因預設編譯快取無寫入權限失敗；改用工程內快取後通過。此次沒有執行 GUI／外部整合，也沒有改動已安裝 App，以下結果仍屬歷史證據。
+
+## 0.2.1 build 8 尺寸拒絕與並排焦點（2026-10-04）
+
+固定安裝版已更新並正常退出／重開，簽章有效，安裝與測試二進位一致，既有兩項權限保留。最終回歸 **275 項全部通過**：
+
+- [核心](core-size-fix-build8.log) **77 / 77**，新增每窗最小寬度、無法同時容納及限制與相鄰索引對應。
+- [原生](native-size-fix-build8-final.json) **78 / 78**，包含真正 clamping fixture、保留比例的尺寸適配、拒絕並排退回且繼續運行、原始 recovery 值／草稿保持、拒絕後單頁切換、已保存並排無法容納的單頁啟動、WindowServer 排序及原生 key window。
+- [背景／偏好](background-size-fix-build8.json) **34 / 34**，隔離儲存，不修改使用者透明度／命名排版／復原資料。
+- [外部 fixture](external-size-fix-build8.json) **75 / 75**，同一最終簽署二進位完成 AX 焦點、預覽、單頁零幾何寫入、部分布局、取消與原始框／最小化復原。
+- [目前 Obsidian 視窗](obsidian-size-fix-build8-320pt.json) **11 / 11**，320 點並排、兩窗不重疊、跨應用往返、準備後單頁零幾何写入，以及原始框／最小化狀態復原；[較寬的首輪](obsidian-size-fix-build8-421pt.json)亦通過。兩輪均接受要求寬度，沒有重現先前的真正程序崩潰或尺寸拒絕。
+
+原碼中的並排尺寸失敗直接 stop 路徑已改為有限適配與退回上次接受布局；退回失敗才執行原始 recovery。啟用／隱藏面板可能晚一個 run-loop 恢復舊 key window，現在略過重複啟用，處理面板後確認焦點，並確認兩個 pane 的即時 WindowServer 排序穩定。build 7 的排序失敗留在 [本輪基線](native-build7-before-fix.json)，修正前各次 build 8 報告亦保留，不能代替最終通過結果。
+
+正常安裝版另以新建空白 TextEdit 和既有 fixture 檢查啟動／退出復原；CUA 的合成全域快捷鍵沒有建立完整切換證據，不增加上述通過數。未測試實際 drag payload、任意應用／螢幕／系統版本、發布封裝或公證。最後恢復原先 ChatGPT、Obsidian、Safari 選取，保持未啟動及 0 recovery；透明度仍約 15%／65%。來源、二進位、報告雜湊及舊版備份見 [完整報告](size-fix-build8.json)。
+
+Obsidian 檢查只在明確參數下操作目前唯一的 Obsidian 視窗和一個自建編輯器，不讀／改筆記內容，使用隔離 journal／排版／偏好：
+
+```sh
+open -W -n dist/WindowLane.app --args --obsidian-smoke-test \
+  --report-path "$PWD/verification/obsidian-size-fix-build8-320pt.json"
+```
+
+
+## 0.2.1 build 6 平滑翻頁（2026-10-04）
+
+目前版本使用新鮮的前一頁快照，待目標原生焦點確認後，播放 280 ms 定向滑動及輕微透視，露出真正的目標視窗。真實視窗維持共同框與開啟堆疊；Reduce Motion、缺圖、逾時、擷取忙碌及尺寸錯配直接切換。外部快照預算 100 ms；同步 AX 讀取逐次限制為 20 ms 或剩餘預算，避免可選動畫長時間阻擋切換。
+
+- [核心](core-page-turn-build6.log) **32 / 32**、[原生整合](native-page-turn-build6.json) **42 / 42**、[背景偏好](background-page-turn-build6.json) **25 / 25**、[外部整合](external-page-turn-build6.json) **65 / 65** 通過。
+- 原生實測正反向動畫、目標編輯器持有鍵盤焦點、實際動畫中停止、面板立即移除，以及 400 ms 後無過期提交／焦點／幾何變更；保留文件草稿與選取。Reduce Motion 使用注入政策驗證，不改系統設定。
+- 外部三文件完成 **7 次翻頁**，原尺寸像素擷取有效。正常切換的 position／size／minimize 寫入增量均為 **0**；整組放大、還原、忙碌輸入丟棄、啟動／焦點交接取消及最終原始框與最小化狀態復原均通過。
+- 原生請求至完整呈現中位 **373 ms**、最大 **801 ms**（11 次）；外部中位 **477 ms**、最大 **490 ms**（7 次）。包含快照、焦點、動畫及輪詢。請求至焦點另記於 `requestToFocusMilliseconds`，不能把動畫後的完成時間稱為純焦點延遲；數值不構成所有應用或硬體的延遲上限。
+- 固定 Apple Development 簽署符合原指定條件，安裝副本與建置產物雜湊一致，已更新日常位置。原生 App 內確認輔助使用及螢幕錄製已允許；現有約 15%／65% 透明度保持。快捷鍵切至 B、返回 A、退出及正常重開已檢查，最後恢復原先兩個日常視窗選取，保持未啟動。
+- [strict 審查](premium-audit-page-turn-build6.json) 0 問題。官方 DESIGN.md linter 仍受离線套件未快取限制。原生工具只檢查靜止的完成狀態，不宣稱完整動畫幀率目視通過；外部 fixture 不能代替所有跨應用相容性。沒有進行發布 ZIP 或公證。
+
+完整雜湊與安裝／介面證據見 [page-turn-build6.json](page-turn-build6.json)。本輪使用隔離復原檔，未消耗使用者 recovery 記錄。直接 shell 執行最初回報無權限且未動作，該報告保留於 [external-page-turn-build6-exec-context.json](external-page-turn-build6-exec-context.json)；用正常 App 啟動方式後沿用現有權限通過，無新增授權。以下舊版區段按當時狀態保留，不能覆蓋本輪結果。
+
+## 0.2.1 build 5 透明度分組（2026-10-04）
+
+「應用與設定視窗透明度」共用一份設定；「工作區透明度」獨立控制工作區背景與其預覽。舊版的應用／工作區值初始化兩組，舊設定視窗專用值退休；壁紙及模糊設定保留。
+
+- release 建置與固定 Apple Development 簽署通過；新版滿足先前的指定簽署條件，已更新至固定安裝位置。
+- [背景／偏好檢查](background-transparency-build5.json) **25 / 25 通過**：獨立保存、v1／v2 舊資料遷移、範圍／非有限數值處理、預設恢復，以及既有壁紙與切換偏好流程。
+- 原生設定頁兩個滑桿各自變更；共用值 43%、工作區值 27%，完整退出且確認程序結束，再重新啟動，數值保持。測試後恢復原先約 35%。主視窗及設定頁文字與佈局已目視檢查；App 內重新檢查確認兩項權限仍已允許。
+- [介面靜態審查](premium-audit-transparency-build5.json) strict 0 項問題；官方 DESIGN.md linter 因離線快取缺少套件而未能執行，見 [紀錄](design-lint-transparency-build5.log)。完整安裝及原生核對範圍見 [transparency-build5.json](transparency-build5.json)。本輪沒有測試外部視窗切換、實際工作區合成背景或完整復原回歸，不沿用舊報告宣稱這些項目通過。
+
+## 0.2.1 build 4 固定簽署與安裝（2026-10-04）
+
+本次只驗證本機安裝及 macOS 權限持續性，**10 / 10 檢查通過**。完整證據見 [signing-installation-2026-10-04.json](signing-installation-2026-10-04.json)，完成時間為 2026-10-04T17:04:05Z。
+
+- 固定位置 `/Users/zhangfei/Applications/WindowLane.app` 的 Apple Development 簽章有效，二進位與 `dist/WindowLane.app` 相同。
+- App 內確認輔助使用與螢幕錄製均已允許，完整退出後核對沒有殘留程序，再重開仍保留兩項權限。
+- 將建置號由 3 改為 4、重新建置簽署並更新固定位置；簽署產物已改變，新版滿足舊版指定簽署條件，啟動後兩項權限仍保留，期間未再次修改授權。
+- 最後僅固定位置的一個實例執行，沒有待復原記錄。現行二進位 SHA-256 為 `02d7a2b836a85cff6dbf9b7940483725450969f5b7c1435d4829206eaa320077`。
+
+遷移舊臨時簽署記錄時，透過系統設定移除／重加本 App 的權限項目；另外辨識出的 Xcode 除錯執行檔權限項目保持原狀。build 3 與 build 4 的原始簽章資料分別保存在 [signing-build3-snapshot.json](signing-build3-snapshot.json) 與 [signing-build4-snapshot.json](signing-build4-snapshot.json)。
+
+這次只更改建置號及簽署產物，沒有修改 Swift 應用行為；權限狀態與外部視窗清單可讀取，不等於預覽像素或切換／復原回歸已通過。憑證換發、Developer ID 發布、公證與最終 0.2.1 ZIP 封裝未測試／執行。下方直接切換功能測試的待辦狀態維持。
+
+同日後續授權清理：使用者要求刪除不用的 WindowLane 授權。透過系統設定的「Show in Finder」確認身分後，移除 Xcode DerivedData 除錯版與原 Language 鏡像內 WindowLaneFixture 的視窗控制授權；保留 `/Users/zhangfei/Applications/WindowLane.app`。兩份相關權限清單均只剩現用 WindowLane 項目，且在 App 內按「重新檢查權限」後，輔助使用及螢幕錄製仍已允許。未變更其他應用權限或刪除程式檔案；此為上述安裝報告完成後的獨立 UI 核對，不增加該報告的測試數量。
+
 ## 0.2.1 直接切換更新（最終驗證待完成）
 
 使用者回報切換時收起／縮放動畫造成卡頓，0.2.1 預設改為直接提升原生視窗並交接焦點。啟動時保存每個視窗的原始框與最小化狀態，再一次排列全部視窗到共同 main frame，解除最小化並維持前後堆疊。正常選取只執行 focus，成功後才更新作用中 ID；不再反覆 place／park 或播放 180 ms 快照滑動。短暫輸入遮罩沒有動畫，在實際焦點交接前釋放。
@@ -10,7 +78,7 @@
 
 | 檢查 | 目前結果 | 最終需要的證據 |
 | --- | --- | --- |
-| 核心／原生／背景回歸 | **核心 32 / 32、背景 23 / 23 通過；原生待解鎖後重測** | [core-direct-switch-tests.log](core-direct-switch-tests.log)，2026-10-04 16:17:38 CEST；[background-smoke.json](background-smoke.json)，UTC 2026-10-04T14:17:09Z。包含兩透明度、壁紙與切換偏好保存 |
+| 核心／原生／背景回歸 | **核心 32 / 32、背景 23 / 23 通過；原生待重測** | [core-direct-switch-tests.log](core-direct-switch-tests.log)，2026-10-04 16:17:38 CEST；[background-smoke.json](background-smoke.json)，UTC 2026-10-04T14:17:09Z。包含兩透明度、壁紙與切換偏好保存 |
 | 外部整合與堆疊 | **待最終結果** | 啟動後全部共同框且未最小化；同應用及跨應用選取的真正焦點身分正確，其他文件保持開啟 |
 | 正常切換寫入次數 | **待最終結果** | 在 start 完成後取 backend baseline；連續切換的 size／position／minimize 寫入增量皆為 0，不以最後框相同推斷沒有中途寫入 |
 | 放大／還原後切換 | **待最終結果** | 每次布局調整涵蓋所有視窗；再選取不同視窗仍不產生重複幾何／最小化寫入 |
@@ -18,7 +86,7 @@
 | 取消與退出復原 | **待最終結果** | 啟動、直接焦點交接及整組放大途中取消；沒有延遲選取／寫入，全部原始框、最小化狀態及復原記錄符合原值 |
 | 原生 UI 與封裝 | **待完成** | 本輪直接切換觀感與設定 UI；完成後產生 `WindowLane-0.2.1-arm64.zip` 及最終來源／報告 SHA-256 |
 
-本輪初次原生測試的焦點檢查未通過；随后操作工具回報 Mac 已鎖定，不能把鎖定中的結果歸因於切換回歸。初始報告保留為 [native-smoke-direct-initial-failure.json](native-smoke-direct-initial-failure.json)。最後修正增加可取消的實際原生 keyWindow 確認、啟用後最多一次焦點重送，以及無動畫的交接面板。最新二進位已編譯、簽章驗證通過；[direct-switch-progress.json](direct-switch-progress.json) 記錄目前雜湊，尚未封裝，等候使用者解鎖後完成原生、外部與 UI 驗證。
+本輪初次原生測試的焦點檢查未通過；随后操作工具回報 Mac 已鎖定，不能把鎖定中的結果歸因於切換回歸。初始報告保留為 [native-smoke-direct-initial-failure.json](native-smoke-direct-initial-failure.json)。最後修正增加可取消的實際原生 keyWindow 確認、啟用後最多一次焦點重送，以及無動畫的交接面板。[direct-switch-progress.json](direct-switch-progress.json) 保留當時 build 3 的 ad-hoc 二進位雜湊。Mac 現已解鎖並完成上方 build 4 的固定簽署、安裝與權限驗證；直接切換的原生、外部與 UI 功能回歸仍待完成，尚未封裝。
 
 歷史 0.2.0 的報告、UI 與建置清單已保留為 `*-stability-v020.json`。下方歷史結果不涵蓋此次直接切換架構；最新 current smoke 報告及建置清單可能在本輪調試期間更新。
 

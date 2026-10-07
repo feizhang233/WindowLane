@@ -1,0 +1,62 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "existing_accessibility_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "exactly_one_existing_obsidian_window",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條、橫向滾輪或 ⌃⌥← \/ → 切換。",
+      "name" : "workspace_starts_with_real_obsidian_window",
+      "passed" : true
+    },
+    {
+      "detail" : "兩個視窗可直接操作與拖放。繼續側滑即可翻頁。",
+      "name" : "narrow_obsidian_pane_keeps_workspace_running",
+      "passed" : true
+    },
+    {
+      "detail" : "initial requested width=320.0; accepted width=320.0",
+      "name" : "obsidian_actual_geometry_matches_adapted_layout",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "obsidian_and_fixture_do_not_overlap",
+      "passed" : true
+    },
+    {
+      "detail" : "Obsidian · 日語語法 - fei - Obsidian 1.13.7",
+      "name" : "obsidian_can_receive_keyboard_focus_after_split",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "cross_application_switch_returns_to_native_editor",
+      "passed" : true
+    },
+    {
+      "detail" : "Split-to-single alignment is measured separately from the prepared single-page switch; baseline size writes=3.",
+      "name" : "prepared_single_page_switch_has_no_geometry_writes",
+      "passed" : true
+    },
+    {
+      "detail" : "已退出工作區，視窗已恢復原位置與尺寸。",
+      "name" : "obsidian_original_frame_and_minimized_state_restored",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "native_fixture_original_frame_restored",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T19:56:54Z",
+  "passed" : true,
+  "scope" : "one-existing-obsidian-window-and-disposable-native-fixture"
+}

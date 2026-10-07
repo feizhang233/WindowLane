@@ -40,34 +40,44 @@ private struct BackgroundReport: Encodable {
             try sourceData.write(to: URL(fileURLWithPath: fixturePath), options: .atomic)
         }
         let settings = BackgroundSettings(defaults: defaults, storageDirectory: cache)
-        record("default_is_semitransparent_frosted", settings.mode == .frosted && settings.transparency == 0.35 && settings.settingsTransparency == 0.35)
+        record("default_is_semitransparent_frosted", settings.mode == .frosted && settings.transparency == 0.35 && settings.workspaceTransparency == 0.35)
         record("wallpaper_requires_image", { settings.setMode(.wallpaper); return settings.mode == .frosted }())
         let imported = await settings.importWallpaper(from: source)
         record("valid_image_imported_and_selected", imported && settings.mode == .wallpaper && settings.image != nil)
         record("original_file_unchanged", (try Data(contentsOf: source)) == sourceData)
         record("local_copy_bounded_to_4096_pixels", settings.image.map { $0.size.width <= 4096 && $0.size.height <= 4096 } == true)
-        settings.setTransparency(0.52); settings.setSettingsTransparency(0.68); settings.setBlur(17)
+        settings.setTransparency(0.52); settings.setWorkspaceTransparency(0.68); settings.setBlur(17)
         let restored = BackgroundSettings(defaults: defaults, storageDirectory: cache)
-        record("image_and_settings_survive_reload", restored.mode == .wallpaper && restored.imageName == source.lastPathComponent && restored.image != nil && restored.transparency == 0.52 && restored.settingsTransparency == 0.68 && restored.blur == 17)
-        settings.setSettingsTransparency(0.14)
-        record("settings_transparency_does_not_change_application", settings.settingsTransparency == 0.14 && settings.transparency == 0.52)
+        record("image_and_settings_survive_reload", restored.mode == .wallpaper && restored.imageName == source.lastPathComponent && restored.image != nil && restored.transparency == 0.52 && restored.workspaceTransparency == 0.68 && restored.blur == 17)
+        settings.setWorkspaceTransparency(0.14)
+        record("workspace_transparency_does_not_change_application", settings.workspaceTransparency == 0.14 && settings.transparency == 0.52)
         settings.setTransparency(0.62)
-        record("application_transparency_does_not_change_settings", settings.transparency == 0.62 && settings.settingsTransparency == 0.14)
-        settings.setTransparency(0.52); settings.setSettingsTransparency(0.68)
+        record("application_transparency_does_not_change_workspace", settings.transparency == 0.62 && settings.workspaceTransparency == 0.14)
+        settings.setTransparency(0.52); settings.setWorkspaceTransparency(0.68)
         if let currentData = defaults.data(forKey: BackgroundSettings.defaultsKey),
            var legacyObject = try JSONSerialization.jsonObject(with: currentData) as? [String: Any] {
-            legacyObject.removeValue(forKey: "settingsTransparency")
+            legacyObject.removeValue(forKey: "workspaceTransparency")
             defaults.set(try JSONSerialization.data(withJSONObject: legacyObject), forKey: BackgroundSettings.defaultsKey)
             let legacy = BackgroundSettings(defaults: defaults, storageDirectory: cache)
-            record("legacy_v1_keeps_wallpaper_and_application_transparency", legacy.mode == .wallpaper && legacy.imageName == source.lastPathComponent && legacy.image != nil && legacy.transparency == 0.52 && legacy.blur == 17 && legacy.settingsTransparency == 0.35)
-            legacy.setSettingsTransparency(0.44)
+            record("legacy_v1_keeps_wallpaper_and_both_transparencies", legacy.mode == .wallpaper && legacy.imageName == source.lastPathComponent && legacy.image != nil && legacy.transparency == 0.52 && legacy.blur == 17 && legacy.workspaceTransparency == 0.52)
+            legacy.setWorkspaceTransparency(0.44)
             let migrated = BackgroundSettings(defaults: defaults, storageDirectory: cache)
-            record("legacy_v1_persists_independent_settings_transparency", migrated.settingsTransparency == 0.44 && migrated.transparency == 0.52 && migrated.mode == .wallpaper)
+            record("legacy_v1_persists_independent_workspace_transparency", migrated.workspaceTransparency == 0.44 && migrated.transparency == 0.52 && migrated.mode == .wallpaper)
+            // v2 had a separate settings-window value. The app value now owns
+            // both application surfaces; the workspace retains its old value.
+            legacyObject["settingsTransparency"] = 0.19
+            defaults.set(try JSONSerialization.data(withJSONObject: legacyObject), forKey: BackgroundSettings.defaultsKey)
+            let legacyV2 = BackgroundSettings(defaults: defaults, storageDirectory: cache)
+            record("legacy_v2_uses_application_value_for_both_new_groups", legacyV2.transparency == 0.52 && legacyV2.workspaceTransparency == 0.52 && legacyV2.mode == .wallpaper && legacyV2.image != nil)
+            legacyV2.setTransparency(0.31)
+            legacyV2.setWorkspaceTransparency(0.73)
+            let migratedV2 = BackgroundSettings(defaults: defaults, storageDirectory: cache)
+            record("legacy_v2_new_groups_persist_independently", migratedV2.transparency == 0.31 && migratedV2.workspaceTransparency == 0.73 && migratedV2.blur == 17)
             legacyObject["transparency"] = 2.0
-            legacyObject["settingsTransparency"] = -1.0
+            legacyObject["workspaceTransparency"] = -1.0
             defaults.set(try JSONSerialization.data(withJSONObject: legacyObject), forKey: BackgroundSettings.defaultsKey)
             let bounded = BackgroundSettings(defaults: defaults, storageDirectory: cache)
-            record("stored_transparency_values_are_bounded", bounded.transparency == 0.8 && bounded.settingsTransparency == 0)
+            record("stored_transparency_values_are_bounded", bounded.transparency == 0.8 && bounded.workspaceTransparency == 0)
             defaults.set(currentData, forKey: BackgroundSettings.defaultsKey)
         } else { record("legacy_v1_fixture_created", false) }
         let invalid = directory.appendingPathComponent("invalid.png")
@@ -78,15 +88,15 @@ private struct BackgroundReport: Encodable {
         try FileManager.default.removeItem(at: source)
         let movedSource = BackgroundSettings(defaults: defaults, storageDirectory: cache)
         record("wallpaper_independent_of_source_path", movedSource.mode == .wallpaper && movedSource.image != nil)
-        settings.setTransparency(10); settings.setSettingsTransparency(-10); settings.setBlur(-10)
-        record("slider_values_are_bounded", settings.transparency == 0.8 && settings.settingsTransparency == 0 && settings.blur == 0)
-        settings.setSettingsTransparency(10)
-        record("settings_transparency_upper_bound", settings.settingsTransparency == 0.8)
-        settings.setTransparency(.nan); settings.setSettingsTransparency(.infinity); settings.setBlur(.infinity)
-        record("nonfinite_values_revert_to_defaults", settings.transparency == 0.35 && settings.settingsTransparency == 0.35 && settings.blur == 24)
-        settings.setTransparency(0.7); settings.setSettingsTransparency(0.1)
+        settings.setTransparency(10); settings.setWorkspaceTransparency(-10); settings.setBlur(-10)
+        record("slider_values_are_bounded", settings.transparency == 0.8 && settings.workspaceTransparency == 0 && settings.blur == 0)
+        settings.setWorkspaceTransparency(10)
+        record("workspace_transparency_upper_bound", settings.workspaceTransparency == 0.8)
+        settings.setTransparency(.nan); settings.setWorkspaceTransparency(.infinity); settings.setBlur(.infinity)
+        record("nonfinite_values_revert_to_defaults", settings.transparency == 0.35 && settings.workspaceTransparency == 0.35 && settings.blur == 24)
+        settings.setTransparency(0.7); settings.setWorkspaceTransparency(0.1)
         settings.restoreDefault()
-        record("reset_defaults_retains_reusable_image", settings.mode == .frosted && settings.transparency == 0.35 && settings.settingsTransparency == 0.35 && settings.blur == 24 && settings.image != nil)
+        record("reset_defaults_retains_reusable_image", settings.mode == .frosted && settings.transparency == 0.35 && settings.workspaceTransparency == 0.35 && settings.blur == 24 && settings.image != nil)
         settings.setMode(.wallpaper)
         try Data("corrupt cache".utf8).write(to: cache.appendingPathComponent("wallpaper.png"), options: .atomic)
         let corrupt = BackgroundSettings(defaults: defaults, storageDirectory: cache)
@@ -95,6 +105,7 @@ private struct BackgroundReport: Encodable {
         settings.removeWallpaper()
         record("remove_copy_clears_wallpaper_preferences", settings.mode == .frosted && settings.image == nil && settings.imageName == nil && !FileManager.default.fileExists(atPath: cache.appendingPathComponent("wallpaper.png").path))
         let interaction = InteractionSettings(defaults:defaults)
+        record("scroll_mode_defaults_to_continuous", interaction.scrollMode == .continuous && interaction.horizontalSwitchingEnabled && interaction.scrollThreshold == 80 && interaction.scrollScope == .workspace)
         interaction.setHorizontalSwitchingEnabled(false)
         interaction.setScrollThreshold(125); interaction.setScrollScope(.rail)
         let reloadedInteraction = InteractionSettings(defaults:defaults)
@@ -108,6 +119,27 @@ private struct BackgroundReport: Encodable {
         interaction.setScrollThreshold(.infinity)
         record("scroll_preference_nonfinite_falls_back", nanBounded && InteractionSettings(defaults:defaults).scrollThreshold == 80)
         interaction.setScrollThreshold(125)
+        interaction.setScrollMode(.stepped)
+        let steppedReload = InteractionSettings(defaults: defaults)
+        record("stepped_scroll_mode_survives_reload", steppedReload.scrollMode == .stepped && !steppedReload.horizontalSwitchingEnabled && steppedReload.scrollThreshold == 125 && steppedReload.scrollScope == .rail)
+        interaction.setScrollMode(.continuous)
+        let continuousReload = InteractionSettings(defaults: defaults)
+        record("continuous_scroll_mode_survives_reload", continuousReload.scrollMode == .continuous && !continuousReload.horizontalSwitchingEnabled && continuousReload.scrollThreshold == 125 && continuousReload.scrollScope == .rail)
+        if let current = defaults.data(forKey: InteractionSettings.defaultsKey),
+           var legacy = try JSONSerialization.jsonObject(with: current) as? [String: Any] {
+            legacy.removeValue(forKey: "scrollMode")
+            defaults.set(try JSONSerialization.data(withJSONObject: legacy), forKey: InteractionSettings.defaultsKey)
+            let migrated = InteractionSettings(defaults: defaults)
+            record("legacy_scroll_preferences_add_continuous_without_changing_other_values", migrated.scrollMode == .continuous && !migrated.horizontalSwitchingEnabled && migrated.scrollThreshold == 125 && migrated.scrollScope == .rail)
+            migrated.setScrollMode(.stepped)
+            let migratedReload = InteractionSettings(defaults: defaults)
+            record("legacy_scroll_mode_can_be_changed_and_persisted", migratedReload.scrollMode == .stepped && !migratedReload.horizontalSwitchingEnabled && migratedReload.scrollThreshold == 125 && migratedReload.scrollScope == .rail)
+            legacy["scrollMode"] = "future-mode"
+            defaults.set(try JSONSerialization.data(withJSONObject: legacy), forKey: InteractionSettings.defaultsKey)
+            let unknownMode = InteractionSettings(defaults: defaults)
+            record("unknown_scroll_mode_preserves_other_preferences", unknownMode.scrollMode == .continuous && !unknownMode.horizontalSwitchingEnabled && unknownMode.scrollThreshold == 125 && unknownMode.scrollScope == .rail)
+            defaults.set(current, forKey: InteractionSettings.defaultsKey)
+        } else { record("legacy_scroll_mode_fixture", false) }
         if let saved = defaults.data(forKey:InteractionSettings.defaultsKey),
            var object = try JSONSerialization.jsonObject(with:saved) as? [String:Any] {
             object["scrollScope"] = "future"
@@ -115,6 +147,42 @@ private struct BackgroundReport: Encodable {
             let unknownScope = InteractionSettings(defaults:defaults)
             record("unknown_scroll_scope_keeps_other_preferences", unknownScope.scrollScope == .workspace && !unknownScope.horizontalSwitchingEnabled && unknownScope.scrollThreshold == 125)
         } else { record("unknown_scroll_scope_fixture",false) }
+        let areaRoot = directory.appendingPathComponent("area-\(UUID().uuidString)")
+        @MainActor func areaStore() -> WorkspaceStore {
+            let instance = areaRoot.appendingPathComponent(UUID().uuidString)
+            return WorkspaceStore(journalURL: instance.appendingPathComponent("recovery.json"),
+                                  presetsURL: instance.appendingPathComponent("workspaces.json"),
+                                  defaults: defaults)
+        }
+        if !NSScreen.screens.isEmpty {
+            let chosenScreen = NSScreen.screens.count - 1
+            let area = areaStore()
+            area.ratio = 0.89
+            area.screenIndex = chosenScreen
+            let areaReload = areaStore()
+            record("workspace_width_and_display_survive_reload", areaReload.ratio == 0.89 && areaReload.screenIndex == chosenScreen && areaReload.ordered.isEmpty && !areaReload.isRunning && areaReload.pendingRecovery.isEmpty && areaReload.fixtures.windows.isEmpty)
+            let displayID = (NSScreen.screens[chosenScreen].deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber)?.uint32Value
+            var areaObject: [String: Any] = ["mainRatio": 4.0]
+            if let displayID { areaObject["displayID"] = displayID }
+            defaults.set(try JSONSerialization.data(withJSONObject: areaObject), forKey: "WindowLane.area.v1")
+            let upperArea = areaStore()
+            areaObject["mainRatio"] = -1.0
+            defaults.set(try JSONSerialization.data(withJSONObject: areaObject), forKey: "WindowLane.area.v1")
+            let lowerArea = areaStore()
+            record("stored_workspace_width_is_bounded", upperArea.ratio == 0.9 && lowerArea.ratio == 0.8)
+            let currentDisplayIDs = Set(NSScreen.screens.compactMap {
+                ($0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber)?.uint32Value
+            })
+            var absentDisplay = UInt32.max
+            while currentDisplayIDs.contains(absentDisplay) { absentDisplay &-= 1 }
+            areaObject["mainRatio"] = 0.87
+            areaObject["displayID"] = absentDisplay
+            defaults.set(try JSONSerialization.data(withJSONObject: areaObject), forKey: "WindowLane.area.v1")
+            let fallbackArea = areaStore()
+            let fallbackDisplayID = fallbackArea.screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber
+            let firstDisplayID = NSScreen.screens[0].deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber
+            record("absent_saved_display_keeps_width_and_uses_current_screen", fallbackArea.ratio == 0.87 && fallbackArea.screenIndex == 0 && fallbackDisplayID == firstDisplayID && !fallbackArea.isRunning)
+        } else { record("workspace_area_requires_current_display", false) }
     } catch { record("test_fixture_and_storage", false); print(error.localizedDescription) }
     let passed = !checks.isEmpty && checks.allSatisfy(\.passed)
     do {

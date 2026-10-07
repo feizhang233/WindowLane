@@ -1,0 +1,5 @@
+PANE_ORDER visible=[22348, 22350] server=[22350, 22348] key=22351 appkit=[22351, 22350, 22348]
+PANE_ORDER visible=[22348, 22350] server=[22351, 22350] key=22351 appkit=[22351, 22350, 22348]
+PANE_ORDER visible=[22348, 22350] server=[22348, 22350] key=22351 appkit=[22351, 22350, 22348]
+WINDOWLANE_SMOKE FAIL /Users/zhangfei/Documents/Codex/WindowLane/verification/native-size-fix-build8-final.json
+NATIVE_SMOKE_FAIL

@@ -4,6 +4,12 @@ set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_DIR"
 
+# Optional machine-local identity; never commit this file or private keys.
+if [[ -f "$PROJECT_DIR/scripts/signing.local.sh" ]]; then
+    source "$PROJECT_DIR/scripts/signing.local.sh"
+fi
+SIGNING_IDENTITY="${WINDOWLANE_SIGNING_IDENTITY:--}"
+
 export CLANG_MODULE_CACHE_PATH="$PROJECT_DIR/.build/ModuleCache"
 export SWIFTPM_MODULECACHE_OVERRIDE="$PROJECT_DIR/.build/ModuleCache"
 BUILD_OPTIONS=(
@@ -21,6 +27,6 @@ cp "$PROJECT_DIR/Resources/Info.plist" "$APP_DIR/Contents/Info.plist"
 chmod 755 "$APP_DIR/Contents/MacOS/WindowLane"
 
 /usr/bin/plutil -lint "$APP_DIR/Contents/Info.plist"
-/usr/bin/codesign --force --sign - --identifier com.feizhang.windowlane "$APP_DIR"
+/usr/bin/codesign --force --sign "$SIGNING_IDENTITY" --identifier com.feizhang.windowlane "$APP_DIR"
 /usr/bin/codesign --verify --strict "$APP_DIR"
 printf 'Built and signed: %s\n' "$APP_DIR"

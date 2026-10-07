@@ -1,0 +1,1 @@
+identifier "com.feizhang.windowlane" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: feizhang233@icloud.com (U8ZN846WAJ)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */

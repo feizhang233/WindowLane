@@ -2,6 +2,7 @@ import AppKit
 import ApplicationServices
 import ScreenCaptureKit
 import WindowLaneCore
+import OSLog
 
 /// A reference to a particular native window, not to an application or a title.
 /// `frame` is a discovery snapshot in AX global coordinates (origin at top left).
@@ -48,6 +49,7 @@ enum WindowBackendError: LocalizedError {
     case fullscreenWindow
     case failed(String, AXError)
     case activationFailed
+    case minimumWidth(CGFloat)
     case frameNotSettled(expected: CGRect, actual: CGRect?)
     case minimizedNotSettled(expected: Bool, actual: Bool?)
 
@@ -59,6 +61,7 @@ enum WindowBackendError: LocalizedError {
         case .fullscreenWindow: return "請先退出這個視窗的 macOS 全螢幕模式，再重試排列或復原。"
         case .failed(let action, let error): return "\(action)未完成（輔助使用錯誤 \(error.rawValue)）。應用可能暫時忙碌或不支援此操作。"
         case .activationFailed: return "無法將這個應用帶到前景。"
+        case .minimumWidth(let width): return "此應用的視窗寬度至少需要 \(Int(width.rounded(.up))) 點。"
         case .frameNotSettled: return "視窗尺寸或位置尚未到位，可能受應用限制。請重試復原。"
         case .minimizedNotSettled: return "視窗收起或恢復尚未完成。請重試。"
         }
@@ -89,6 +92,7 @@ final class WindowBackend {
     private var activationObserver: NSObjectProtocol?
     private let ownPID = ProcessInfo.processInfo.processIdentifier
     private(set) var diagnostics = WindowBackendDiagnostics()
+    private let logger = Logger(subsystem: "com.feizhang.windowlane", category: "geometry")
 
     var isTrusted: Bool { AXIsProcessTrusted() }
 
@@ -437,6 +441,14 @@ final class WindowBackend {
         return AXRead.bool(window.element, kAXMinimizedAttribute)
     }
 
+    /// Keep both panes visible while macOS continues the original drag session.
+    /// This deliberately requests no app activation or keyboard-focus change.
+    func raiseForInteraction(_ window: WindowCandidate) throws {
+        guard isTrusted, isAlive(window) else { throw WindowBackendError.windowUnavailable }
+        let result = AXUIElementPerformAction(window.element, kAXRaiseAction as CFString)
+        guard result == .success else { throw WindowBackendError.failed("顯示並排視窗", result) }
+    }
+
     func focus(_ window: WindowCandidate, isCancelled: () -> Bool = { false }) async throws {
         diagnostics.focusCalls += 1
         let started = ProcessInfo.processInfo.systemUptime
@@ -671,6 +683,8 @@ final class WindowBackend {
         var actual: CGRect?
         var serverFrame: CGRect?
         var matchingSince: TimeInterval?
+        var constrainedSince: TimeInterval?
+        var constrainedWidth: CGFloat?
         func matches(_ frame: CGRect) -> Bool {
             (sizeOnly || (abs(frame.minX - expected.minX) <= 1 && abs(frame.minY - expected.minY) <= 1))
                 && abs(frame.width - expected.width) <= 1 && abs(frame.height - expected.height) <= 1
@@ -696,11 +710,27 @@ final class WindowBackend {
                     return
                 }
             } else { matchingSince = nil }
+            // Learn a lower bound only from a sustained, wider-than-requested
+            // size with the requested height, corroborated by WindowServer.
+            // An unreadable, moving or position-only failure is not a minimum.
+            if sizeOnly, let actual, actual.width > expected.width + 4,
+               abs(actual.height - expected.height) <= 1,
+               serverFrame.map({ abs($0.width - actual.width) <= 1 && abs($0.height - actual.height) <= 1 }) ?? true {
+                if constrainedWidth.map({ abs($0 - actual.width) > 1 }) ?? true {
+                    constrainedWidth = actual.width; constrainedSince = now
+                }
+            } else { constrainedWidth = nil; constrainedSince = nil }
             let pause = min(0.02, deadline - ProcessInfo.processInfo.systemUptime)
             if pause > 0 { try await Task.sleep(nanoseconds: UInt64(pause * 1_000_000_000)) }
         }
         try requireLive(window, isCancelled: isCancelled)
+        if sizeOnly, let width = constrainedWidth, let since = constrainedSince,
+           ProcessInfo.processInfo.systemUptime - since >= 0.20 {
+            logger.notice("minimum-width window=\(window.id, privacy: .public) bundle=\(window.bundleIdentifier ?? "unknown", privacy: .public) requested=\(expected.width) accepted=\(width)")
+            throw WindowBackendError.minimumWidth(width.rounded(.up))
+        }
         let error = WindowBackendError.frameNotSettled(expected: expected, actual: actual)
+        logger.error("frame-rejected window=\(window.id, privacy: .public) bundle=\(window.bundleIdentifier ?? "unknown", privacy: .public) expected=\(String(describing: expected), privacy: .public) actual=\(String(describing: actual), privacy: .public)")
         print("WINDOWLANE_AX_SETTLE phase=\(sizeOnly ? "size" : "frame") \(error.failureReason ?? "geometry timeout") WindowServer: \(String(describing: serverFrame)).")
         throw error
     }
@@ -781,7 +811,7 @@ final class PreviewCapture {
         _ = CGRequestScreenCaptureAccess()
     }
 
-    func capture(_ window: WindowCandidate) async -> NSImage? {
+    func capture(_ window: WindowCandidate, timeout: Duration = .seconds(2)) async -> NSImage? {
         guard inFlight == nil, isAuthorized, AXIsProcessTrusted(), !Task.isCancelled else { return nil }
         let id = UUID()
         let captureGeneration = generation
@@ -792,7 +822,7 @@ final class PreviewCapture {
                     continuation.resume(returning: nil)
                     return
                 }
-                let request = PreviewRequest(id: id, continuation: continuation)
+                let request = PreviewRequest(id: id, timeout: timeout, continuation: continuation)
                 inFlight = request
                 request.operation = Task { @MainActor [weak self, request] in
                     guard let self else {
@@ -836,15 +866,40 @@ final class PreviewCapture {
         return true
     }
 
+    private func captureValue(_ element: AXUIElement, _ attribute: String, request: PreviewRequest) -> CFTypeRef? {
+        guard request.canDeliver, !Task.isCancelled else { return nil }
+        guard request.limitsAXReadTime else { return AXRead.value(element, attribute) }
+        // The deadline task shares MainActor with AX. Give each synchronous read
+        // its own short timeout, otherwise a stalled AX call prevents that task
+        // from ending the optional transition capture on time.
+        let remaining = ContinuousClock.now.duration(to: request.deadline).components
+        let remainingSeconds = Double(remaining.seconds) + Double(remaining.attoseconds) / 1e18
+        guard remainingSeconds >= 0.001 else { return nil }
+        let readTimeout = Float(min(0.020, remainingSeconds))
+        guard AXUIElementSetMessagingTimeout(element, readTimeout) == .success else { return nil }
+        defer { AXUIElementSetMessagingTimeout(element, 0.3) }
+        let value = AXRead.value(element, attribute)
+        return request.canDeliver && !Task.isCancelled ? value : nil
+    }
+
+    private func captureFrame(_ window: WindowCandidate, request: PreviewRequest) -> CGRect? {
+        AXRead.frame(window.element, reading: { attribute in
+            self.captureValue(window.element, attribute, request: request)
+        })
+    }
+
     private func captureOnce(_ window: WindowCandidate, request: PreviewRequest) async -> NSImage? {
         guard canCapture(window, request: request),
-              let currentFrame = AXRead.frame(window.element),
-              AXRead.bool(window.element, kAXMinimizedAttribute) != true else { return nil }
-        let currentTitle = AXRead.string(window.element, kAXTitleAttribute) ?? ""
+              let currentFrame = captureFrame(window, request: request) else { return nil }
+        let minimized = captureValue(window.element, kAXMinimizedAttribute, request: request) as? Bool
+        guard minimized != true, (!request.limitsAXReadTime || minimized != nil),
+              request.canDeliver else { return nil }
+        let currentTitle = captureValue(window.element, kAXTitleAttribute, request: request) as? String ?? ""
+        guard request.canDeliver, !Task.isCancelled else { return nil }
         do {
             let content = try await SCShareableContent.excludingDesktopWindows(true, onScreenWindowsOnly: false)
             guard canCapture(window, request: request),
-                  let beforeCapture = AXRead.frame(window.element),
+                  let beforeCapture = captureFrame(window, request: request),
                   WindowMatching.close(beforeCapture, currentFrame) else { return nil }
             let matches = content.windows.filter {
                 $0.owningApplication?.processID == window.pid
@@ -871,7 +926,7 @@ final class PreviewCapture {
             configuration.scalesToFit = true
             let image = try await SCScreenshotManager.captureImage(contentFilter: filter, configuration: configuration)
             guard canCapture(window, request: request),
-                  let afterFrame = AXRead.frame(window.element),
+                  let afterFrame = captureFrame(window, request: request),
                   WindowMatching.close(afterFrame, currentFrame) else { return nil }
             return NSImage(cgImage: image, size: currentFrame.size)
         } catch {
@@ -885,7 +940,8 @@ final class PreviewCapture {
 @MainActor
 private final class PreviewRequest {
     let id: UUID
-    let deadline = ContinuousClock.now.advanced(by: .seconds(2))
+    let deadline: ContinuousClock.Instant
+    let limitsAXReadTime: Bool
     private var continuation: CheckedContinuation<NSImage?, Never>?
     private var invalidated = false
     var operation: Task<Void, Never>?
@@ -893,8 +949,10 @@ private final class PreviewRequest {
 
     var canDeliver: Bool { !invalidated && ContinuousClock.now < deadline }
 
-    init(id: UUID, continuation: CheckedContinuation<NSImage?, Never>) {
+    init(id: UUID, timeout: Duration, continuation: CheckedContinuation<NSImage?, Never>) {
         self.id = id
+        self.deadline = ContinuousClock.now.advanced(by: timeout)
+        self.limitsAXReadTime = timeout < .seconds(2)
         self.continuation = continuation
     }
 
@@ -974,9 +1032,10 @@ private enum AXRead {
         return AXUIElementIsAttributeSettable(element, attribute as CFString, &isSettable) == .success && isSettable.boolValue
     }
 
-    static func frame(_ element: AXUIElement) -> CGRect? {
-        guard let positionRef = value(element, kAXPositionAttribute),
-              let sizeRef = value(element, kAXSizeAttribute),
+    static func frame(_ element: AXUIElement, reading read: ((String) -> CFTypeRef?)? = nil) -> CGRect? {
+        let readAttribute = read ?? { value(element, $0) }
+        guard let positionRef = readAttribute(kAXPositionAttribute),
+              let sizeRef = readAttribute(kAXSizeAttribute),
               CFGetTypeID(positionRef) == AXValueGetTypeID(),
               CFGetTypeID(sizeRef) == AXValueGetTypeID() else { return nil }
         let positionValue = positionRef as! AXValue

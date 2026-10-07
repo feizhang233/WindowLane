@@ -1,0 +1,143 @@
+{
+  "checks" : [
+    {
+      "name" : "default_is_semitransparent_frosted",
+      "passed" : true
+    },
+    {
+      "name" : "wallpaper_requires_image",
+      "passed" : true
+    },
+    {
+      "name" : "valid_image_imported_and_selected",
+      "passed" : true
+    },
+    {
+      "name" : "original_file_unchanged",
+      "passed" : true
+    },
+    {
+      "name" : "local_copy_bounded_to_4096_pixels",
+      "passed" : true
+    },
+    {
+      "name" : "image_and_settings_survive_reload",
+      "passed" : true
+    },
+    {
+      "name" : "workspace_transparency_does_not_change_application",
+      "passed" : true
+    },
+    {
+      "name" : "application_transparency_does_not_change_workspace",
+      "passed" : true
+    },
+    {
+      "name" : "legacy_v1_keeps_wallpaper_and_both_transparencies",
+      "passed" : true
+    },
+    {
+      "name" : "legacy_v1_persists_independent_workspace_transparency",
+      "passed" : true
+    },
+    {
+      "name" : "legacy_v2_uses_application_value_for_both_new_groups",
+      "passed" : true
+    },
+    {
+      "name" : "legacy_v2_new_groups_persist_independently",
+      "passed" : true
+    },
+    {
+      "name" : "stored_transparency_values_are_bounded",
+      "passed" : true
+    },
+    {
+      "name" : "invalid_import_keeps_previous_background",
+      "passed" : true
+    },
+    {
+      "name" : "wallpaper_independent_of_source_path",
+      "passed" : true
+    },
+    {
+      "name" : "slider_values_are_bounded",
+      "passed" : true
+    },
+    {
+      "name" : "workspace_transparency_upper_bound",
+      "passed" : true
+    },
+    {
+      "name" : "nonfinite_values_revert_to_defaults",
+      "passed" : true
+    },
+    {
+      "name" : "reset_defaults_retains_reusable_image",
+      "passed" : true
+    },
+    {
+      "name" : "corrupt_cache_falls_back_to_frosted",
+      "passed" : true
+    },
+    {
+      "name" : "remove_copy_clears_wallpaper_preferences",
+      "passed" : true
+    },
+    {
+      "name" : "scroll_mode_defaults_to_continuous",
+      "passed" : true
+    },
+    {
+      "name" : "scroll_preferences_survive_reload",
+      "passed" : true
+    },
+    {
+      "name" : "scroll_preference_bounds_survive_reload",
+      "passed" : true
+    },
+    {
+      "name" : "scroll_preference_nonfinite_falls_back",
+      "passed" : true
+    },
+    {
+      "name" : "stepped_scroll_mode_survives_reload",
+      "passed" : true
+    },
+    {
+      "name" : "continuous_scroll_mode_survives_reload",
+      "passed" : true
+    },
+    {
+      "name" : "legacy_scroll_preferences_add_continuous_without_changing_other_values",
+      "passed" : true
+    },
+    {
+      "name" : "legacy_scroll_mode_can_be_changed_and_persisted",
+      "passed" : true
+    },
+    {
+      "name" : "unknown_scroll_mode_preserves_other_preferences",
+      "passed" : true
+    },
+    {
+      "name" : "unknown_scroll_scope_keeps_other_preferences",
+      "passed" : true
+    },
+    {
+      "name" : "workspace_width_and_display_survive_reload",
+      "passed" : true
+    },
+    {
+      "name" : "stored_workspace_width_is_bounded",
+      "passed" : true
+    },
+    {
+      "name" : "absent_saved_display_keeps_width_and_uses_current_screen",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T19:59:11Z",
+  "passed" : true,
+  "scope" : "local-background-preferences"
+}

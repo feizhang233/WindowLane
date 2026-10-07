@@ -1,0 +1,125 @@
+{
+  "updatedAt": "2026-10-04T20:14:17.021254+00:00",
+  "status": "verified-and-installed",
+  "version": "0.2.1",
+  "build": 8,
+  "diagnosis": {
+    "crashReportFound": false,
+    "confirmedCodeDefect": "A rejected fractional size called stop(), exiting the entire workspace.",
+    "confirmedNativeDefect": "WindowServer ordering and keyboard focus changed after pane placement; the original build 7 failed both checks.",
+    "obsidianOriginalCause": "The user suspected sizing. Current Obsidian accepted both 421-point and 320-point requests, so its earlier refusal or a process crash was not reproduced."
+  },
+  "changes": [
+    "Learn stable per-window lower width bounds from corroborated AX/WindowServer readback and adapt the pane boundary without rounding the chosen fraction.",
+    "Bound adaptive attempts and roll back rejected layouts to the exact accepted frames, preserving the running workspace and the original recovery values.",
+    "Fallback to a single page when a saved split cannot fit known minimum widths.",
+    "Do not reactivate an already active native app; handle old tool-panel visibility before focus confirmation, then verify focused window and front-to-back pane ordering.",
+    "Record geometry rejection and rollback metadata without note contents."
+  ],
+  "checks": {
+    "native": {
+      "passed": 78,
+      "failed": 0,
+      "report": "native-size-fix-build8-final.json",
+      "completedAt": "2026-10-04T19:58:16Z",
+      "sha256": "693bb0f4dd11b32bb9388c6be6733ac111a6338991fe8e47bb127844cb64d1d8"
+    },
+    "background": {
+      "passed": 34,
+      "failed": 0,
+      "report": "background-size-fix-build8.json",
+      "completedAt": "2026-10-04T19:59:11Z",
+      "sha256": "8652af14fd7c17a0b26469954d2ba467a547e02e3962c59c1de9ce210441bf25"
+    },
+    "external": {
+      "passed": 75,
+      "failed": 0,
+      "report": "external-size-fix-build8.json",
+      "completedAt": "2026-10-04T20:00:17Z",
+      "sha256": "07b92e13862d6bef33c7d0c0c7f6bec549a8cc1f7ccc0240ecb7c9ac720f082d"
+    },
+    "obsidian": {
+      "passed": 11,
+      "failed": 0,
+      "report": "obsidian-size-fix-build8-320pt.json",
+      "completedAt": "2026-10-04T19:56:54Z",
+      "sha256": "e026e13abb917b126c50c434a3050b097f5bd6afec7bb26feead27eee647b9dd"
+    },
+    "core": {
+      "passed": 77,
+      "failed": 0,
+      "report": "core-size-fix-build8.log",
+      "sha256": "04cdc0e46f86aa509fb2a4e380885dcc042238c515a84b91e7be3b4954c3af18"
+    }
+  },
+  "automaticChecksTotal": 275,
+  "installedApp": "/Users/zhangfei/Applications/WindowLane.app",
+  "binarySHA256": "f45b30b561de1ef698facd3cd79e270504120f7f6d5eeb38f816a3ad3a95eeb3",
+  "installedBinarySHA256": "f45b30b561de1ef698facd3cd79e270504120f7f6d5eeb38f816a3ad3a95eeb3",
+  "backup": "/Users/zhangfei/Documents/Codex/WindowLane/dist/local-backups/WindowLane-build6-before-size-fix.app",
+  "installationUI": {
+    "codeSignatureVerified": true,
+    "normalQuitAndReopen": true,
+    "permissionsAfterReopen": {
+      "accessibility": true,
+      "screenCapture": true
+    },
+    "existingTransparencyPercent": [
+      15,
+      65
+    ],
+    "finalSelection": [
+      "ChatGPT",
+      "Obsidian",
+      "Safari"
+    ],
+    "finalWorkspaceRunning": false,
+    "pendingRecovery": 0,
+    "temporaryFixtureAppClosed": true,
+    "textEditCheck": "A fresh empty editor and external fixture started and were restored. Synthetic global shortcuts were not established by CUA; this is not included in the automatic pass count. The empty test document was preserved in /private/tmp."
+  },
+  "limitations": [
+    "Obsidian evidence covers the currently open window only; its earlier crash or rejection was not reproduced.",
+    "Native simulated clamping verifies adaptive and infeasible-size paths, not arbitrary applications.",
+    "External fixture results do not establish all application, monitor or OS combinations.",
+    "Actual file/image drag delivery, publication packaging and notarization were not tested."
+  ],
+  "sourceSHA256": {
+    "Resources/Info.plist": "18c4baea7d87c20721c3e1141ef2e20893b964fd3cd357ff4fb585e1f52aa5b0",
+    "Sources/WindowLane/App.swift": "1404cc8ce4c91cc849575fe847f3af0d24f96719a74a6576516488a39785eef8",
+    "Sources/WindowLane/BackgroundCheck.swift": "8b09d63029e4d7cc95365e4b4ee2014e81290a5c2a3772ba461622241bd82049",
+    "Sources/WindowLane/BackgroundSettings.swift": "e30b5e9cce75218e6de5bfc1c11a02ceebd50fd8935d5144af936074deeb23c8",
+    "Sources/WindowLane/BackgroundSettingsView.swift": "fe1d75e51bb3a33825d7f5fe6ebda83313e7a7fba4cb977d6d50466ed09920be",
+    "Sources/WindowLane/ContinuousPagePresentation.swift": "c2808619c5e5e1cff1f303525a1d76e0ac0f469f3f4f30527f2ccf0c318db91e",
+    "Sources/WindowLane/DragTransferRouter.swift": "5fe28d1744e643f6110d2f63cca553c4c3b9f37a3eec8a6146c8f5bb1f92454c",
+    "Sources/WindowLane/ExternalCheck.swift": "dc6139a13f95bf4c672d780ddece3c610bc47009f30e89aad89f2ecbbba30b80",
+    "Sources/WindowLane/FixtureWindows.swift": "867a2541a8c19f2e9490b4ab5dacfc7fbc6b5d01565d6d9629299b132b28aa65",
+    "Sources/WindowLane/GlassUI.swift": "bdc4f75122b2d9db424b41d526a645f0af2110fa09004677f230417b6ccf5f46",
+    "Sources/WindowLane/GlobalShortcuts.swift": "42ca53615c49fc6fd61e3c2745ff17ee775ff4c84f306db855111b3ae7619eee",
+    "Sources/WindowLane/HorizontalScrollRouter.swift": "bcba57e66c47aa49d6f68435320244c56e37906f5b987851395f570209b1cec2",
+    "Sources/WindowLane/InteractionSettings.swift": "323f46bc721bc523dd1f0470347fadb2bd64386a6448b38bacb5b14898e99714",
+    "Sources/WindowLane/ObsidianSizingCheck.swift": "91043305abaa1a437aabc637d405fd519280a2166f340fdb66e93825e454824e",
+    "Sources/WindowLane/PageTurnTransition.swift": "f2b0986507356623a40a50e4e35cc46279fe0aa46b3d8031983839c000bbdc94",
+    "Sources/WindowLane/SmokeCheck.swift": "a3d96dbc9b70aa94ef40088021811fa61ad8e8d134f116dd74626269c4a441b5",
+    "Sources/WindowLane/TransferFixture.swift": "da3093e0a8c498cf9855981425529a9305041356e4ce0a7ed7f6094cc999621e",
+    "Sources/WindowLane/Views.swift": "dfaa80071281684f5335cf9f39c5392de5f3402d36b0b72b3b4fdfeb0290b5f4",
+    "Sources/WindowLane/WindowBackend.swift": "a88189212fa3e3110a3442d631cc6b5ea87765ebfaaf8de4c22d23adff903489",
+    "Sources/WindowLane/WorkspacePresetControls.swift": "72af3079057b7f32abe5ffa19fc91fe5a11357fd579b140f8642947fe978dcbe",
+    "Sources/WindowLane/WorkspacePresets.swift": "cff543b1ed856125b45d2c95ce4b8b9ac5322009741265a948f7916e10630943",
+    "Sources/WindowLane/WorkspaceStore.swift": "6c35a2e8c5a543f96bb25f8eb9dc76f4a24579ac3d9611d42e9d7fd66fa1a230",
+    "Sources/WindowLaneCore/BookPageLayout.swift": "babd5b3241655bb8d94cab056962b3cdaa447f7c5aeb5d130b29953a641de3c9",
+    "Sources/WindowLaneCore/ContinuousScrollPaging.swift": "1347e28dbfb6d3c263b5c66829aff4d3f431706ae007b91846f1c71d8dab8746",
+    "Sources/WindowLaneCore/HorizontalScrollGate.swift": "eb0a6016c569b097623d815b8a999e79eeb4dc1f1bfd613ab3c44b50519f22df",
+    "Sources/WindowLaneCore/WindowRestorationGeometry.swift": "8b57e56b881270f9d9b5e7bb5a8ed862a0ddf3813ad92e670f7a00c823972989",
+    "Sources/WindowLaneCore/WorkspaceCore.swift": "a009cb5f27562f1c2a0161ba3008cb1c70839767930ce83c856c4680face5e1e",
+    "Sources/WindowLaneCore/WorkspacePreset.swift": "649e1f3d718f731d13d065e37f405f21d2aa6d21fdc3c4369812bdc5699251f8",
+    "Tests/WindowLaneCoreTests/BookPageLayoutTests.swift": "102a26ce1addb209fd0f360615343b5f731b3879c4e0edcb0c4faa0e6cf09f7b",
+    "Tests/WindowLaneCoreTests/ContinuousScrollPagingTests.swift": "71dba55d49bc8e32d0f3e1a386c96e36fffbe883e9fd1fca4f573700dcfb21ee",
+    "Tests/WindowLaneCoreTests/HorizontalScrollGateTests.swift": "eac1ce282417b5ae1e52f02fd144e141081867303c56b06da8188d3f1767e2b8",
+    "Tests/WindowLaneCoreTests/WindowRestorationGeometryTests.swift": "32bb42b5ecd8a9d2173a6ffa50a16a8e6d263affb29abd2a977fb1ab87913d88",
+    "Tests/WindowLaneCoreTests/WorkspaceCoreTests.swift": "48a99a5b660bebb035d0e9976f87c6f710fddccff9e649c6d54533c9cff86854",
+    "Tests/WindowLaneCoreTests/WorkspacePresetTests.swift": "294adba001f58247cd1c165299da775bed6a13e0379958d4a04fb080634765db",
+    "scripts/build-app.sh": "4925b4a672da44f46db441bdd4465874507debcddeaeb7284781721435b05d81",
+    "scripts/package-app.sh": "1829e4ee8dac19c47ed7941fcba914825afeb175be85b28717930db61f6eb365"
+  }
+}

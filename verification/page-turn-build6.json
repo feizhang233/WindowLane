@@ -1,0 +1,104 @@
+{
+  "installedAtUTC": "2026-10-04T17:41:05.481282+00:00",
+  "version": "0.2.1",
+  "build": "6",
+  "installedPath": "/Users/zhangfei/Applications/WindowLane.app",
+  "previousBuildBackup": "/private/tmp/windowlane-build5-eqcdviek",
+  "executableSHA256": "d07a41d59d34558f3042b3ecdc9e7e4d8b1da80b88c57828b3c78389053016ce",
+  "sameSigningRequirement": true,
+  "installedArtifactMatchesBuildOutput": true,
+  "recoveryRecordsBeforeInstall": 0,
+  "verifiedAtUTC": "2026-10-04T17:45:39.476731+00:00",
+  "scope": "Directional page-turn presentation, focus ownership, cancellation, external geometry/restoration, preference regression, and signed local update.",
+  "passed": true,
+  "checks": {
+    "core": 32,
+    "native": 42,
+    "external": 65,
+    "background": 25
+  },
+  "externalCompletedPageTurns": 7,
+  "nativeUI": {
+    "forwardSelectionObserved": true,
+    "backwardSelectionObserved": true,
+    "destinationEditableTextFocused": true,
+    "exitRestorationMessageObserved": true,
+    "fullQuitAndRelaunchObserved": true,
+    "permissions": {
+      "accessibility": true,
+      "screenRecording": true
+    },
+    "priorTwoWindowSelectionRestored": true,
+    "applicationTransparency": 0.1503845214843751,
+    "workspaceTransparency": 0.6491821289062499,
+    "continuousAnimationVisuallyReviewed": false
+  },
+  "timing": {
+    "native": {
+      "focusSampleCount": 11,
+      "requestToFocusMedianMilliseconds": 54.95849996805191,
+      "requestToFocusMaximumMilliseconds": 502.2217499790713,
+      "presentation": {
+        "maximumMilliseconds": 801.3755416614003,
+        "measurement": "Monotonic elapsed time from select() to completed presentation with confirmed native keyboard focus, including outgoing native snapshot preparation, focus handoff, page-turn animation when enabled, and diagnostic polling. Successful switches only; no fixed latency pass/fail budget.",
+        "medianMilliseconds": 373.29354166286066,
+        "samplesMilliseconds": [
+          360.30737502733245,
+          374.15287498151883,
+          361.8926249910146,
+          801.3755416614003,
+          389.61241667857394,
+          368.3923750068061,
+          374.71508333692327,
+          369.1062916186638,
+          364.49604167137295,
+          375.1032499712892,
+          373.29354166286066
+        ]
+      }
+    },
+    "external": {
+      "focusSampleCount": 6,
+      "requestToFocusMedianMilliseconds": 143.8786041981075,
+      "requestToFocusMaximumMilliseconds": 146.70858334284276,
+      "presentation": {
+        "maximumMilliseconds": 490.4999166610651,
+        "measurement": "Monotonic elapsed time from select() to completed presentation with confirmed system-wide AX keyboard focus, including bounded outgoing snapshot preparation, focus handoff, page-turn animation when enabled, diagnostic polling, and AX readback. Successful switches only; no fixed cross-application latency pass/fail budget.",
+        "medianMilliseconds": 476.9895000499673,
+        "samplesMilliseconds": [
+          471.0658333497122,
+          474.47883331915364,
+          490.4999166610651,
+          475.7004583370872,
+          477.3583333590068,
+          476.9895000499673,
+          478.453041636385
+        ]
+      }
+    }
+  },
+  "evidence": [
+    "core-page-turn-build6.log",
+    "build-page-turn-build6.log",
+    "native-page-turn-build6.json",
+    "external-page-turn-build6.json",
+    "background-page-turn-build6.json",
+    "premium-audit-page-turn-build6.json"
+  ],
+  "launchContextNote": "Direct shell execution initially reported both permissions absent without acting on windows. LaunchServices launch of the same fixed installed app retained existing permissions and passed external regression. Initial blocked report retained as external-page-turn-build6-exec-context.json.",
+  "limitations": [
+    "Native UI tool checked settled states and destination editor focus, not continuous compositor frame pacing or perceived smoothness.",
+    "External integration covers three documents in one fixture process; broad cross-app, multi-display, sleep and crash behavior is not established by these tests.",
+    "Official DESIGN.md linter remains unavailable offline (uncached @google/design.md); strict project audit passed.",
+    "No notarization or final release ZIP packaging in this request."
+  ],
+  "sourceSHA256": {
+    "Sources/WindowLane/App.swift": "9d1de1c96af0a0d663e63eb6a68753828a9977bd9e53431b9ff48fb6206bff2c",
+    "Sources/WindowLane/WorkspaceStore.swift": "05c70f9cbd36aaf9ac31b1d33de3d133ddd72f20e35a340735af69d2773ec290",
+    "Sources/WindowLane/WindowBackend.swift": "fa26503473a1badd842b5088d52b95c937d8a7d9d94f7e834d8f823e86929f2f",
+    "Sources/WindowLane/PageTurnTransition.swift": "f2b0986507356623a40a50e4e35cc46279fe0aa46b3d8031983839c000bbdc94",
+    "Sources/WindowLane/SmokeCheck.swift": "a55946dd3c75d9745bc731f4e81b387631c06950e514106ea16149d9d1bc613c",
+    "Sources/WindowLane/ExternalCheck.swift": "29f3b96bca9e12e899f6f4fb966cb0504408cd68346f0288a55f6a03c747d8ba",
+    "Resources/Info.plist": "9da6c397225c33a30eb1111fb8f901d3e3353eabd2def86d9f0b44cd6c941ef9"
+  }
+}

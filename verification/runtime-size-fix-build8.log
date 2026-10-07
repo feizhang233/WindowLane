@@ -1,0 +1,84 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-04 21:38:25.133 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:38:26.668 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:38:26.686 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:38:26.761 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:38:30.036 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:38:30.588 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:38:30.995 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:38:31.531 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:38:31.638 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] adapt-width window=demo-1 width=1015.000000 position=0.080000
+2026-10-04 21:38:32.146 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] adapt-width window=demo-0 width=1522.000000 position=0.500000
+2026-10-04 21:38:32.146 E  WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] layout-rejected position=0.500000 reason=<private>
+2026-10-04 21:38:32.165 Df WindowLane[14182:7a09a8] [com.feizhang.windowlane:workspace] layout-rollback-complete position=0.000000
+2026-10-04 21:42:05.508 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:42:06.977 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:42:06.996 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:42:07.070 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:42:10.299 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:42:10.848 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:42:11.231 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:42:11.789 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:42:11.893 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] adapt-width window=demo-1 width=1015.000000 position=0.080000
+2026-10-04 21:42:12.399 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] adapt-width window=demo-0 width=1522.000000 position=0.500000
+2026-10-04 21:42:12.399 E  WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] layout-rejected position=0.500000 reason=<private>
+2026-10-04 21:42:12.418 Df WindowLane[14632:7a1fb9] [com.feizhang.windowlane:workspace] layout-rollback-complete position=0.000000
+2026-10-04 21:43:51.032 Df WindowLane[14868:7a2c67] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:43:51.889 E  WindowLane[14868:7a2c67] [com.feizhang.windowlane:workspace] start-failed reason=<private>
+2026-10-04 21:46:35.075 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:46:36.524 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:46:36.530 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:46:36.602 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:46:39.702 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:46:40.262 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:46:40.680 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:46:41.215 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:46:41.309 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] adapt-width window=demo-1 width=1015.000000 position=0.080000
+2026-10-04 21:46:41.801 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] adapt-width window=demo-0 width=1522.000000 position=0.500000
+2026-10-04 21:46:41.801 E  WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] layout-rejected position=0.500000 reason=<private>
+2026-10-04 21:46:41.814 Df WindowLane[14981:7a3a6e] [com.feizhang.windowlane:workspace] layout-rollback-complete position=0.000000
+2026-10-04 21:48:49.110 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:48:50.560 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:48:50.573 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:48:50.644 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:48:54.189 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:48:54.724 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:48:55.423 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:48:55.764 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:48:56.045 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] adapt-width window=demo-1 width=1015.000000 position=0.080000
+2026-10-04 21:48:56.349 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] adapt-width window=demo-0 width=1522.000000 position=0.500000
+2026-10-04 21:48:56.349 E  WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] layout-rejected position=0.500000 reason=<private>
+2026-10-04 21:48:56.373 Df WindowLane[15248:7a47f4] [com.feizhang.windowlane:workspace] layout-rollback-complete position=0.000000
+2026-10-04 21:50:53.508 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:50:54.919 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:50:54.926 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:50:55.005 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:50:58.095 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:50:58.635 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:50:59.326 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:50:59.636 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:50:59.917 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] adapt-width window=demo-1 width=1015.000000 position=0.080000
+2026-10-04 21:51:00.275 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] adapt-width window=demo-0 width=1522.000000 position=0.500000
+2026-10-04 21:51:00.276 E  WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] layout-rejected position=0.500000 reason=<private>
+2026-10-04 21:51:00.287 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] layout-rollback-complete position=0.000000
+2026-10-04 21:51:00.729 Df WindowLane[15423:7a5419] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:52:19.910 Df WindowLane[15739:7a608f] [com.feizhang.windowlane:workspace] start windows=2 position=0.000000
+2026-10-04 21:56:48.503 Df WindowLane[16032:7a774a] [com.feizhang.windowlane:workspace] start windows=2 position=0.000000
+2026-10-04 21:58:08.045 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=3 position=2.000000
+2026-10-04 21:58:09.499 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:58:09.506 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:58:09.596 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:58:13.183 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=2 position=1.000000
+2026-10-04 21:58:13.745 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:58:14.458 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:58:14.816 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:58:15.118 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] adapt-width window=demo-1 width=1015.000000 position=0.080000
+2026-10-04 21:58:15.459 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] adapt-width window=demo-0 width=1522.000000 position=0.500000
+2026-10-04 21:58:15.459 E  WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] layout-rejected position=0.500000 reason=<private>
+2026-10-04 21:58:15.474 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] layout-rollback-complete position=0.000000
+2026-10-04 21:58:15.937 Df WindowLane[16108:7a7fae] [com.feizhang.windowlane:workspace] start windows=3 position=0.500000
+2026-10-04 21:59:41.192 Df WindowLane[16228:7a894a] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:59:56.346 Df WindowLane[16228:7a894a] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 21:59:56.724 Df WindowLane[16228:7a894a] [com.feizhang.windowlane:workspace] start windows=3 position=0.000000
+2026-10-04 22:00:03.814 Df WindowLane[16228:7a894a] [com.feizhang.windowlane:workspace] start windows=3 position=1.000000
+2026-10-04 22:04:54.544 Df WindowLane[16529:7a9a07] [com.feizhang.windowlane:workspace] start windows=2 position=0.000000

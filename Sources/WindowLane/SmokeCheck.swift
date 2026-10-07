@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import WindowLaneCore
 
 private struct SmokeCheckResult: Encodable {
     let name: String
@@ -20,7 +21,7 @@ private struct SmokeFrame: Encodable {
 private struct SmokeReport: Encodable {
     let schemaVersion = 2
     let scope = "native-demo-integration"
-    let limitation = "App-owned NSWindow/NSTextView integration only. External application control, AX permission grants, ScreenCaptureKit capture, and global key delivery are not verified by this run."
+    let limitation = "App-owned NSWindow/NSTextView integration and isolated named-workspace storage only. Fractional layouts verify real window geometry and editor ownership, not delivery or acceptance of drag payloads. External application control, AX permission grants, ScreenCaptureKit capture, and global key delivery are not verified by this run."
     let completedAt: Date
     let passed: Bool
     let checks: [SmokeCheckResult]
@@ -28,10 +29,11 @@ private struct SmokeReport: Encodable {
     let restoredFrames: [SmokeFrame]
     let screenshotPath: String?
     let switchPerformance: SmokeSwitchPerformance
+    let requestToFocusMilliseconds: [Double]
 }
 
 private struct SmokeSwitchPerformance: Encodable {
-    let measurement = "Monotonic elapsed time from select() to settled native keyboard focus, including diagnostic polling. Successful switches only; no fixed latency pass/fail budget."
+    let measurement = "Monotonic elapsed time from select() to completed presentation with confirmed native keyboard focus, including outgoing native snapshot preparation, focus handoff, page-turn animation when enabled, and diagnostic polling. Successful switches only; no fixed latency pass/fail budget."
     let samplesMilliseconds: [Double]
     let medianMilliseconds: Double?
     let maximumMilliseconds: Double?
@@ -48,7 +50,7 @@ private struct SmokeSwitchPerformance: Encodable {
 
 /// Called only by the explicit --smoke-test launch mode; never manages external windows.
 @MainActor
-func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool {
+func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow, transition: PageTurnTransition) async -> Bool {
     let arguments = ProcessInfo.processInfo.arguments
     func option(_ name: String) -> String? {
         guard let index = arguments.firstIndex(of: name), arguments.indices.contains(index + 1) else { return nil }
@@ -60,6 +62,7 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
     var originals: [CGRect] = []
     var restored: [CGRect] = []
     var switchLatencies: [Double] = []
+    var focusLatencies: [Double] = []
     var writtenScreenshot: String?
     func record(_ name: String, _ passed: Bool, _ detail: String = "") {
         checks.append(SmokeCheckResult(name: name, passed: passed, detail: detail))
@@ -70,7 +73,8 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
             completedAt: Date(), passed: passed, checks: checks,
             originalFrames: originals.map(SmokeFrame.init), restoredFrames: restored.map(SmokeFrame.init),
             screenshotPath: writtenScreenshot,
-            switchPerformance: SmokeSwitchPerformance(switchLatencies)
+            switchPerformance: SmokeSwitchPerformance(switchLatencies),
+            requestToFocusMilliseconds: focusLatencies
         )
         do {
             let encoder = JSONEncoder()
@@ -91,6 +95,32 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
         return finish()
     }
     record("isolated_startup", true)
+
+    // Exercise presentation fallbacks using only a generated in-memory image.
+    // This never captures the user's screen or changes an accessibility setting.
+    let fallbackFrame = CGRect(x: 0, y: 0, width: 96, height: 64)
+    let fallbackImage = NSImage(size: fallbackFrame.size, flipped: false) { rect in
+        NSColor.windowBackgroundColor.setFill()
+        rect.fill()
+        return true
+    }
+    let reducedTransition = PageTurnTransition(reduceMotion: { true })
+    record("reduce_motion_bypasses_page_turn", !reducedTransition.prepare(image: fallbackImage, frame: fallbackFrame, direction: 1)
+           && !reducedTransition.isVisible && !reducedTransition.isAnimating && reducedTransition.preparedCount == 0,
+           "Injected Reduce Motion policy; no macOS preference was modified.")
+    reducedTransition.cancel()
+    let fallbackTransition = PageTurnTransition(reduceMotion: { false })
+    let emptyBypassed = !fallbackTransition.prepare(image: NSImage(size: .zero), frame: fallbackFrame, direction: 1)
+        && !fallbackTransition.isVisible && !fallbackTransition.isAnimating
+    record("empty_snapshot_bypasses_page_turn", emptyBypassed)
+    fallbackTransition.cancel()
+    let mismatchFrame = CGRect(x: 0, y: 0, width: 192, height: 128)
+    let mismatchBypassed = !fallbackTransition.prepare(image: fallbackImage, frame: mismatchFrame, direction: -1)
+        && !fallbackTransition.isVisible && !fallbackTransition.isAnimating
+    record("mismatched_snapshot_bypasses_page_turn", mismatchBypassed,
+           "A 96 × 64 logical-point image must not be stretched into a 192 × 128 window.")
+    fallbackTransition.cancel()
+
     store.loadDemo()
     let windows = store.fixtures.windows
     record("three_native_editable_windows", windows.count == 3 && store.ordered.count == 3 && store.isDemo)
@@ -121,6 +151,21 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
         guard settled, store.isRunning, store.order.activeID == destination,
               let window = store.entries[destination]?.native, NSApp.keyWindow === window else { return }
         switchLatencies.append((ProcessInfo.processInfo.systemUptime - startedAt) * 1_000)
+        if let latency = store.lastSwitchFocusMilliseconds { focusLatencies.append(latency) }
+    }
+    func direction(to index: Int) -> Int { index > store.activeIndex ? 1 : -1 }
+    func recordPageTurn(_ name: String, preparedBefore: Int, completedBefore: Int, expectedDirection: Int, settled: Bool, reducedMotion: Bool) {
+        let hidden = !transition.isVisible && !transition.isAnimating
+        if reducedMotion {
+            record("\(name)_reduce_motion_bypassed", settled && hidden
+                   && transition.preparedCount == preparedBefore && transition.completedCount == completedBefore,
+                   "System Reduce Motion was enabled; this check verifies bypass, not an animated presentation.")
+        } else {
+            record("\(name)_animation_completed", settled && hidden
+                   && transition.preparedCount == preparedBefore + 1
+                   && transition.completedCount == completedBefore + 1 && transition.lastDirection == expectedDirection,
+                   "direction=\(String(describing: transition.lastDirection)), expected=\(expectedDirection); prepared \(preparedBefore)→\(transition.preparedCount); completed \(completedBefore)→\(transition.completedCount).")
+        }
     }
     store.move(originalIDs[0], to: 2)
     record("reorder_preserves_active_identity", store.order.ids == [originalIDs[1], originalIDs[2], originalIDs[0]] && store.order.activeID == originalIDs[0])
@@ -150,6 +195,10 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
     record("active_window_main_frame", smokeSameFrame(windows[0].frame, store.layout.mainFrame), "AppKit frame tolerance: 1 point.")
     record("all_windows_open_unminimized_at_main_frame", allManagedWindowsReady(), "All managed windows stay ready behind the active window; no per-switch parking.")
 
+    var preparedBefore = transition.preparedCount
+    var completedBefore = transition.completedCount
+    var expectedDirection = direction(to: 0)
+    var reducedMotion = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
     var switchStarted = ProcessInfo.processInfo.systemUptime
     store.select(index: 0)
     let selectSettled = await smokeWaitUntilSettled(store)
@@ -159,13 +208,23 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
     record("selected_window_key_and_editable", NSApp.keyWindow === windows[1] && windows[1].firstResponder === editors[1],
            smokeFocusDetail(expectedWindow: windows[1], expectedResponder: editors[1], activeID: store.order.activeID))
     record("switch_keeps_all_windows_ready", allManagedWindowsReady())
+    recordPageTurn("backward_page_turn", preparedBefore: preparedBefore, completedBefore: completedBefore,
+                   expectedDirection: expectedDirection, settled: selectSettled, reducedMotion: reducedMotion)
 
+    preparedBefore = transition.preparedCount
+    completedBefore = transition.completedCount
+    expectedDirection = direction(to: store.activeIndex + 1)
+    reducedMotion = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
     switchStarted = ProcessInfo.processInfo.systemUptime
     store.step(1)
     let stepSettled = await smokeWaitUntilSettled(store)
     noteSwitchLatency(startedAt: switchStarted, destination: originalIDs[2], settled: stepSettled)
     record("step_settles", stepSettled, store.status)
     record("next_window_selected", store.order.activeID == originalIDs[2])
+    recordPageTurn("forward_page_turn", preparedBefore: preparedBefore, completedBefore: completedBefore,
+                   expectedDirection: expectedDirection, settled: stepSettled, reducedMotion: reducedMotion)
+    record("page_turn_retains_target_keyboard_editor", NSApp.keyWindow === windows[2] && windows[2].firstResponder === editors[2],
+           smokeFocusDetail(expectedWindow: windows[2], expectedResponder: editors[2], activeID: store.order.activeID))
     switchStarted = ProcessInfo.processInfo.systemUptime
     store.select(originalIDs[0])
     let returnSettled = await smokeWaitUntilSettled(store)
@@ -239,9 +298,290 @@ func runSmokeCheck(store: WorkspaceStore, managerWindow: NSWindow) async -> Bool
     store.stop(); await store.waitForRestoration()
     record("repeated_switches_restore_documents", windows.map(\.frame) == originals && editors.indices.allSatisfy { editors[$0].string == drafts[$0] && editors[$0].selectedRange() == selections[$0] })
 
+    // Unlike the earlier immediate-cancel case, wait for an actually entered
+    // animation so cancellation covers the visual awaiter and overlay teardown.
+    store.start()
+    let animationRestarted = await smokeWaitUntilSettled(store) && store.isRunning
+    record("restart_for_animation_cancellation", animationRestarted, store.status)
+    if animationRestarted, let destination = store.order.ids.first(where: { $0 != store.order.activeID }) {
+        reducedMotion = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+        let cancelledBefore = transition.cancelledCount
+        let completedBeforeCancellation = transition.completedCount
+        store.select(destination)
+        if reducedMotion {
+            let settled = await smokeWaitUntilSettled(store)
+            record("animation_cancellation_reduce_motion_bypass", settled && !transition.isVisible && !transition.isAnimating,
+                   "System Reduce Motion bypasses animation; active-animation cancellation was not exercised.")
+        } else {
+            let animationEntered = await smokeWait(timeout: 2) { transition.isAnimating && transition.isVisible }
+            record("cancellation_enters_visible_page_turn", animationEntered,
+                   "Polled renderer state; an arbitrary delay is not used as evidence that animation began.")
+            let destinationWindow = store.entries[destination]?.native
+            let destinationEditor = (destinationWindow?.contentView as? NSScrollView)?.documentView as? NSTextView
+            record("visible_page_turn_keeps_real_keyboard_focus", animationEntered && store.order.activeID == destination
+                   && NSApp.keyWindow === destinationWindow && destinationWindow?.firstResponder === destinationEditor,
+                   smokeFocusDetail(expectedWindow: destinationWindow, expectedResponder: destinationEditor, activeID: store.order.activeID))
+            let selectionAtStop = store.order.activeID
+            store.stop()
+            record("stop_immediately_removes_page_turn", !transition.isVisible && !transition.isAnimating
+                   && (!animationEntered || transition.cancelledCount == cancelledBefore + 1))
+            await store.waitForRestoration()
+            let keyWindowAfterRestore = NSApp.keyWindow
+            try? await Task.sleep(nanoseconds: 400_000_000)
+            record("cancel_page_turn_has_no_late_mutation", !store.isRunning && !store.isBusy
+                   && store.order.activeID == selectionAtStop && NSApp.keyWindow === keyWindowAfterRestore
+                   && !transition.isVisible && !transition.isAnimating
+                   && transition.completedCount == completedBeforeCancellation && windows.map(\.frame) == originals,
+                   "Selection, keyboard focus, overlay visibility, completion count, and original frames remain unchanged after a 400 ms observation interval.")
+            record("cancel_page_turn_preserves_documents", windows.allSatisfy { $0.isVisible && !$0.isMiniaturized }
+                   && editors.indices.allSatisfy { editors[$0].string == drafts[$0] && editors[$0].selectedRange() == selections[$0] })
+        }
+    }
+    store.stop(); await store.waitForRestoration()
+
+    // Restore the fixture removed earlier without closing or recreating its
+    // document. Three pages are needed to exercise both fractional pairs.
+    if store.entries[originalIDs[1]] == nil {
+        store.entries[originalIDs[1]] = ManagedWindow(native: windows[1], index: 1)
+    }
+    store.order = WorkspaceOrder(ids: originalIDs, activeID: originalIDs[0])
+    store.pagePosition = 0
+    func visibleNativeFramesMatch() -> Bool {
+        store.visibleWindowIDs.allSatisfy { id in
+            guard let window = store.entries[id]?.native else { return false }
+            return window.isVisible && !window.isMiniaturized && smokeSameFrame(window.frame, store.frameForWindow(id))
+        }
+    }
+    func splitEditorsAreReal() -> Bool {
+        store.visibleWindowIDs.count == 2 && store.visibleWindowIDs.allSatisfy { id in
+            guard let window = store.entries[id]?.native,
+                  let editor = (window.contentView as? NSScrollView)?.documentView as? NSTextView else { return false }
+            return editor.isEditable && editors.contains { $0 === editor } && window.isVisible
+        }
+    }
+    func activeSplitEditorHasFocus() -> Bool {
+        guard let active = store.active, store.visibleWindowIDs.contains(active.id), let window = active.native,
+              let editor = (window.contentView as? NSScrollView)?.documentView as? NSTextView else { return false }
+        return NSApp.keyWindow === window && window.firstResponder === editor
+    }
+    func bothPanesAreAboveOtherManagedWindows() -> Bool {
+        let visible = store.visibleWindowIDs.compactMap { store.entries[$0]?.native }
+        let windowNumbers = Set(windows.map(\.windowNumber))
+        let serverWindows = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] ?? []
+        let frontNumbers = serverWindows.compactMap { $0[kCGWindowNumber as String] as? Int }
+            .filter { windowNumbers.contains($0) }.prefix(2)
+        print("PANE_ORDER visible=\(visible.map(\.windowNumber)) server=\(Array(frontNumbers)) key=\(NSApp.keyWindow?.windowNumber ?? -1) appkit=\(NSApp.orderedWindows.filter { windowNumbers.contains($0.windowNumber) }.map(\.windowNumber))")
+        return visible.count == 2 && frontNumbers.count == 2
+            && visible.allSatisfy { frontNumbers.contains($0.windowNumber) }
+    }
+    let ratioBeforePresetTests = store.ratio
+    store.start()
+    let fractionalStarted = await smokeWaitUntilSettled(store) && store.isRunning
+    record("fractional_layout_starts_three_existing_documents", fractionalStarted && store.ordered.count == 3, store.status)
+    if fractionalStarted {
+        store.commitContinuousPaging(position: 0.5)
+        let halfSettled = await smokeWaitUntilSettled(store)
+        let leftHalf = windows[0].frame
+        let rightHalf = windows[1].frame
+        record("half_page_preserves_fraction_after_release", halfSettled && store.isRunning && store.isSplit
+               && abs(store.pagePosition - 0.5) < 0.0001, store.status)
+        record("half_page_two_live_equal_nonoverlapping_frames", halfSettled && visibleNativeFramesMatch()
+               && abs(leftHalf.width - rightHalf.width) <= 1 && leftHalf.maxX <= rightHalf.minX
+               && smokeSameFrame(leftHalf, store.frameForWindow(originalIDs[0]))
+               && smokeSameFrame(rightHalf, store.frameForWindow(originalIDs[1])),
+               "Live NSWindow frames equal the requested two-pane layout; tolerance 1 point.")
+        record("half_page_contains_original_native_editors", splitEditorsAreReal())
+        record("half_page_active_editor_has_real_keyboard_focus", activeSplitEditorHasFocus(), smokeFocusDetail(expectedWindow: store.active?.native, expectedResponder: editors[store.activeIndex], activeID: store.order.activeID))
+        record("half_page_both_panes_above_other_managed_documents", bothPanesAreAboveOtherManagedWindows(),
+               "WindowServer front-to-back ordering confirms that an inactive managed document cannot cover either real pane; AppKit orderedWindows may cache an older list.")
+        record("half_page_releases_snapshot_pointer_shield", !transition.isVisible && !transition.isAnimating,
+               "No page snapshot remains above either real window after the fractional commit. Actual drag payload delivery is a separate UI check.")
+
+        let testDirectory = FileManager.default.temporaryDirectory.standardizedFileURL.path
+        let isolatedPresetStorage = store.presets.url.standardizedFileURL.path.hasPrefix(testDirectory + "/")
+        record("named_workspace_storage_is_isolated", isolatedPresetStorage,
+               "Preset writes are allowed only in this diagnostic run's temporary storage, never the user's collection.")
+        var savedPreset: WorkspacePreset?
+        if isolatedPresetStorage {
+            do {
+                let name = "Half-page smoke \(UUID().uuidString.prefix(8))"
+                try store.savePresetThrowing(name: name)
+                savedPreset = store.selectedPresetID.flatMap { id in store.presets.items.first { $0.id == id } }
+                record("named_workspace_saves_current_order_and_half_page", savedPreset.map {
+                    $0.name == name && $0.windows.map(\.id) == store.order.ids
+                        && abs($0.effectivePagePosition - 0.5) < 0.0001 && $0.activeSlot == store.activeIndex
+                        && abs($0.mainRatio - store.ratio) < 0.0001
+                } ?? false)
+                if let saved = savedPreset {
+                    let renamed = "Renamed \(name)"
+                    try store.presets.rename(saved.id, to: renamed)
+                    record("named_workspace_rename_keeps_identity", store.presets.items.first { $0.id == saved.id }?.name == renamed)
+                    try store.savePresetThrowing(name: renamed, replacing: saved.id)
+                    savedPreset = store.presets.items.first { $0.id == saved.id }
+                    record("named_workspace_update_keeps_identity_and_creation_date", savedPreset.map {
+                        $0.id == saved.id && $0.createdAt == saved.createdAt && abs($0.effectivePagePosition - 0.5) < 0.0001
+                    } ?? false)
+                    let reopened = WorkspacePresets(url: store.presets.url)
+                    record("named_workspace_reload_preserves_saved_half_page", reopened.readError == nil
+                           && reopened.items.first { $0.id == saved.id } == savedPreset)
+                    let deleted = try store.presets.delete(saved.id)
+                    record("named_workspace_delete_removes_only_preset", !store.presets.items.contains { $0.id == saved.id }
+                           && windows.allSatisfy(\.isVisible) && store.isRunning)
+                    try store.presets.restore(deleted)
+                    record("named_workspace_delete_can_be_undone", store.presets.items.first { $0.id == saved.id } == deleted)
+                }
+            } catch { record("named_workspace_crud_completed", false, error.localizedDescription) }
+        }
+
+        let framesBeforeContinuousPreview = windows.map(\.frame)
+        store.beginContinuousPaging()
+        store.updateContinuousPaging(position: 1.25)
+        record("continuous_preview_tracks_fraction_without_early_window_mutation", store.isBusy
+               && abs(store.pagePosition - 1.25) < 0.0001 && windows.map(\.frame) == framesBeforeContinuousPreview,
+               "Preview movement retains the real panes until the native geometry commit on release.")
+        store.commitContinuousPaging(position: 1.25)
+        let quarterSettled = await smokeWaitUntilSettled(store)
+        record("quarter_page_preserves_fraction_and_live_pair", quarterSettled && store.isRunning && store.isSplit
+               && abs(store.pagePosition - 1.25) < 0.0001 && store.visibleWindowIDs == [originalIDs[1], originalIDs[2]]
+               && visibleNativeFramesMatch() && windows[1].frame.maxX <= windows[2].frame.minX,
+               "After release, position 1.25 remains accepted and the second/third real windows stay side by side.")
+        record("quarter_page_keeps_original_editors_and_drafts", splitEditorsAreReal()
+               && editors.indices.allSatisfy { editors[$0].string == drafts[$0] && editors[$0].selectedRange() == selections[$0] })
+        store.commitContinuousPaging(position: 2)
+        let wholeSettled = await smokeWaitUntilSettled(store)
+        record("whole_page_restores_all_windows_to_common_main_frame", wholeSettled && store.isRunning && !store.isSplit
+               && abs(store.pagePosition - 2) < 0.0001 && allManagedWindowsReady(), store.status)
+        store.stop(); await store.waitForRestoration()
+        record("fractional_and_whole_layouts_restore_original_documents", !store.isRunning && !store.isBusy
+               && windows.map(\.frame) == originals
+               && editors.indices.allSatisfy { editors[$0].string == drafts[$0] && editors[$0].selectedRange() == selections[$0] })
+
+        if let saved = savedPreset {
+            store.move(originalIDs[0], to: 2)
+            store.ratio = saved.mainRatio == 0.8 ? 0.9 : 0.8
+            let reapplied = store.applyPreset(saved.id)
+            record("named_workspace_apply_restores_order_ratio_and_fraction", reapplied
+                   && store.order.ids == saved.windows.map(\.id) && abs(store.ratio - saved.mainRatio) < 0.0001
+                   && abs(store.pagePosition - 0.5) < 0.0001 && store.selectedPresetID == saved.id, store.status)
+            let reorderedName = "Reordered demo smoke \(UUID().uuidString.prefix(8))"
+            store.move(originalIDs[0], to: 2)
+            let reorderedIDs = store.order.ids
+            do {
+                try store.savePresetThrowing(name: reorderedName)
+                let reorderedID = store.selectedPresetID
+                store.move(originalIDs[0], to: 0)
+                let appliedReordered = reorderedID.map { store.applyPreset($0) } ?? false
+                record("reordered_demo_preset_restores_specific_document_identity", appliedReordered && store.order.ids == reorderedIDs
+                       && originalIDs.enumerated().allSatisfy { store.entries[$0.element]?.native === windows[$0.offset] },
+                       "Demo document identity is its fixture index, independent of the saved display order.")
+                if let reorderedID { _ = try store.presets.delete(reorderedID) }
+                _ = store.applyPreset(saved.id)
+            } catch { record("reordered_demo_preset_check_completed", false, error.localizedDescription) }
+            let orderBeforeMissing = store.order
+            let entriesBeforeMissing = Set(store.entries.keys)
+            let positionBeforeMissing = store.pagePosition
+            let ratioBeforeMissing = store.ratio
+            record("missing_workspace_does_not_replace_current_selection", !store.applyPreset(UUID())
+                   && store.order == orderBeforeMissing && Set(store.entries.keys) == entriesBeforeMissing
+                   && store.pagePosition == positionBeforeMissing && store.ratio == ratioBeforeMissing)
+            do {
+                let absent = try store.presets.save(name: "Unresolved smoke fixture", windows: [
+                    WorkspaceWindowDescriptor(id: "missing-smoke-window", bundleIdentifier: "com.feizhang.windowlane.smoke.missing",
+                                              appName: "Missing fixture", title: "Unopened smoke document")
+                ])
+                record("unresolved_saved_workspace_preserves_current_selection", !store.applyPreset(absent.id)
+                       && store.order == orderBeforeMissing && Set(store.entries.keys) == entriesBeforeMissing
+                       && store.pagePosition == positionBeforeMissing && store.ratio == ratioBeforeMissing,
+                       "A missing saved window prevents replacing the current workspace; no application or document is reopened.")
+                _ = try store.presets.delete(absent.id)
+            } catch { record("unresolved_saved_workspace_check_completed", false, error.localizedDescription) }
+            store.start()
+            let savedRestarted = await smokeWaitUntilSettled(store) && store.isRunning
+            record("saved_half_page_restarts_with_real_window_geometry", savedRestarted && store.isSplit
+                   && abs(store.pagePosition - 0.5) < 0.0001 && visibleNativeFramesMatch() && splitEditorsAreReal(), store.status)
+            record("saved_half_page_exposes_both_panes_above_remaining_documents", savedRestarted
+                   && bothPanesAreAboveOtherManagedWindows(),
+                   "Visible: \(store.visibleWindowIDs); front-to-back: \(NSApp.orderedWindows.filter { window in windows.contains { $0 === window } }.map(\.title))")
+            if savedRestarted {
+                let beforeCancel = windows.map(\.frame)
+                store.beginContinuousPaging()
+                store.updateContinuousPaging(position: 0.75)
+                store.cancelContinuousPaging()
+                record("cancel_continuous_preview_retains_accepted_fraction_and_geometry", !store.isBusy
+                       && abs(store.pagePosition - 0.5) < 0.0001 && windows.map(\.frame) == beforeCancel)
+            }
+            store.stop(); await store.waitForRestoration()
+            record("saved_half_page_exit_restores_original_geometry", windows.map(\.frame) == originals && !store.isBusy)
+            _ = try? store.presets.delete(saved.id)
+        }
+    }
+    // Simulate Obsidian/Electron accepting AX resize requests while enforcing
+    // a larger native minimum than the generic 320-point pane estimate.
+    store.start()
+    let sizingStarted = await smokeWaitUntilSettled(store) && store.isRunning
+    record("minimum_width_fixture_starts", sizingStarted, store.status)
+    if sizingStarted, let constrained = windows[1] as? SizingFixtureWindow,
+       let firstConstrained = windows[0] as? SizingFixtureWindow {
+        let requested = BookPageLayout(visibleFrame: store.screen.visibleFrame, mainRatio: store.ratio, position: 0.08, count: 3)
+        let learnedMinimum = max(500, requested.bookFrame.width * 0.40)
+        constrained.imposedMinimumWidth = learnedMinimum
+        store.commitContinuousPaging(position: 0.08)
+        let adapted = await smokeWaitUntilSettled(store)
+        record("application_minimum_width_adapts_without_exiting_workspace", adapted && store.isRunning && store.isSplit
+               && abs(store.pagePosition - 0.08) < 0.0001 && windows[1].frame.width >= learnedMinimum
+               && windows[0].frame.maxX <= windows[1].frame.minX && !store.isError, store.status)
+        record("adapted_panes_match_real_geometry_and_are_exposed", visibleNativeFramesMatch()
+               && bothPanesAreAboveOtherManagedWindows() && activeSplitEditorHasFocus())
+        // Return to a single accepted page, then force two incompatible minima.
+        constrained.imposedMinimumWidth = 0
+        store.commitContinuousPaging(position: 0)
+        _ = await smokeWaitUntilSettled(store)
+        let accepted = windows.map(\.frame)
+        let originalValues = store.ordered.map(\.originalFrame)
+        firstConstrained.imposedMinimumWidth = requested.bookFrame.width * 0.60
+        constrained.imposedMinimumWidth = requested.bookFrame.width * 0.60
+        store.commitContinuousPaging(position: 0.5)
+        let rejected = await smokeWaitUntilSettled(store)
+        record("impossible_split_rolls_back_and_keeps_workspace_running", rejected && store.isRunning && store.isError
+               && !store.isSplit && store.pagePosition == 0 && windows.map(\.frame) == accepted, store.status)
+        record("size_rejection_preserves_original_recovery_frames_and_documents", store.ordered.map(\.originalFrame) == originalValues
+               && editors.indices.allSatisfy { editors[$0].string == drafts[$0] && editors[$0].selectedRange() == selections[$0] })
+        firstConstrained.imposedMinimumWidth = 0; constrained.imposedMinimumWidth = 0
+        store.select(index: 2)
+        let switchedAfterRejection = await smokeWaitUntilSettled(store)
+        record("whole_page_switch_works_after_size_rejection", switchedAfterRejection && store.isRunning
+               && store.active?.id == originalIDs[2] && NSApp.keyWindow === windows[2], store.status)
+    }
+    store.stop(); await store.waitForRestoration()
+    let normalMinimums = windows.map(\.minSize)
+    let incompatibleWidth = store.bookLayout.bookFrame.width * 0.60
+    windows[0].minSize.width = incompatibleWidth
+    windows[1].minSize.width = incompatibleWidth
+    store.order.select(originalIDs[0])
+    store.pagePosition = 0.5
+    store.start()
+    let fallbackStarted = await smokeWaitUntilSettled(store)
+    record("saved_split_with_incompatible_minimums_starts_as_single_page", fallbackStarted && store.isRunning
+           && !store.isSplit && store.pagePosition == 0 && allManagedWindowsReady(), store.status)
+    for index in windows.indices { windows[index].minSize = normalMinimums[index] }
+    store.stop(); await store.waitForRestoration()
+    record("minimum_width_recovery_and_saved_split_fallback_restore_original_frames", windows.map(\.frame) == originals
+           && !store.isBusy && !store.isRunning)
+    store.ratio = ratioBeforePresetTests
+    restored = windows.map(\.frame)
+
     // These documents were created only for this explicitly requested smoke run.
     store.fixtures.close()
     return finish()
+}
+
+@MainActor
+private func smokeWait(timeout: TimeInterval, condition: () -> Bool) async -> Bool {
+    let deadline = ProcessInfo.processInfo.systemUptime + timeout
+    while !condition(), ProcessInfo.processInfo.systemUptime < deadline {
+        try? await Task.sleep(nanoseconds: 5_000_000)
+    }
+    return condition()
 }
 
 @MainActor

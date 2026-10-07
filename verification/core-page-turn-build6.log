@@ -1,0 +1,118 @@
+Building for debugging...
+[Planning deferred tasks]
+[25 / 55] WindowLaneCore
+[35 / 94]
+[42 / 94]
+[44 / 94]
+[49 / 94]
+[53 / 94]
+[56 / 94]
+[59 / 94]
+[60 / 94]
+[75 / 95] WindowLane-product
+[87 / 147]
+[95 / 147] WindowLaneCore
+[105 / 148]
+[110 / 148]
+[116 / 148]
+[118 / 158]
+[121 / 158]
+[134 / 158] WindowLane-product
+[136 / 158]
+[139 / 158] WindowLaneCoreTests-product
+[140 / 158] WindowLaneCoreTests-product
+[142 / 158] WindowLaneCoreTests-product
+[148 / 158] WindowLane-product
+[150 / 158] WindowLane-product
+[154 / 158] WindowLane-product
+[156 / 158] WindowLane-product
+Build complete! (6.53 sec)
+Test Suite 'All tests' started at 2026-10-04 19:36:13.684.
+Test Suite 'WindowLaneCoreTests.xctest' started at 2026-10-04 19:36:13.685.
+Test Suite 'HorizontalScrollGateTests' started at 2026-10-04 19:36:13.685.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testCooldownDiscardsWheelDistanceInsteadOfQueuingIt]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testCooldownDiscardsWheelDistanceInsteadOfQueuingIt]' passed (0.001 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testDisabledAndBusyInputNeitherAccumulatesNorQueuesGestureTail]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testDisabledAndBusyInputNeitherAccumulatesNorQueuesGestureTail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testExtremeFiniteDeltaSafelySaturatesAtThreshold]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testExtremeFiniteDeltaSafelySaturatesAtThreshold]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testGestureThatStartsDuringCooldownCannotTriggerFromItsTail]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testGestureThatStartsDuringCooldownCannotTriggerFromItsTail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testIdleGapDropsPartialWheelMovement]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testIdleGapDropsPartialWheelMovement]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testInvalidInputAndBackwardsTimeDropAccumulatedMovement]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testInvalidInputAndBackwardsTimeDropAccumulatedMovement]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testMomentumAndCancelledMovementNeverTrigger]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testMomentumAndCancelledMovementNeverTrigger]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testOnePhaseGestureCannotSwitchTwiceEvenAfterCooldownOrIdle]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testOnePhaseGestureCannotSwitchTwiceEvenAfterCooldownOrIdle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testResetClearsCooldownAndGestureLatch]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testResetClearsCooldownAndGestureLatch]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testReversalUsesOnlyNewDirectionDistance]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testReversalUsesOnlyNewDirectionDistance]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdBoundsAndChangesStartFresh]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdBoundsAndChangesStartFresh]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdIsInclusiveAndSmallTouchesDoNotSwitch]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdIsInclusiveAndSmallTouchesDoNotSwitch]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testVerticalAndDiagonalInputClearsPreviousHorizontalIntent]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testVerticalAndDiagonalInputClearsPreviousHorizontalIntent]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelCanFollowTrackpadWhenItsTerminalPhaseWasLost]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelCanFollowTrackpadWhenItsTerminalPhaseWasLost]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelTicksNormalizeAndBothDirectionsWork]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelTicksNormalizeAndBothDirectionsWork]' passed (0.000 seconds).
+Test Suite 'HorizontalScrollGateTests' passed at 2026-10-04 19:36:13.689.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
+Test Suite 'SavedWindowFrameTests' started at 2026-10-04 19:36:13.689.
+Test Case '-[WindowLaneCoreTests.SavedWindowFrameTests testRecoveryDataPreservesNegativeDisplayCoordinatesAndMinimizedState]' started.
+Test Case '-[WindowLaneCoreTests.SavedWindowFrameTests testRecoveryDataPreservesNegativeDisplayCoordinatesAndMinimizedState]' passed (0.000 seconds).
+Test Suite 'SavedWindowFrameTests' passed at 2026-10-04 19:36:13.689.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'WindowRestorationGeometryTests' started at 2026-10-04 19:36:13.689.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOrdinaryWorkspaceFrameDoesNotNeedStaging]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOrdinaryWorkspaceFrameDoesNotNeedStaging]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOriginalLargerThanAvailableDisplayIsNotSilentlyResized]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOriginalLargerThanAvailableDisplayIsNotSilentlyResized]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testPartiallyOffscreenOriginalCanBeSizedBeforeReturningToItsOrigin]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testPartiallyOffscreenOriginalCanBeSizedBeforeReturningToItsOrigin]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testSecondaryDisplayWithNegativeCoordinatesUsesItsOwnBounds]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testSecondaryDisplayWithNegativeCoordinatesUsesItsOwnBounds]' passed (0.000 seconds).
+Test Suite 'WindowRestorationGeometryTests' passed at 2026-10-04 19:36:13.690.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'WorkspaceLayoutTests' started at 2026-10-04 19:36:13.690.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testAccessibilityConversionUsesPrimaryDisplayIncludingNegativeCoordinates]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testAccessibilityConversionUsesPrimaryDisplayIncludingNegativeCoordinates]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testExpandedModeUsesPreviewSpaceButPreservesRail]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testExpandedModeUsesPreviewSpaceButPreservesRail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testFramesFitVisibleAreaAndDoNotOverlapAcrossDisplays]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testFramesFitVisibleAreaAndDoNotOverlapAcrossDisplays]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testRatiosClampToSupportedRangeAndNonFiniteUsesDefault]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testRatiosClampToSupportedRangeAndNonFiniteUsesDefault]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testTinyVisibleAreasNeverProduceNegativeSizes]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testTinyVisibleAreasNeverProduceNegativeSizes]' passed (0.000 seconds).
+Test Suite 'WorkspaceLayoutTests' passed at 2026-10-04 19:36:13.690.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'WorkspaceOrderTests' started at 2026-10-04 19:36:13.690.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testCapacityAndDuplicateAttemptsPreserveExistingWorkspace]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testCapacityAndDuplicateAttemptsPreserveExistingWorkspace]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testDecodingNormalizesPersistedInvalidIdentities]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testDecodingNormalizesPersistedInvalidIdentities]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testInvalidRequestsDoNotAlterSelectionOrOrder]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testInvalidRequestsDoNotAlterSelectionOrOrder]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testNavigationStopsAtBothEndsEvenForExtremeOffsets]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testNavigationStopsAtBothEndsEvenForExtremeOffsets]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingActiveWindowSelectsNeighborAndLastRemovalClearsSelection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingActiveWindowSelectsNeighborAndLastRemovalClearsSelection]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingOtherWindowPreservesSelection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingOtherWindowPreservesSelection]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testReorderKeepsSelectedWindowIdentity]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testReorderKeepsSelectedWindowIdentity]' passed (0.000 seconds).
+Test Suite 'WorkspaceOrderTests' passed at 2026-10-04 19:36:13.691.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'WindowLaneCoreTests.xctest' passed at 2026-10-04 19:36:13.691.
+	 Executed 32 tests, with 0 failures (0 unexpected) in 0.004 (0.006) seconds
+Test Suite 'All tests' passed at 2026-10-04 19:36:13.691.
+	 Executed 32 tests, with 0 failures (0 unexpected) in 0.004 (0.008) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

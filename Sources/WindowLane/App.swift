@@ -18,7 +18,7 @@ struct WindowLaneMain {
     let store: WorkspaceStore = {
         // Explicit fixture test runs never consume or overwrite a user's
         // unresolved recovery journal. Each run owns a distinct temporary file.
-        let testMode = CommandLine.arguments.contains("--smoke-test") || CommandLine.arguments.contains("--external-smoke-test")
+        let testMode = CommandLine.arguments.contains { $0.hasSuffix("smoke-test") || $0 == "--transfer-fixture" }
         let testJournal = testMode ? FileManager.default.temporaryDirectory.appendingPathComponent("WindowLane-tests/\(UUID().uuidString)/recovery.json") : nil
         return WorkspaceStore(journalURL:testJournal)
     }()
@@ -30,8 +30,9 @@ struct WindowLaneMain {
     var shortcuts: GlobalShortcuts?
     var statusItem: NSStatusItem?
     var screenObserver: NSObjectProtocol?
+    var transferFixture: TransferFixture?
     func applicationDidFinishLaunching(_ notification: Notification) {
-        let diagnostic = CommandLine.arguments.contains { $0.hasSuffix("smoke-test") || $0 == "--fixture-host" }
+        let diagnostic = CommandLine.arguments.contains { $0.hasSuffix("smoke-test") || $0 == "--fixture-host" || $0 == "--transfer-fixture" }
         if !diagnostic, let bundleID = Bundle.main.bundleIdentifier,
            let existing = NSRunningApplication.runningApplications(withBundleIdentifier:bundleID).first(where:{ $0.processIdentifier != ProcessInfo.processInfo.processIdentifier && !$0.isTerminated }) {
             // Two managers must never race over the same external windows and journal.
@@ -60,11 +61,26 @@ struct WindowLaneMain {
         store.onPrepareFocus = { [weak self] in self?.panels.releaseInputShield() }
         store.onWorkspaceChanged = { [weak self] in
             guard let self else { return }
-            if self.store.isRunning { self.manager.orderOut(nil) }
+            if self.store.isRunning, self.manager.isVisible { self.manager.orderOut(nil) }
             self.panels.update()
             self.scrollRouter?.updateMonitoring()
         }
         store.onPrepareSwitch = { [weak self] in self?.panels.beginFocusHandoff() }
+        store.onPreparePageTurn = { [weak self] image, direction in
+            guard let self else { return false }
+            return self.panels.pageTurn.prepare(image: image, frame: self.store.layout.mainFrame, direction: direction)
+        }
+        store.onFinishPageTurn = { [weak self] in await self?.panels.pageTurn.finish() }
+        store.onCancelPageTurn = { [weak self] in self?.panels.pageTurn.cancel() }
+        store.onContinuousPreview = { [weak self] images, titles, layout in
+            guard let self else { return }
+            _ = self.panels.continuous.prepare(images: images, titles: titles, frame: layout.bookFrame,
+                                               position: layout.position, mainRatio: self.store.ratio, frames: layout.frames)
+        }
+        store.onContinuousPositionChanged = { [weak self] layout in
+            self?.panels.continuous.update(position: layout.position, frames: layout.frames)
+        }
+        store.onCancelContinuousPreview = { [weak self] in self?.panels.continuous.cancel() }
         if CommandLine.arguments.contains("--fixture-host") {
             store.fixtures.show()
             return
@@ -83,6 +99,15 @@ struct WindowLaneMain {
         menu.addItem(withTitle:"結束 WindowLane",action:#selector(NSApplication.terminate(_:)),keyEquivalent:"q")
         item.menu = menu; statusItem = item
         showManager()
+        if CommandLine.arguments.contains("--transfer-fixture") {
+            let arguments = CommandLine.arguments
+            let path = arguments.firstIndex(of: "--report-path").flatMap { arguments.indices.contains($0 + 1) ? arguments[$0 + 1] : nil }
+                ?? "/tmp/WindowLane-transfer.json"
+            let fixture = TransferFixture(reportURL: URL(fileURLWithPath: path))
+            transferFixture = fixture; fixture.show(); store.loadNativeFixture(windows: fixture.windows)
+            store.start()
+            return
+        }
         if CommandLine.arguments.contains("--demo") { store.loadDemo() }
         if CommandLine.arguments.contains("--background-smoke-test") {
             Task { @MainActor in
@@ -94,15 +119,22 @@ struct WindowLaneMain {
         if CommandLine.arguments.contains("--smoke-test") {
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds:300_000_000)
-                let passed = await runSmokeCheck(store:store,managerWindow:manager)
+                let passed = await runSmokeCheck(store:store,managerWindow:manager,transition:panels.pageTurn)
                 print(passed ? "NATIVE_SMOKE_PASS" : "NATIVE_SMOKE_FAIL")
                 NSApp.terminate(nil)
             }
         }
         if CommandLine.arguments.contains("--external-smoke-test") {
             Task { @MainActor in
-                let passed = await runExternalCheck(store:store)
+                let passed = await runExternalCheck(store:store, transition:panels.pageTurn)
                 print(passed ? "EXTERNAL_SMOKE_PASS" : "EXTERNAL_SMOKE_NOT_PASSED")
+                NSApp.terminate(nil)
+            }
+        }
+        if CommandLine.arguments.contains("--obsidian-smoke-test") {
+            Task { @MainActor in
+                let passed = await runObsidianSizingCheck(store: store)
+                print(passed ? "OBSIDIAN_SMOKE_PASS" : "OBSIDIAN_SMOKE_FAIL")
                 NSApp.terminate(nil)
             }
         }
@@ -142,6 +174,7 @@ struct WindowLaneMain {
     @objc func stopWorkspace() { store.stop(); showManager() }
     @objc func openSettings() { showSettings() }
     func showSettings() {
+        store.settingsPresentation = UUID()
         store.refreshPermissions()
         if settingsWindow == nil {
             let window = NSWindow(contentRect:NSRect(x:0,y:0,width:580,height:740),styleMask:[.titled,.closable,.miniaturizable,.resizable,.fullSizeContentView],backing:.buffered,defer:false)
@@ -186,7 +219,7 @@ struct WindowLaneMain {
         return .terminateNow
     }
     func applicationWillTerminate(_ notification:Notification) {
-        shortcuts?.unregister(); scrollRouter?.stopMonitoring(); panels?.hide()
+        shortcuts?.unregister(); scrollRouter?.stopMonitoring(); panels?.hide(); transferFixture?.close()
     }
 }
 
@@ -213,6 +246,15 @@ final class InputShieldPanel: NSPanel {
     let right = LanePanel(contentRect:.zero,styleMask:[.borderless,.nonactivatingPanel],backing:.buffered,defer:false)
     let rail = LanePanel(contentRect:.zero,styleMask:[.borderless,.nonactivatingPanel],backing:.buffered,defer:false)
     let backdrop = BackdropWindow(contentRect:.zero,styleMask:[.borderless],backing:.buffered,defer:false)
+    let pageTurn = PageTurnTransition()
+    let continuous = ContinuousPagePresentation()
+    lazy var dragTransfer = DragTransferRouter(
+        isEnabled: { [weak self] in self?.store.isRunning == true && self?.store.isBusy == false && self?.store.expanded == false },
+        canNavigate: { [weak self] direction in
+            guard let self else { return false }
+            return self.store.ordered.indices.contains(self.store.activeIndex + direction)
+        },
+        navigate: { [weak self] direction in self?.store.revealAdjacentForDrag(direction) })
     var shield: InputShieldPanel?
     init(store:WorkspaceStore) {
         self.store = store
@@ -227,12 +269,12 @@ final class InputShieldPanel: NSPanel {
         right.title = "下一個視窗預覽"
         rail.title = "WindowLane 切換條"
         backdrop.title = "WindowLane 背景"
-        left.contentView = NSHostingView(rootView:EdgeView(store:store,delta:-1))
-        right.contentView = NSHostingView(rootView:EdgeView(store:store,delta:1))
+        left.contentView = EdgeDropHostingView(rootView:EdgeView(store:store,delta:-1), direction:-1, router:dragTransfer)
+        right.contentView = EdgeDropHostingView(rootView:EdgeView(store:store,delta:1), direction:1, router:dragTransfer)
         rail.contentView = NSHostingView(rootView:RailView(store:store))
         backdrop.isOpaque = false
         backdrop.backgroundColor = .clear
-        backdrop.contentView = NSHostingView(rootView: LaneWindowBackground(settings: store.background))
+        backdrop.contentView = NSHostingView(rootView: LaneWindowBackground(settings: store.background, surface: .workspace))
         backdrop.level = NSWindow.Level(rawValue:NSWindow.Level.normal.rawValue-1)
         backdrop.ignoresMouseEvents = true
         backdrop.isReleasedWhenClosed = false
@@ -243,13 +285,16 @@ final class InputShieldPanel: NSPanel {
         let layout = store.layout
         backdrop.setFrame(store.screen.visibleFrame,display:true); backdrop.orderFrontRegardless()
         rail.setFrame(layout.railFrame,display:true); rail.orderFrontRegardless()
-        if store.expanded { left.orderOut(nil); right.orderOut(nil) }
+        if store.expanded || store.isSplit {
+            if left.isVisible { left.orderOut(nil) }
+            if right.isVisible { right.orderOut(nil) }
+        }
         else {
             left.setFrame(layout.leftPreviewFrame,display:true); right.setFrame(layout.rightPreviewFrame,display:true)
             left.orderFrontRegardless(); right.orderFrontRegardless()
         }
     }
-    func hide() { left.orderOut(nil); right.orderOut(nil); rail.orderOut(nil); backdrop.orderOut(nil); releaseInputShield() }
+    func hide() { pageTurn.cancel(); continuous.cancel(); dragTransfer.cancel(); left.orderOut(nil); right.orderOut(nil); rail.orderOut(nil); backdrop.orderOut(nil); releaseInputShield() }
     func releaseInputShield() { shield?.orderOut(nil); shield = nil }
     func beginFocusHandoff() {
         releaseInputShield()

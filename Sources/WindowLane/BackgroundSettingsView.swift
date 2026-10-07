@@ -1,10 +1,12 @@
+import AppKit
 import SwiftUI
 
 private enum LaneSettingsPage: String, CaseIterable {
-    case appearance, switching, permissions
+    case appearance, workspace, switching, permissions
     var title: String {
         switch self {
         case .appearance: return "外觀"
+        case .workspace: return "工作區"
         case .switching: return "切換"
         case .permissions: return "權限"
         }
@@ -24,6 +26,7 @@ struct BackgroundSettingsView: View {
         self.settings = store.background
         self.interaction = store.interaction
         self.onClose = onClose
+        _page = State(initialValue: LaneSettingsPage(rawValue: store.settingsPageRequest) ?? .appearance)
     }
 
     var body: some View {
@@ -47,6 +50,7 @@ struct BackgroundSettingsView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     switch page {
                     case .appearance: appearance
+                    case .workspace: workspace
                     case .switching: switching
                     case .permissions: permissions
                     }
@@ -55,8 +59,11 @@ struct BackgroundSettingsView: View {
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }.padding(24).frame(minWidth: 540, minHeight: 520)
             .foregroundStyle(Theme.ink)
-            .background(LaneWindowBackground(settings: settings, surface: .settings))
+            .background(LaneWindowBackground(settings: settings, surface: .application))
             .onAppear { store.refreshPermissions() }
+            .onChange(of: store.settingsPresentation) { _, _ in
+                page = LaneSettingsPage(rawValue: store.settingsPageRequest) ?? .appearance
+            }
             .onExitCommand(perform: onClose)
     }
 
@@ -64,10 +71,10 @@ struct BackgroundSettingsView: View {
         VStack(alignment: .leading, spacing: 20) {
             Text("透明度只影響背景，文字與控制項保持清晰。")
                 .font(.callout).foregroundStyle(Theme.muted)
-            transparencyControl(title: "應用與工作區透明度", value: settings.transparency,
+            transparencyControl(title: "應用與設定視窗透明度", value: settings.transparency,
                                 setValue: settings.setTransparency)
-            transparencyControl(title: "設定視窗透明度", value: settings.settingsTransparency,
-                                setValue: settings.setSettingsTransparency)
+            transparencyControl(title: "工作區透明度", value: settings.workspaceTransparency,
+                                setValue: settings.setWorkspaceTransparency)
             Divider()
             wallpaperPreview
             wallpaperControls
@@ -101,7 +108,7 @@ struct BackgroundSettingsView: View {
 
     private var wallpaperPreview: some View {
         ZStack {
-            LaneWindowBackground(settings: settings)
+            LaneWindowBackground(settings: settings, surface: .workspace)
             Label(settings.mode == .frosted ? "工作區：半透明毛玻璃" : "工作區：自訂壁紙",
                   systemImage: "rectangle.3.group")
                 .font(.headline).padding(12).laneGlass(radius: Theme.controlRadius)
@@ -153,7 +160,13 @@ struct BackgroundSettingsView: View {
             Toggle("左右滑動滾輪切換視窗", isOn: Binding(
                 get: { interaction.horizontalSwitchingEnabled },
                 set: { interaction.setHorizontalSwitchingEnabled($0) }))
-            Text("累積足夠的橫向滑動才切換，每次滑動最多切換一個視窗。垂直捲動不會觸發。")
+            Picker("翻頁方式", selection: Binding(get: { interaction.scrollMode }, set: interaction.setScrollMode)) {
+                Text("連續翻頁").tag(ScrollPagingMode.continuous)
+                Text("逐頁切換").tag(ScrollPagingMode.stepped)
+            }.pickerStyle(.segmented).disabled(!interaction.horizontalSwitchingEnabled)
+            Text(interaction.scrollMode == .continuous
+                 ? "側滑滾輪可翻開一部分或整頁，停止後保留比例。半翻開時是兩個可操作的真實視窗；垂直捲動不會觸發。"
+                 : "累積足夠的橫向滑動才切換，每次滑動最多切換一個視窗。垂直捲動不會觸發。")
                 .font(.callout).foregroundStyle(Theme.muted)
             VStack(alignment: .leading, spacing: 16) {
                 Picker("使用範圍", selection: Binding(
@@ -168,19 +181,44 @@ struct BackgroundSettingsView: View {
                     .font(.caption).foregroundStyle(Theme.muted)
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text("切換閾值")
+                        Text(interaction.scrollMode == .continuous ? "翻頁距離" : "切換閾值")
                         Spacer()
                         Text("\(Int(interaction.scrollThreshold.rounded()))")
                             .monospacedDigit().foregroundStyle(Theme.muted)
                     }
                     Slider(value: Binding(get: { interaction.scrollThreshold },
                                           set: { interaction.setScrollThreshold($0) }), in: 30...180, step: 1)
-                        .accessibilityLabel("切換閾值")
+                        .accessibilityLabel(interaction.scrollMode == .continuous ? "翻頁距離" : "切換閾值")
                         .accessibilityValue("\(Int(interaction.scrollThreshold.rounded()))")
-                    Text("數值越高，需要滑動的距離越長，越不容易誤觸。")
+                    Text("數值越高，翻過一頁需要的滾輪距離越長。")
                         .font(.caption).foregroundStyle(Theme.muted)
                 }
             }.disabled(!interaction.horizontalSwitchingEnabled)
+        }
+    }
+
+    private var workspace: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("工作區範圍").font(.headline)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack { Text("主視窗寬度"); Spacer(); Text("\(Int((store.ratio * 100).rounded()))%").monospacedDigit() }
+                Slider(value: $store.ratio, in: 0.80...0.90, step: 0.01).accessibilityLabel("主視窗寬度")
+                Picker("螢幕", selection: $store.screenIndex) {
+                    ForEach(Array(NSScreen.screens.enumerated()), id: \.offset) { index, screen in
+                        Text(screen.localizedName).tag(index)
+                    }
+                }
+                Text(store.isRunning ? "請先退出工作區，再調整螢幕與單頁寬度。" : "單頁時使用這個寬度；半翻開時依比例排列兩個視窗。")
+                    .font(.caption).foregroundStyle(Theme.muted)
+            }.disabled(store.isRunning || store.isBusy)
+            Divider()
+            Text("已儲存排版").font(.headline)
+            WorkspacePresetControls(store: store)
+            Divider()
+            Text("兩窗交互").font(.headline)
+            Text("側滑至一半，或按切換條的「並排」，兩個原生視窗便可直接拖放。單頁時，拖曳到左右預覽停留片刻，可展開相鄰視窗，再移入該視窗放下。目標應用需支援對應文件或圖片。")
+                .font(.callout).foregroundStyle(Theme.muted)
+            if store.isRunning { Button("兩窗各半") { store.showHalfPage() }.laneGlassButton().disabled(store.isBusy || store.ordered.count < 2) }
         }
     }
 

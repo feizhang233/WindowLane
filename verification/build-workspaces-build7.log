@@ -1,0 +1,12 @@
+Building for production...
+[2 / 9]
+[3 / 10] WindowLaneCore
+[5 / 11] WindowLaneCore
+[8 / 10] WindowLane-product
+[9 / 11] WindowLane-product
+[11 / 11] WindowLane-product
+[13 / 14] WindowLane-product
+Build complete! (13.49 sec)
+/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app/Contents/Info.plist: OK
+/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app: replacing existing signature
+Built and signed: /Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app

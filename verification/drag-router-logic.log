@@ -1,0 +1,30 @@
+Production source: Sources/WindowLane/DragTransferRouter.swift
+Fixture: verification/drag-router-logic.swift
+Command: swiftc -module-cache-path .build/DragTransferModuleCache Sources/WindowLane/DragTransferRouter.swift verification/drag-router-logic.swift -o /private/tmp/windowlane-drag-router-logic
+Compilation exit: 0
+Execution: /private/tmp/windowlane-drag-router-logic
+Execution exit: 0
+
+PASS enter marks native drag active
+PASS short accidental edge visit does not navigate
+PASS dwell opens requested neighbor
+PASS stationary pointer cannot repeatedly navigate
+PASS temporary operation busy does not unlatch visit
+PASS return to real window retains native drag state
+PASS reentry starts another dwell rather than immediate turn
+PASS leaving and revisiting permits another neighbor
+PASS old edge exit cannot clear opposite edge
+PASS old session end cannot cancel current session
+PASS native drag end clears state
+PASS workspace stop clears pending hover synchronously
+PASS stale update after stop cannot navigate
+PASS new source session never inherits old dwell
+PASS new session can navigate after its own dwell
+PASS missing neighbor cannot start or turn
+PASS invalid direction or time cannot navigate
+PASS diagnostic count matches actual callbacks
+DRAG_ROUTER_LOGIC 18/18
+
+Scope: deterministic router lifecycle only. No windows opened, drag payload
+created, synthetic input posted, preference changed, or real file/photo drop
+attempted. This is not evidence of cross-application drag acceptance.

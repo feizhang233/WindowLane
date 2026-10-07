@@ -1,0 +1,5 @@
+PANE_ORDER visible=[22511, 22513] server=[22513, 22511] key=22513 appkit=[22513, 22511, 22514]
+PANE_ORDER visible=[22511, 22513] server=[22513, 22511] key=22513 appkit=[22513, 22511, 22514]
+PANE_ORDER visible=[22511, 22513] server=[22511, 22513] key=22511 appkit=[22511, 22513, 22514]
+WINDOWLANE_SMOKE PASS /Users/zhangfei/Documents/Codex/WindowLane/verification/native-size-fix-build8-iteration5.json
+NATIVE_SMOKE_PASS

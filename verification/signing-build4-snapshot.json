@@ -1,0 +1,19 @@
+{
+  "observedAtUTC": "2026-10-04T17:02:28.676712+00:00",
+  "version": "0.2.1",
+  "build": "4",
+  "installedPath": "/Users/zhangfei/Applications/WindowLane.app",
+  "executableSHA256": "02d7a2b836a85cff6dbf9b7940483725450969f5b7c1435d4829206eaa320077",
+  "signatureDetails": "designated => identifier \"com.feizhang.windowlane\" and anchor apple generic and certificate leaf[subject.CN] = \"Apple Development: feizhang233@icloud.com (U8ZN846WAJ)\" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */\nExecutable=/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app/Contents/MacOS/WindowLane\nIdentifier=com.feizhang.windowlane\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20400 size=5435 flags=0x0(none) hashes=163+3 location=embedded\nVersionPlatform=1\nVersionMin=917504\nVersionSDK=917504\nHash type=sha256 size=32\nCandidateCDHash sha256=17fa928770e2237b19dee15621c47e3dcae16573\nCandidateCDHashFull sha256=17fa928770e2237b19dee15621c47e3dcae16573c97e5848dd2268770ba86195\nHash choices=sha256\nCMSDigest=17fa928770e2237b19dee15621c47e3dcae16573c97e5848dd2268770ba86195\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=901120\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=17fa928770e2237b19dee15621c47e3dcae16573\nSignature size=4788\nAuthority=Apple Development: feizhang233@icloud.com (U8ZN846WAJ)\nAuthority=Apple Worldwide Developer Relations Certification Authority\nAuthority=Apple Root CA\nSigned Time=Oct 4, 2026 at 19:00:46\nInfo.plist entries=15\nTeamIdentifier=KV8857HZA9\nSealed Resources version=2 rules=13 files=0\nTotal signatures=1\nChosen signature=1\n",
+  "sameDesignatedRequirementAsBuild3": true,
+  "satisfiesBuild3DesignatedRequirement": true,
+  "artifactChangedSinceBuild3": true,
+  "installedArtifactMatchesBuildOutput": true,
+  "permissionsAfterUpdate": {
+    "accessibility": true,
+    "screenRecording": true
+  },
+  "permissionEvidence": "Native UI Settings > Permissions: 控制視窗 輔助使用已允許; 邊緣預覽 螢幕錄製已允許. Both remained granted after build 3 -> 4 update, without reauthorizing.",
+  "runningProcess": "94026 /Users/zhangfei/Applications/WindowLane.app/Contents/MacOS/WindowLane",
+  "verifiedAtUTC": "2026-10-04T17:04:05.644216+00:00"
+}

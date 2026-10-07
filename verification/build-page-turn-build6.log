@@ -1,0 +1,12 @@
+Building for production...
+[Planning deferred tasks]
+[6 / 18] WindowLaneCore
+[8 / 19] WindowLaneCore
+[11 / 16] WindowLane-product
+[13 / 17] WindowLane-product
+[15 / 17] WindowLane-product
+[16 / 17] WindowLane-product
+Build complete! (9.65 sec)
+/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app/Contents/Info.plist: OK
+/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app: replacing existing signature
+Built and signed: /Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app

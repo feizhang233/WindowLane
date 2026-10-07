@@ -1,0 +1,4 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-04 21:25:31.633 E  WindowLane[11423:79ad4f] [com.apple.BaseBoard:Common] Unable to obtain a task name port right for pid 417: (os/kern) failure (0x5)
+2026-10-04 21:25:47.437 E  WindowLane[11423:79acf8] [com.apple.CFBundle:plugin] AddInstanceForFactory: No factory registered for id <CFUUID 0x7703f20fc0> F8BB1C28-BAE8-11D6-9C31-00039315CD46
+2026-10-04 21:25:51.058 E  WindowLane[11423:79acf8] [com.apple.os_debug_log:] assertion failed: 26A428: libxpc.dylib + 109020 [0791121F-B5FC-3F84-BF04-115E86D2D882]: 0x7d

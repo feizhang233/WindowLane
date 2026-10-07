@@ -1,0 +1,35 @@
+{
+  "checks" : [
+    {
+      "detail" : "AXIsProcessTrusted() returned false.",
+      "name" : "accessibility_permission",
+      "passed" : false
+    }
+  ],
+  "completedAt" : "2026-10-04T17:41:31Z",
+  "completedPageTurns" : 0,
+  "fixtureBundleID" : "com.feizhang.windowlane.fixture",
+  "limitation" : "Only the three documents of the separate fixture application are managed. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested.",
+  "originalStates" : [
+
+  ],
+  "passed" : false,
+  "reason" : "No system Accessibility permission is granted to this WindowLane application. The test did not request permission or modify any window.",
+  "requestToFocusMilliseconds" : [
+
+  ],
+  "restoredStates" : [
+
+  ],
+  "schemaVersion" : 2,
+  "scope" : "external-AX-integration",
+  "screenCaptureAuthorizedAtStart" : false,
+  "screenCaptureTest" : "unverified",
+  "status" : "blocked",
+  "switchPerformance" : {
+    "measurement" : "Monotonic elapsed time from select() to completed presentation with confirmed system-wide AX keyboard focus, including bounded outgoing snapshot preparation, focus handoff, page-turn animation when enabled, diagnostic polling, and AX readback. Successful switches only; no fixed cross-application latency pass\/fail budget.",
+    "samplesMilliseconds" : [
+
+    ]
+  }
+}

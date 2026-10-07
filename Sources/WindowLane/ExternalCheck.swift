@@ -1,6 +1,7 @@
 import AppKit
 import ApplicationServices
 import Foundation
+import WindowLaneCore
 
 private struct ExternalCheckResult: Encodable {
     let name: String
@@ -31,7 +32,7 @@ private struct ExternalReport: Encodable {
     let schemaVersion = 2
     let scope = "external-AX-integration"
     let fixtureBundleID = "com.feizhang.windowlane.fixture"
-    let limitation = "Only the three documents of the separate fixture application are managed. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested."
+    let limitation = "Only the three documents of the separate fixture application are managed. Fractional layouts verify live AX geometry, visibility and focus, not delivery or acceptance of drag payloads. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested."
     let completedAt: Date
     let status: String
     let reason: String?
@@ -42,10 +43,12 @@ private struct ExternalReport: Encodable {
     let originalStates: [ExternalWindowState]
     let restoredStates: [ExternalWindowState]
     let switchPerformance: ExternalSwitchPerformance
+    let requestToFocusMilliseconds: [Double]
+    let completedPageTurns: Int
 }
 
 private struct ExternalSwitchPerformance: Encodable {
-    let measurement = "Monotonic elapsed time from select() to settled system-wide AX keyboard focus, including diagnostic polling and AX readback. Successful switches only; no fixed cross-application latency pass/fail budget."
+    let measurement = "Monotonic elapsed time from select() to completed presentation with confirmed system-wide AX keyboard focus, including bounded outgoing snapshot preparation, focus handoff, page-turn animation when enabled, diagnostic polling, and AX readback. Successful switches only; no fixed cross-application latency pass/fail budget."
     let samplesMilliseconds: [Double]
     let medianMilliseconds: Double?
     let maximumMilliseconds: Double?
@@ -63,7 +66,7 @@ private struct ExternalSwitchPerformance: Encodable {
 /// This path never acts on user applications, even when they share a fixture title.
 /// Both the explicit launch argument and the dedicated fixture bundle are required.
 @MainActor
-func runExternalCheck(store: WorkspaceStore) async -> Bool {
+func runExternalCheck(store: WorkspaceStore, transition: PageTurnTransition) async -> Bool {
     let arguments = ProcessInfo.processInfo.arguments
     func option(_ name: String) -> String? {
         guard let index = arguments.firstIndex(of: name), arguments.indices.contains(index + 1) else { return nil }
@@ -76,6 +79,7 @@ func runExternalCheck(store: WorkspaceStore) async -> Bool {
     var originals: [ExternalWindowState] = []
     var restored: [ExternalWindowState] = []
     var switchLatencies: [Double] = []
+    var focusLatencies: [Double] = []
     var blockedReason: String?
     let captureAuthorized = store.capture.isAuthorized
     var captureTest = "unverified"
@@ -89,7 +93,9 @@ func runExternalCheck(store: WorkspaceStore) async -> Bool {
                                     passed: passed, screenCaptureAuthorizedAtStart: captureAuthorized,
                                     screenCaptureTest: captureTest, checks: checks,
                                     originalStates: originals, restoredStates: restored,
-                                    switchPerformance: ExternalSwitchPerformance(switchLatencies))
+                                    switchPerformance: ExternalSwitchPerformance(switchLatencies),
+                                    requestToFocusMilliseconds: focusLatencies,
+                                    completedPageTurns: transition.completedCount)
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -221,6 +227,7 @@ func runExternalCheck(store: WorkspaceStore) async -> Bool {
             let focused = await externalWait(timeout: 2) { externalFocusedWindowIs(expected) }
             if step > 0, focused, store.order.activeID == expected.id {
                 switchLatencies.append((ProcessInfo.processInfo.systemUptime - switchStarted) * 1_000)
+                if let latency = store.lastSwitchFocusMilliseconds { focusLatencies.append(latency) }
             }
             record("switch_\(step)_real_keyboard_focus", focused, "System-wide AX focused application + focused window must equal \(expected.title).")
             record("switch_\(step)_active_identity", store.order.activeID == expected.id)
@@ -324,11 +331,10 @@ func runExternalCheck(store: WorkspaceStore) async -> Bool {
             record("busy_switch_keeps_all_windows_ready", allExternalWindowsReady())
             let focusCallsBeforeCancellation = store.backend.diagnostics.focusCalls
             store.select(index:2)
-            // Enter the direct AX handoff before its 15 ms focus verification
-            // completes. This exercises cancellation in flight without relying
-            // on an animation or geometry-settlement duration.
-            try? await Task.sleep(nanoseconds:5_000_000)
-            let focusHandoffStarted = store.backend.diagnostics.focusCalls > focusCallsBeforeCancellation
+            // Wait for the actual AX handoff, after optional snapshot work.
+            let focusHandoffStarted = await externalWait(timeout: 2) {
+                store.backend.diagnostics.focusCalls > focusCallsBeforeCancellation
+            }
             let selectedWhenStopping = store.order.activeID
             store.stop(); await store.waitForRestoration()
             let focusedAfterRestoration = candidates.firstIndex { externalFocusedWindowIs($0) }
@@ -340,6 +346,65 @@ func runExternalCheck(store: WorkspaceStore) async -> Bool {
                    "The focused fixture identity (or absence of fixture focus) stays unchanged after restoration and a 350 ms observation interval.")
             record("cancelled_session_completes_recovery_journal", store.pendingRecovery.isEmpty,store.status)
             restored = candidates.map { externalState($0,backend:store.backend) }
+        }
+        if originalsStillRestored() && store.pendingRecovery.isEmpty && !store.isBusy {
+            store.pagePosition = Double(store.activeIndex)
+            store.start()
+            let fractionalStarted = await externalWait(timeout: 15) { !store.isBusy }
+            record("fractional_layout_restart_uses_only_fixture_windows", fractionalStarted && store.isRunning,
+                   "A fresh fixture-only session retains the same original restoration records.")
+            if fractionalStarted && store.isRunning {
+                func pairFramesMatch() -> Bool {
+                    let primaryHeight = NSScreen.screens.first?.frame.height ?? 0
+                    return store.visibleWindowIDs.count == 2 && store.visibleWindowIDs.allSatisfy { id in
+                        guard let candidate = candidates.first(where: { $0.id == id }),
+                              let actual = store.backend.frame(of: candidate) else { return false }
+                        let expected = WorkspaceLayout.accessibilityFrame(fromAppKit: store.frameForWindow(id), primaryScreenHeight: primaryHeight)
+                        return externalSameFrame(actual, expected) && store.backend.isMinimized(candidate) == false
+                            && store.backend.isAlive(candidate)
+                    }
+                }
+                store.commitContinuousPaging(position: 0.5)
+                let halfSettled = await externalWait(timeout: 8) { !store.isBusy }
+                let firstFrame = store.backend.frame(of: candidates[0])
+                let secondFrame = store.backend.frame(of: candidates[1])
+                let equalSeparatedFrames = firstFrame.flatMap { first in secondFrame.map {
+                    abs(first.width - $0.width) <= 4 && first.maxX <= $0.minX
+                }} ?? false
+                record("half_page_keeps_fractional_position_after_release", halfSettled && store.isRunning && store.isSplit
+                       && abs(store.pagePosition - 0.5) < 0.0001, store.status)
+                record("half_page_two_real_AX_windows_match_equal_nonoverlapping_frames", halfSettled && pairFramesMatch()
+                       && equalSeparatedFrames, "Live AX frame readback, 4-point tolerance; original fixture documents remain unminimized.")
+                record("half_page_has_real_focus_in_visible_pair", store.visibleWindowIDs.contains(store.order.activeID ?? "")
+                       && candidates.first(where: { $0.id == store.order.activeID }).map(externalFocusedWindowIs) == true)
+                record("half_page_has_no_snapshot_input_cover", !transition.isVisible && !transition.isAnimating,
+                       "No snapshot overlay covers the real panes after commit. Actual cross-window drag acceptance is outside this automatic check.")
+                let framesBeforeContinuousPreview = candidates.map { store.backend.frame(of: $0) }
+                store.beginContinuousPaging()
+                store.updateContinuousPaging(position: 1.25)
+                record("continuous_preview_does_not_write_real_AX_frames_before_release", store.isBusy
+                       && abs(store.pagePosition - 1.25) < 0.0001 && candidates.enumerated().allSatisfy { index, candidate in
+                    guard let before = framesBeforeContinuousPreview[index], let actual = store.backend.frame(of: candidate) else { return false }
+                    return externalSameFrame(before, actual, tolerance: 1)
+                }, "The fractional preview follows input while live fixture geometry stays at the accepted half-page layout.")
+                store.commitContinuousPaging(position: 1.25)
+                let quarterSettled = await externalWait(timeout: 8) { !store.isBusy }
+                record("quarter_page_persists_and_matches_both_live_AX_frames", quarterSettled && store.isRunning && store.isSplit
+                       && abs(store.pagePosition - 1.25) < 0.0001
+                       && store.visibleWindowIDs == [candidates[1].id, candidates[2].id] && pairFramesMatch(), store.status)
+                record("quarter_page_does_not_minimize_or_close_other_documents", candidates.allSatisfy {
+                    store.backend.isAlive($0) && store.backend.isMinimized($0) == false
+                })
+                store.commitContinuousPaging(position: 2)
+                let wholeSettled = await externalWait(timeout: 8) { !store.isBusy }
+                record("whole_page_restores_all_live_AX_main_frames", wholeSettled && store.isRunning && !store.isSplit
+                       && abs(store.pagePosition - 2) < 0.0001 && allExternalWindowsReady(), store.status)
+            }
+            store.stop(); await store.waitForRestoration()
+            record("fractional_layout_exit_restores_original_AX_geometry_and_minimized_flags", !store.isRunning && !store.isBusy
+                   && originalsStillRestored() && store.pendingRecovery.isEmpty,
+                   "Original live AX frames restored within 2 points and original minimized flags retained exactly.")
+            restored = candidates.map { externalState($0, backend: store.backend) }
         }
     }
     return finish()

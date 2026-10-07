@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local signed installation and macOS permission persistence only",
+  "completedAt": "2026-10-04T17:04:05.644216+00:00",
+  "passed": true,
+  "appVersion": "0.2.1",
+  "build": "4",
+  "installedPath": "/Users/zhangfei/Applications/WindowLane.app",
+  "executableSHA256": "02d7a2b836a85cff6dbf9b7940483725450969f5b7c1435d4829206eaa320077",
+  "signingCertificateSHA1": "E92D00434FA6595663B78546B35805BCD11D0656",
+  "teamIdentifier": "KV8857HZA9",
+  "checks": [
+    {
+      "name": "fixed_install_signature_valid",
+      "passed": true
+    },
+    {
+      "name": "installed_artifact_matches_build_output",
+      "passed": true
+    },
+    {
+      "name": "accessibility_granted_in_installed_app",
+      "passed": true
+    },
+    {
+      "name": "screen_recording_granted_in_installed_app",
+      "passed": true
+    },
+    {
+      "name": "full_quit_and_relaunch_retains_both_permissions",
+      "passed": true
+    },
+    {
+      "name": "build3_to_build4_changes_signed_artifact",
+      "passed": true
+    },
+    {
+      "name": "build4_satisfies_build3_designated_requirement",
+      "passed": true
+    },
+    {
+      "name": "build3_to_build4_update_retains_both_permissions",
+      "passed": true
+    },
+    {
+      "name": "single_running_instance_from_fixed_path",
+      "passed": true
+    },
+    {
+      "name": "no_pending_recovery_records",
+      "passed": true
+    }
+  ],
+  "permissionMigration": "Refreshed the WindowLane app entries through macOS System Settings after the ad-hoc -> Apple Development migration. The separately identified Xcode debug-executable entry was left unchanged. No TCC database editing or security bypass was used. No authorization changes were made between the successful build 3 grant/restart checks and the build 4 update check.",
+  "evidence": [
+    "signing-build3-snapshot.json",
+    "signing-build3-requirement.txt",
+    "signing-build4-snapshot.json"
+  ],
+  "limitations": [
+    "The update check changes CFBundleVersion from 3 to 4 and the signed artifact; application source behavior is unchanged.",
+    "This run verifies permission status and successful external-window discovery, not image pixels, window switching/restoration regression or update behavior after certificate renewal.",
+    "Developer ID distribution, notarization and final 0.2.1 packaging are not performed."
+  ]
+}

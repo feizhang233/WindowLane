@@ -1,0 +1,9 @@
+Building for production...
+[2 / 5] WindowLane-product
+[3 / 6] WindowLane-product
+[5 / 6] WindowLane-product
+[6 / 6] WindowLane-product
+Build complete! (7.56 sec)
+/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app/Contents/Info.plist: OK
+/Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app: replacing existing signature
+Built and signed: /Users/zhangfei/Documents/Codex/WindowLane/dist/WindowLane.app

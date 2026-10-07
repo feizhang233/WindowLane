@@ -10,9 +10,10 @@ enum LaneBackgroundMode: String, Codable, CaseIterable {
 private struct SavedBackground: Codable {
     var mode: LaneBackgroundMode
     var transparency: Double
-    // Optional on disk so existing v1 preferences keep their accepted wallpaper
-    // and application transparency when settings-window preferences are added.
-    var settingsTransparency: Double?
+    // Older builds used transparency for the app and workspace. Preserve that
+    // value for both groups until the user adjusts the new workspace control.
+    // The retired settingsTransparency key is intentionally ignored on decode.
+    var workspaceTransparency: Double?
     var blur: Double
     var imageName: String?
 }
@@ -32,11 +33,10 @@ private enum WallpaperError: LocalizedError {
 @MainActor final class BackgroundSettings: ObservableObject {
     static let defaultsKey = "WindowLane.background.v1"
     static let defaultTransparency = 0.35
-    static let defaultSettingsTransparency = 0.35
     static let defaultBlur = 24.0
     @Published private(set) var mode: LaneBackgroundMode = .frosted
     @Published private(set) var transparency = defaultTransparency
-    @Published private(set) var settingsTransparency = defaultSettingsTransparency
+    @Published private(set) var workspaceTransparency = defaultTransparency
     @Published private(set) var blur = defaultBlur
     @Published private(set) var image: NSImage?
     @Published private(set) var imageName: String?
@@ -54,8 +54,8 @@ private enum WallpaperError: LocalizedError {
         guard let data = defaults.data(forKey: Self.defaultsKey),
               let saved = try? JSONDecoder().decode(SavedBackground.self, from: data) else { return }
         transparency = Self.bounded(saved.transparency, range: 0...0.8, fallback: Self.defaultTransparency)
-        settingsTransparency = Self.bounded(saved.settingsTransparency ?? Self.defaultSettingsTransparency,
-                                           range: 0...0.8, fallback: Self.defaultSettingsTransparency)
+        workspaceTransparency = Self.bounded(saved.workspaceTransparency ?? saved.transparency,
+                                            range: 0...0.8, fallback: Self.defaultTransparency)
         blur = Self.bounded(saved.blur, range: 0...60, fallback: Self.defaultBlur)
         imageName = saved.imageName
         if saved.imageName != nil { image = NSImage(contentsOf: imageURL) }
@@ -75,15 +75,15 @@ private enum WallpaperError: LocalizedError {
     func setTransparency(_ value: Double) {
         transparency = Self.bounded(value, range: 0...0.8, fallback: Self.defaultTransparency); persist()
     }
-    func setSettingsTransparency(_ value: Double) {
-        settingsTransparency = Self.bounded(value, range: 0...0.8, fallback: Self.defaultSettingsTransparency); persist()
+    func setWorkspaceTransparency(_ value: Double) {
+        workspaceTransparency = Self.bounded(value, range: 0...0.8, fallback: Self.defaultTransparency); persist()
     }
     func setBlur(_ value: Double) {
         blur = Self.bounded(value, range: 0...60, fallback: Self.defaultBlur); persist()
     }
     func restoreDefault() {
         mode = .frosted; transparency = Self.defaultTransparency
-        settingsTransparency = Self.defaultSettingsTransparency; blur = Self.defaultBlur
+        workspaceTransparency = Self.defaultTransparency; blur = Self.defaultBlur
         notice = "已恢復預設毛玻璃。"; isError = false; persist()
     }
     func removeWallpaper() {
@@ -134,7 +134,7 @@ private enum WallpaperError: LocalizedError {
 
     private func persist() {
         let saved = SavedBackground(mode: mode, transparency: transparency,
-                                    settingsTransparency: settingsTransparency, blur: blur, imageName: imageName)
+                                    workspaceTransparency: workspaceTransparency, blur: blur, imageName: imageName)
         if let data = try? JSONEncoder().encode(saved) { defaults.set(data, forKey: Self.defaultsKey) }
     }
     private static func bounded(_ value: Double, range: ClosedRange<Double>, fallback: Double) -> Double {

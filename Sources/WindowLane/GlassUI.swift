@@ -89,16 +89,16 @@ private struct LaneWindowMaterial: NSViewRepresentable {
 }
 
 enum LaneBackgroundSurface {
-    case application, settings
+    case application, workspace
 }
 
 struct LaneWindowBackground: View {
     @ObservedObject var settings: BackgroundSettings
-    var surface: LaneBackgroundSurface = .application
+    var surface: LaneBackgroundSurface
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var contrast
     private var transparency: Double {
-        surface == .settings ? settings.settingsTransparency : settings.transparency
+        surface == .workspace ? settings.workspaceTransparency : settings.transparency
     }
     var body: some View {
         Group {

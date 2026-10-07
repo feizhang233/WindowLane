@@ -1,0 +1,86 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    },
+    {
+      "detail" : "Injected Reduce Motion policy; no macOS preference was modified.",
+      "name" : "reduce_motion_bypasses_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "empty_snapshot_bypasses_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "A 96 × 64 logical-point image must not be stretched into a 192 × 128 window.",
+      "name" : "mismatched_snapshot_bypasses_page_turn",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "three_native_editable_windows",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "native_editors",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "reorder_preserves_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "已退出工作區，視窗已恢復原位置與尺寸。",
+      "name" : "start_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "workspace_running",
+      "passed" : false
+    }
+  ],
+  "completedAt" : "2026-10-04T19:43:51Z",
+  "limitation" : "App-owned NSWindow\/NSTextView integration and isolated named-workspace storage only. Fractional layouts verify real window geometry and editor ownership, not delivery or acceptance of drag payloads. External application control, AX permission grants, ScreenCaptureKit capture, and global key delivery are not verified by this run.",
+  "originalFrames" : [
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 50,
+      "y" : 815
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 94,
+      "y" : 780
+    },
+    {
+      "height" : 588,
+      "width" : 720,
+      "x" : 138,
+      "y" : 745
+    }
+  ],
+  "passed" : false,
+  "requestToFocusMilliseconds" : [
+
+  ],
+  "restoredFrames" : [
+
+  ],
+  "schemaVersion" : 2,
+  "scope" : "native-demo-integration",
+  "switchPerformance" : {
+    "measurement" : "Monotonic elapsed time from select() to completed presentation with confirmed native keyboard focus, including outgoing native snapshot preparation, focus handoff, page-turn animation when enabled, and diagnostic polling. Successful switches only; no fixed latency pass\/fail budget.",
+    "samplesMilliseconds" : [
+
+    ]
+  }
+}

@@ -5,3 +5,18 @@ dist/
 # Local verification binaries and rendered evidence
 verification/*.app/
 verification/*.png
+
+# Machine-specific IDE state and signing configuration
+.swiftpm/
+*.xcuserstate
+xcuserdata/
+scripts/signing.local.sh
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.p12
+*.pfx
+*.key
+*.pem

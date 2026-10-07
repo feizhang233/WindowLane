@@ -1,0 +1,493 @@
+{
+  "checks" : [
+    {
+      "detail" : "",
+      "name" : "accessibility_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "Already granted; all three pre-layout snapshots must contain nonempty pixels.",
+      "name" : "optional_screen_capture_permission",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "isolated_startup",
+      "passed" : true
+    },
+    {
+      "detail" : "Three AX objects in process 16204; own application and all other bundles excluded.",
+      "name" : "fixture_only_scope",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stable_AX_identity_across_discovery",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "three_external_windows_added",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條、橫向滾輪或 ⌃⌥← \/ → 切換。",
+      "name" : "start_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條、橫向滾輪或 ⌃⌥← \/ → 切換。",
+      "name" : "workspace_running",
+      "passed" : true
+    },
+    {
+      "detail" : "720 × 588 pixels from the pre-layout ScreenCaptureKit snapshot.",
+      "name" : "screen_capture_0_nonempty_pixels",
+      "passed" : true
+    },
+    {
+      "detail" : "720 × 588 pixels from the pre-layout ScreenCaptureKit snapshot.",
+      "name" : "screen_capture_1_nonempty_pixels",
+      "passed" : true
+    },
+    {
+      "detail" : "720 × 588 pixels from the pre-layout ScreenCaptureKit snapshot.",
+      "name" : "screen_capture_2_nonempty_pixels",
+      "passed" : true
+    },
+    {
+      "detail" : "2110 × 1306 pixels; workspace 2110 × 1306 points at 1.0x screen scale.",
+      "name" : "main_window_capture_native_resolution",
+      "passed" : true
+    },
+    {
+      "detail" : "NSImage point size must match the live window so the edge crop never stretches a thumbnail.",
+      "name" : "main_window_capture_logical_size",
+      "passed" : true
+    },
+    {
+      "detail" : "All three AX windows remain unminimized at the shared workspace frame.",
+      "name" : "all_windows_start_open_unminimized_at_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條、橫向滾輪或 ⌃⌥← \/ → 切換。",
+      "name" : "switch_0_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document A · 閱讀測試.",
+      "name" : "switch_0_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_0_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_0_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_0_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document B · 草稿測試",
+      "name" : "switch_1_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document B · 草稿測試.",
+      "name" : "switch_1_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_1_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_1_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_1_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document C · 日語測試",
+      "name" : "switch_2_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document C · 日語測試.",
+      "name" : "switch_2_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_2_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_2_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_2_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "switch_3_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document A · 閱讀測試.",
+      "name" : "switch_3_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_3_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_3_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_3_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document C · 日語測試",
+      "name" : "switch_4_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document C · 日語測試.",
+      "name" : "switch_4_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_4_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_4_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_4_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document B · 草稿測試",
+      "name" : "switch_5_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document B · 草稿測試.",
+      "name" : "switch_5_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_5_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_5_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_5_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "switch_6_settles",
+      "passed" : true
+    },
+    {
+      "detail" : "System-wide AX focused application + focused window must equal Document A · 閱讀測試.",
+      "name" : "switch_6_real_keyboard_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "switch_6_active_identity",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame compared with workspace geometry; tolerance 4 points.",
+      "name" : "switch_6_actual_main_frame",
+      "passed" : true
+    },
+    {
+      "detail" : "All managed documents remain open at the common frame; selecting changes focus only.",
+      "name" : "switch_6_all_windows_unminimized_and_aligned",
+      "passed" : true
+    },
+    {
+      "detail" : "After each direct focus switch, every live AX frame stays within 1 point of its post-start baseline and every minimized flag is unchanged.",
+      "name" : "repeated_switches_preserve_all_geometry_and_minimized_flags",
+      "passed" : true
+    },
+    {
+      "detail" : "setFrameCalls 3→3; setMinimizedCalls 3→3; positionWrites 3→3; sizeWrites 3→3; minimizedWrites 0→0; focusCalls 1→7; warmFocusSuccesses 0→6.",
+      "name" : "warm_switches_do_not_call_geometry_or_minimize_apis",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "expanded_aligns_all_actual_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "WindowLane Fixture · Document A · 閱讀測試",
+      "name" : "expanded_restores_all_main_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_clears_running_state",
+      "passed" : true
+    },
+    {
+      "detail" : "Each original AX frame restored within 2 points and original minimized flag restored exactly.",
+      "name" : "stop_restores_original_geometry_and_minimized_state",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "stop_keeps_fixture_documents_alive",
+      "passed" : true
+    },
+    {
+      "detail" : "已退出工作區，視窗已恢復原位置與尺寸。",
+      "name" : "recovery_journal_completed",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "cancel_start_does_not_write_or_move_later",
+      "passed" : true
+    },
+    {
+      "detail" : "工作區已啟動。使用底部切換條、橫向滾輪或 ⌃⌥← \/ → 切換。",
+      "name" : "restart_after_cancel",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "busy_switch_input_is_not_queued",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "busy_switch_keeps_all_windows_ready",
+      "passed" : true
+    },
+    {
+      "detail" : "backend.focusCalls increased before stop(), so cancellation covers an entered AX handoff.",
+      "name" : "cancelled_external_focus_handoff_was_started",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "cancel_immediate_focus_handoff_has_no_late_mutation",
+      "passed" : true
+    },
+    {
+      "detail" : "The focused fixture identity (or absence of fixture focus) stays unchanged after restoration and a 350 ms observation interval.",
+      "name" : "cancel_immediate_focus_handoff_has_no_late_focus",
+      "passed" : true
+    },
+    {
+      "detail" : "已退出工作區，視窗已恢復原位置與尺寸。",
+      "name" : "cancelled_session_completes_recovery_journal",
+      "passed" : true
+    },
+    {
+      "detail" : "A fresh fixture-only session retains the same original restoration records.",
+      "name" : "fractional_layout_restart_uses_only_fixture_windows",
+      "passed" : true
+    },
+    {
+      "detail" : "兩個視窗可直接操作與拖放。繼續側滑即可翻頁。",
+      "name" : "half_page_keeps_fractional_position_after_release",
+      "passed" : true
+    },
+    {
+      "detail" : "Live AX frame readback, 4-point tolerance; original fixture documents remain unminimized.",
+      "name" : "half_page_two_real_AX_windows_match_equal_nonoverlapping_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "half_page_has_real_focus_in_visible_pair",
+      "passed" : true
+    },
+    {
+      "detail" : "No snapshot overlay covers the real panes after commit. Actual cross-window drag acceptance is outside this automatic check.",
+      "name" : "half_page_has_no_snapshot_input_cover",
+      "passed" : true
+    },
+    {
+      "detail" : "The fractional preview follows input while live fixture geometry stays at the accepted half-page layout.",
+      "name" : "continuous_preview_does_not_write_real_AX_frames_before_release",
+      "passed" : true
+    },
+    {
+      "detail" : "兩個視窗可直接操作與拖放。繼續側滑即可翻頁。",
+      "name" : "quarter_page_persists_and_matches_both_live_AX_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "",
+      "name" : "quarter_page_does_not_minimize_or_close_other_documents",
+      "passed" : true
+    },
+    {
+      "detail" : "Document C · 日語測試",
+      "name" : "whole_page_restores_all_live_AX_main_frames",
+      "passed" : true
+    },
+    {
+      "detail" : "Original live AX frames restored within 2 points and original minimized flags retained exactly.",
+      "name" : "fractional_layout_exit_restores_original_AX_geometry_and_minimized_flags",
+      "passed" : true
+    }
+  ],
+  "completedAt" : "2026-10-04T20:00:17Z",
+  "completedPageTurns" : 7,
+  "fixtureBundleID" : "com.feizhang.windowlane.fixture",
+  "limitation" : "Only the three documents of the separate fixture application are managed. Fractional layouts verify live AX geometry, visibility and focus, not delivery or acceptance of drag payloads. ScreenCaptureKit pixel output is checked only if permission was already granted; visual correspondence, other applications, content preservation and hardware shortcut delivery are outside this test. No system permission is requested.",
+  "originalStates" : [
+    {
+      "cgWindowID" : 22754,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 50,
+        "y" : 37
+      },
+      "id" : "A99ABF54-3CD0-4A8C-8B35-0EAF31565C5F",
+      "minimized" : false,
+      "pid" : 16204,
+      "title" : "Document A · 閱讀測試"
+    },
+    {
+      "cgWindowID" : 22756,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 94,
+        "y" : 72
+      },
+      "id" : "3527CC55-5ADD-4655-8102-2079081693D6",
+      "minimized" : false,
+      "pid" : 16204,
+      "title" : "Document B · 草稿測試"
+    },
+    {
+      "cgWindowID" : 22757,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 138,
+        "y" : 107
+      },
+      "id" : "BBCD179D-FE13-4094-9038-9377096148AC",
+      "minimized" : false,
+      "pid" : 16204,
+      "title" : "Document C · 日語測試"
+    }
+  ],
+  "passed" : true,
+  "requestToFocusMilliseconds" : [
+    113.04550000932068,
+    130.82587497774512,
+    132.28383334353566,
+    139.11037502111867,
+    150.01012501306832,
+    172.42670833365992
+  ],
+  "restoredStates" : [
+    {
+      "cgWindowID" : 22754,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 50,
+        "y" : 37
+      },
+      "id" : "A99ABF54-3CD0-4A8C-8B35-0EAF31565C5F",
+      "minimized" : false,
+      "pid" : 16204,
+      "title" : "Document A · 閱讀測試"
+    },
+    {
+      "cgWindowID" : 22756,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 94,
+        "y" : 72
+      },
+      "id" : "3527CC55-5ADD-4655-8102-2079081693D6",
+      "minimized" : false,
+      "pid" : 16204,
+      "title" : "Document B · 草稿測試"
+    },
+    {
+      "cgWindowID" : 22757,
+      "frame" : {
+        "height" : 588,
+        "width" : 720,
+        "x" : 138,
+        "y" : 107
+      },
+      "id" : "BBCD179D-FE13-4094-9038-9377096148AC",
+      "minimized" : false,
+      "pid" : 16204,
+      "title" : "Document C · 日語測試"
+    }
+  ],
+  "schemaVersion" : 2,
+  "scope" : "external-AX-integration",
+  "screenCaptureAuthorizedAtStart" : true,
+  "screenCaptureTest" : "pixel-output-verified",
+  "status" : "passed",
+  "switchPerformance" : {
+    "maximumMilliseconds" : 514.9739166372456,
+    "measurement" : "Monotonic elapsed time from select() to completed presentation with confirmed system-wide AX keyboard focus, including bounded outgoing snapshot preparation, focus handoff, page-turn animation when enabled, diagnostic polling, and AX readback. Successful switches only; no fixed cross-application latency pass\/fail budget.",
+    "medianMilliseconds" : 473.9757083589211,
+    "samplesMilliseconds" : [
+      453.6808750126511,
+      473.9757083589211,
+      480.09112500585616,
+      484.7360833664425,
+      450.8579166722484,
+      514.9739166372456,
+      463.78750004805624
+    ]
+  }
+}

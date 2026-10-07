@@ -22,7 +22,7 @@ final class FixtureWindows {
                     width: width,
                     height: height
                 )
-                let window = NSWindow(
+                let window = SizingFixtureWindow(
                     contentRect: frame,
                     styleMask: [.titled, .closable, .miniaturizable, .resizable],
                     backing: .buffered,
@@ -65,5 +65,16 @@ final class FixtureWindows {
     func close() {
         windows.forEach { $0.close() }
         windows.removeAll()
+    }
+}
+
+/// Test fixture for applications that accept a resize request but clamp its width.
+/// A zero bound retains the ordinary editable demonstration behavior.
+final class SizingFixtureWindow: NSWindow {
+    var imposedMinimumWidth: CGFloat = 0
+    override func setFrame(_ frameRect: NSRect, display flag: Bool) {
+        var frame = frameRect
+        frame.size.width = max(frame.width, imposedMinimumWidth)
+        super.setFrame(frame, display: flag)
     }
 }

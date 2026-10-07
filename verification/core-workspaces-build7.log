@@ -1,0 +1,194 @@
+Building for debugging...
+[3 / 19] WindowLaneCore
+[5 / 20] WindowLaneCore
+[8 / 11] WindowLane-product
+[16 / 19] WindowLane-product
+[17 / 19] WindowLane-product
+[19 / 21] WindowLane-product
+[21 / 23] WindowLane-product
+Build complete! (3.03 sec)
+Test Suite 'All tests' started at 2026-10-04 20:15:55.686.
+Test Suite 'WindowLaneCoreTests.xctest' started at 2026-10-04 20:15:55.686.
+Test Suite 'BookPageLayoutTests' started at 2026-10-04 20:15:55.686.
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testHalfTurnMakesTwoEqualNonoverlappingInteractiveFrames]' started.
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testHalfTurnMakesTwoEqualNonoverlappingInteractiveFrames]' passed (0.001 seconds).
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testPartialTurnPreservesFractionAndProtectsMinimumWidths]' started.
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testPartialTurnPreservesFractionAndProtectsMinimumWidths]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testTinyScreenNeverProducesNegativeOrOverlappingFrames]' started.
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testTinyScreenNeverProducesNegativeOrOverlappingFrames]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testWholePageUsesExistingCentralFrameAndBoundsInvalidInput]' started.
+Test Case '-[WindowLaneCoreTests.BookPageLayoutTests testWholePageUsesExistingCentralFrameAndBoundsInvalidInput]' passed (0.000 seconds).
+Test Suite 'BookPageLayoutTests' passed at 2026-10-04 20:15:55.687.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ContinuousScrollPagingTests' started at 2026-10-04 20:15:55.687.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testCancelledGestureReturnsItsOriginalFraction]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testCancelledGestureReturnsItsOriginalFraction]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDelayedIdleCommitsOldWheelMovementBeforeNewInput]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDelayedIdleCommitsOldWheelMovementBeforeNewInput]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDirectionReversalRetracesTheSameDistanceSmoothly]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDirectionReversalRetracesTheSameDistanceSmoothly]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDisabledBusyAndChangedOrderCancelWithoutQueuedInput]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDisabledBusyAndChangedOrderCancelWithoutQueuedInput]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDistanceCanStopBetweenPagesWithoutRounding]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testDistanceCanStopBetweenPagesWithoutRounding]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testEndpointsDoNotWrapAndOutwardInputDoesNotStart]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testEndpointsDoNotWrapAndOutwardInputDoesNotStart]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testExplicitResetCancelsPendingIdleAndAllowsFreshPosition]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testExplicitResetCancelsPendingIdleAndAllowsFreshPosition]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testHeldPhasedGestureDoesNotCommitFromWheelIdleTimer]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testHeldPhasedGestureDoesNotCommitFromWheelIdleTimer]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testInvalidDeltasAndBackwardTimeClearActiveGesture]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testInvalidDeltasAndBackwardTimeClearActiveGesture]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testMomentumDoesNotAddDistanceOrStartAnotherGesture]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testMomentumDoesNotAddDistanceOrStartAnotherGesture]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testNextGestureStartsFromPreviouslyCommittedFraction]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testNextGestureStartsFromPreviouslyCommittedFraction]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testOneGestureCanCrossSeveralPages]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testOneGestureCanCrossSeveralPages]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testSensitivityChangeCancelsInsteadOfJumping]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testSensitivityChangeCancelsInsteadOfJumping]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testVerticalAndDiagonalInputDoNotMoveTheBoundary]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testVerticalAndDiagonalInputDoNotMoveTheBoundary]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testWheelIdleCommitsFractionAndDoesNotQueueNewPage]' started.
+Test Case '-[WindowLaneCoreTests.ContinuousScrollPagingTests testWheelIdleCommitsFractionAndDoesNotQueueNewPage]' passed (0.000 seconds).
+Test Suite 'ContinuousScrollPagingTests' passed at 2026-10-04 20:15:55.689.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'HorizontalScrollGateTests' started at 2026-10-04 20:15:55.689.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testCooldownDiscardsWheelDistanceInsteadOfQueuingIt]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testCooldownDiscardsWheelDistanceInsteadOfQueuingIt]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testDisabledAndBusyInputNeitherAccumulatesNorQueuesGestureTail]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testDisabledAndBusyInputNeitherAccumulatesNorQueuesGestureTail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testExtremeFiniteDeltaSafelySaturatesAtThreshold]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testExtremeFiniteDeltaSafelySaturatesAtThreshold]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testGestureThatStartsDuringCooldownCannotTriggerFromItsTail]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testGestureThatStartsDuringCooldownCannotTriggerFromItsTail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testIdleGapDropsPartialWheelMovement]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testIdleGapDropsPartialWheelMovement]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testInvalidInputAndBackwardsTimeDropAccumulatedMovement]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testInvalidInputAndBackwardsTimeDropAccumulatedMovement]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testMomentumAndCancelledMovementNeverTrigger]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testMomentumAndCancelledMovementNeverTrigger]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testOnePhaseGestureCannotSwitchTwiceEvenAfterCooldownOrIdle]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testOnePhaseGestureCannotSwitchTwiceEvenAfterCooldownOrIdle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testResetClearsCooldownAndGestureLatch]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testResetClearsCooldownAndGestureLatch]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testReversalUsesOnlyNewDirectionDistance]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testReversalUsesOnlyNewDirectionDistance]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdBoundsAndChangesStartFresh]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdBoundsAndChangesStartFresh]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdIsInclusiveAndSmallTouchesDoNotSwitch]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testThresholdIsInclusiveAndSmallTouchesDoNotSwitch]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testVerticalAndDiagonalInputClearsPreviousHorizontalIntent]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testVerticalAndDiagonalInputClearsPreviousHorizontalIntent]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelCanFollowTrackpadWhenItsTerminalPhaseWasLost]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelCanFollowTrackpadWhenItsTerminalPhaseWasLost]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelTicksNormalizeAndBothDirectionsWork]' started.
+Test Case '-[WindowLaneCoreTests.HorizontalScrollGateTests testWheelTicksNormalizeAndBothDirectionsWork]' passed (0.000 seconds).
+Test Suite 'HorizontalScrollGateTests' passed at 2026-10-04 20:15:55.691.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'SavedWindowFrameTests' started at 2026-10-04 20:15:55.691.
+Test Case '-[WindowLaneCoreTests.SavedWindowFrameTests testRecoveryDataPreservesNegativeDisplayCoordinatesAndMinimizedState]' started.
+Test Case '-[WindowLaneCoreTests.SavedWindowFrameTests testRecoveryDataPreservesNegativeDisplayCoordinatesAndMinimizedState]' passed (0.000 seconds).
+Test Suite 'SavedWindowFrameTests' passed at 2026-10-04 20:15:55.691.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'WindowRestorationGeometryTests' started at 2026-10-04 20:15:55.691.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOrdinaryWorkspaceFrameDoesNotNeedStaging]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOrdinaryWorkspaceFrameDoesNotNeedStaging]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOriginalLargerThanAvailableDisplayIsNotSilentlyResized]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testOriginalLargerThanAvailableDisplayIsNotSilentlyResized]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testPartiallyOffscreenOriginalCanBeSizedBeforeReturningToItsOrigin]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testPartiallyOffscreenOriginalCanBeSizedBeforeReturningToItsOrigin]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testSecondaryDisplayWithNegativeCoordinatesUsesItsOwnBounds]' started.
+Test Case '-[WindowLaneCoreTests.WindowRestorationGeometryTests testSecondaryDisplayWithNegativeCoordinatesUsesItsOwnBounds]' passed (0.000 seconds).
+Test Suite 'WindowRestorationGeometryTests' passed at 2026-10-04 20:15:55.691.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'WorkspaceLayoutTests' started at 2026-10-04 20:15:55.691.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testAccessibilityConversionUsesPrimaryDisplayIncludingNegativeCoordinates]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testAccessibilityConversionUsesPrimaryDisplayIncludingNegativeCoordinates]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testExpandedModeUsesPreviewSpaceButPreservesRail]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testExpandedModeUsesPreviewSpaceButPreservesRail]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testFramesFitVisibleAreaAndDoNotOverlapAcrossDisplays]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testFramesFitVisibleAreaAndDoNotOverlapAcrossDisplays]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testRatiosClampToSupportedRangeAndNonFiniteUsesDefault]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testRatiosClampToSupportedRangeAndNonFiniteUsesDefault]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testTinyVisibleAreasNeverProduceNegativeSizes]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceLayoutTests testTinyVisibleAreasNeverProduceNegativeSizes]' passed (0.000 seconds).
+Test Suite 'WorkspaceLayoutTests' passed at 2026-10-04 20:15:55.692.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'WorkspaceOrderTests' started at 2026-10-04 20:15:55.692.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testCapacityAndDuplicateAttemptsPreserveExistingWorkspace]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testCapacityAndDuplicateAttemptsPreserveExistingWorkspace]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testDecodingNormalizesPersistedInvalidIdentities]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testDecodingNormalizesPersistedInvalidIdentities]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testInvalidRequestsDoNotAlterSelectionOrOrder]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testInvalidRequestsDoNotAlterSelectionOrOrder]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testNavigationStopsAtBothEndsEvenForExtremeOffsets]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testNavigationStopsAtBothEndsEvenForExtremeOffsets]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingActiveWindowSelectsNeighborAndLastRemovalClearsSelection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingActiveWindowSelectsNeighborAndLastRemovalClearsSelection]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingOtherWindowPreservesSelection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testRemovingOtherWindowPreservesSelection]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testReorderKeepsSelectedWindowIdentity]' started.
+Test Case '-[WindowLaneCoreTests.WorkspaceOrderTests testReorderKeepsSelectedWindowIdentity]' passed (0.000 seconds).
+Test Suite 'WorkspaceOrderTests' passed at 2026-10-04 20:15:55.693.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'WorkspacePresetMatcherTests' started at 2026-10-04 20:15:55.693.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testAmbiguousRestartNeverChoosesTheFirstTitle]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testAmbiguousRestartNeverChoosesTheFirstTitle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testAmbiguousSessionIdentityDoesNotFallbackToAUniqueTitle]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testAmbiguousSessionIdentityDoesNotFallbackToAUniqueTitle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testDemoSlotsOnlyMatchExplicitNativeDemoDescriptors]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testDemoSlotsOnlyMatchExplicitNativeDemoDescriptors]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testDifferentApplicationCannotReplaceAnIdenticalTitle]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testDifferentApplicationCannotReplaceAnIdenticalTitle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testDuplicateTitlesAreResolvedOnlyBySessionIdentity]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testDuplicateTitlesAreResolvedOnlyBySessionIdentity]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testEmptyTitleAndMissingBundleCannotUseRestartMatching]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testEmptyTitleAndMissingBundleCannotUseRestartMatching]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testPartialMatchIsReportedWithoutBecomingACompleteWorkspace]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testPartialMatchIsReportedWithoutBecomingACompleteWorkspace]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testRestartUsesUniqueExactBundleAndTitle]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testRestartUsesUniqueExactBundleAndTitle]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testReusedPIDAndWindowIDDoNotMatchChangedDocument]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testReusedPIDAndWindowIDDoNotMatchChangedDocument]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testRuntimeIDAloneDoesNotBypassIdentityChecks]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testRuntimeIDAloneDoesNotBypassIdentityChecks]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testSameSessionIdentitySurvivesTitleChange]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testSameSessionIdentitySurvivesTitleChange]' passed (0.000 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testTwoSavedSlotsCannotResolveToOneCurrentWindow]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetMatcherTests testTwoSavedSlotsCannotResolveToOneCurrentWindow]' passed (0.000 seconds).
+Test Suite 'WorkspacePresetMatcherTests' passed at 2026-10-04 20:15:55.695.
+	 Executed 12 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'WorkspacePresetRepositoryTests' started at 2026-10-04 20:15:55.695.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testCorruptArchiveRemainsUntouchedAndBlocksWrites]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testCorruptArchiveRemainsUntouchedAndBlocksWrites]' passed (0.002 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testDeletionCanBeUndoneWithoutRecreatingIdentity]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testDeletionCanBeUndoneWithoutRecreatingIdentity]' passed (0.005 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testDuplicateNameAndInvalidNameKeepAcceptedFileUnchanged]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testDuplicateNameAndInvalidNameKeepAcceptedFileUnchanged]' passed (0.001 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testFailedAtomicWriteDoesNotPublishNewCollection]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testFailedAtomicWriteDoesNotPublishNewCollection]' passed (0.002 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testFailedReloadRetainsLastAcceptedItemsThenCanRecover]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testFailedReloadRetainsLastAcceptedItemsThenCanRecover]' passed (0.002 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testMissingPagePositionDecodesToActiveSlotAndBoundsFiniteValues]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testMissingPagePositionDecodesToActiveSlotAndBoundsFiniteValues]' passed (0.002 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testPresetCapacityAllowsUpdatingAnExistingItemAtTheLimit]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testPresetCapacityAllowsUpdatingAnExistingItemAtTheLimit]' passed (0.019 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testSaveReloadPreservesNamesOrderLayoutScreenAndFractionalPage]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testSaveReloadPreservesNamesOrderLayoutScreenAndFractionalPage]' passed (0.002 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testSixWindowBoundAndDuplicateWindowValidationPreserveAcceptedPreset]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testSixWindowBoundAndDuplicateWindowValidationPreserveAcceptedPreset]' passed (0.002 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testUnsupportedArchiveVersionPreservesFutureData]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testUnsupportedArchiveVersionPreservesFutureData]' passed (0.001 seconds).
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testUpdateAndRenamePreserveIdentityAndCreationDate]' started.
+Test Case '-[WindowLaneCoreTests.WorkspacePresetRepositoryTests testUpdateAndRenamePreserveIdentityAndCreationDate]' passed (0.002 seconds).
+Test Suite 'WorkspacePresetRepositoryTests' passed at 2026-10-04 20:15:55.734.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.039 (0.040) seconds
+Test Suite 'WindowLaneCoreTests.xctest' passed at 2026-10-04 20:15:55.734.
+	 Executed 74 tests, with 0 failures (0 unexpected) in 0.045 (0.048) seconds
+Test Suite 'All tests' passed at 2026-10-04 20:15:55.734.
+	 Executed 74 tests, with 0 failures (0 unexpected) in 0.045 (0.049) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

@@ -1,0 +1,71 @@
+{
+  "installedAtUTC": "2026-10-04T17:16:52.443853+00:00",
+  "version": "0.2.1",
+  "build": "5",
+  "installedPath": "/Users/zhangfei/Applications/WindowLane.app",
+  "previousBuildBackup": "/private/tmp/windowlane-build4-9d2rjttu",
+  "executableSHA256": "2d714ca6d9e3e895871992ce9538754d60835d09ada8ec166dde5e23f810a13e",
+  "sameSigningRequirement": true,
+  "installedArtifactMatchesBuildOutput": true,
+  "backgroundChecksPassed": 25,
+  "nativeUI": {
+    "settingsAndManagerVisuallyChecked": true,
+    "newLabels": [
+      "應用與設定視窗透明度",
+      "工作區透明度"
+    ],
+    "legacyMigrationObserved": {
+      "application": 0.35413818359375,
+      "workspace": 0.35413818359375
+    },
+    "independentSliderChanges": true,
+    "fullQuitConfirmed": true,
+    "valuesAfterRelaunch": {
+      "application": 0.43413818359375,
+      "workspace": 0.2741381835937499
+    },
+    "finalValues": {
+      "application": 0.35413818359375,
+      "workspace": 0.3541381835937499
+    },
+    "permissions": {
+      "accessibility": true,
+      "screenRecording": true
+    },
+    "workspaceCompositeVisuallyChecked": false
+  },
+  "verifiedAtUTC": "2026-10-04T17:20:33.595028+00:00",
+  "renderingOwnership": {
+    "application": [
+      "ManagerView",
+      "BackgroundSettingsView"
+    ],
+    "workspace": [
+      "WorkspacePanels.backdrop",
+      "BackgroundSettingsView.wallpaperPreview"
+    ],
+    "evidence": "Explicit LaneWindowBackground surface arguments; release compilation passed."
+  },
+  "evidence": [
+    "background-transparency-build5.json",
+    "background-transparency-build5.log",
+    "build-transparency-build5.log",
+    "premium-audit-transparency-build5.json",
+    "design-lint-transparency-build5.log"
+  ],
+  "limitations": [
+    "Official DESIGN.md linter unavailable offline because @google/design.md is not cached.",
+    "No external-window switching/restoration regression or full workspace compositor inspection in this scope.",
+    "No notarization or final release ZIP packaging in this scope."
+  ],
+  "sourceSHA256": {
+    "Sources/WindowLane/BackgroundSettings.swift": "e30b5e9cce75218e6de5bfc1c11a02ceebd50fd8935d5144af936074deeb23c8",
+    "Sources/WindowLane/BackgroundSettingsView.swift": "3ef1645e15714cbd88dfe9a0d776a8885b3772012738bb97cba5b5dd14bcb383",
+    "Sources/WindowLane/GlassUI.swift": "bdc4f75122b2d9db424b41d526a645f0af2110fa09004677f230417b6ccf5f46",
+    "Sources/WindowLane/App.swift": "a14a13aadb45eaea09463ec8785266a9b44ae355abdce1b0a0aba6f22b607afd",
+    "Sources/WindowLane/Views.swift": "df9a146bb726d480a79fb46c2be7847a2c5f5464a9629206ce541aa488bd94d7",
+    "Sources/WindowLane/BackgroundCheck.swift": "cbd3d038484b369d9637939b84f779270b5c7824687c4af5daa984cf4bd1e885"
+  },
+  "passed": true,
+  "scope": "Transparency grouping, legacy preference migration, native settings persistence and signed local update."
+}

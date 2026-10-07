@@ -1,0 +1,18 @@
+{
+  "observedAtUTC": "2026-10-04T17:00:14.346725+00:00",
+  "version": "0.2.1",
+  "build": "3",
+  "installedPath": "/Users/zhangfei/Applications/WindowLane.app",
+  "backupPath": "/private/tmp/windowlane-build3-841116dx/WindowLane.app",
+  "executableSHA256": "3efdc0c9b87a0fe6917154a052185f492335a46f50a66ed14fb308651c8a8fd8",
+  "signatureDetails": "designated => identifier \"com.feizhang.windowlane\" and anchor apple generic and certificate leaf[subject.CN] = \"Apple Development: feizhang233@icloud.com (U8ZN846WAJ)\" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */\nExecutable=/Users/zhangfei/Applications/WindowLane.app/Contents/MacOS/WindowLane\nIdentifier=com.feizhang.windowlane\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20400 size=5435 flags=0x0(none) hashes=163+3 location=embedded\nVersionPlatform=1\nVersionMin=917504\nVersionSDK=917504\nHash type=sha256 size=32\nCandidateCDHash sha256=fc8208409462569f37452cc189b5c75be2c9875f\nCandidateCDHashFull sha256=fc8208409462569f37452cc189b5c75be2c9875feadf4f5c717f7006613b49f5\nHash choices=sha256\nCMSDigest=fc8208409462569f37452cc189b5c75be2c9875feadf4f5c717f7006613b49f5\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=901120\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=fc8208409462569f37452cc189b5c75be2c9875f\nSignature size=4788\nAuthority=Apple Development: feizhang233@icloud.com (U8ZN846WAJ)\nAuthority=Apple Worldwide Developer Relations Certification Authority\nAuthority=Apple Root CA\nSigned Time=Oct 4, 2026 at 18:46:26\nInfo.plist entries=15\nTeamIdentifier=KV8857HZA9\nSealed Resources version=2 rules=13 files=0\nTotal signatures=1\nChosen signature=1\n",
+  "permissionsAfterGrant": {
+    "accessibility": true,
+    "screenRecording": true
+  },
+  "permissionsAfterFullQuitAndRelaunch": {
+    "accessibility": true,
+    "screenRecording": true
+  },
+  "permissionEvidence": "Observed installed App Settings > Permissions via native accessibility text; no WindowLane process remained between launches."
+}
